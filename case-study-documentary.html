@@ -176,6 +176,7 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
   }
   .cs-image-pair .cs-image-placeholder { aspect-ratio: 4/3; }
+  .cs-image-pair img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; border-radius: 2px; }
 
   /* THREE-UP IMAGES */
   .cs-image-trio {
@@ -491,8 +492,11 @@
 <!-- FULL BLEED IMAGE -->
 <div class="cs-image-full">
   <div class="cs-image-full-inner">
-    <div class="cs-image-placeholder">Filming in Scotland — team on location</div>
-    <p class="cs-image-caption">The production team filming on location in Scotland</p>
+    <div class="cs-image-pair">
+      <img src="images/Documentary Project/FilmingLondon.JPG" alt="Filming on location in London">
+      <img src="images/Documentary Project/FilmingLondon2.JPG" alt="Filming on location in London">
+    </div>
+    <p class="cs-image-caption">The production team filming on location in London</p>
   </div>
 </div>
 
@@ -507,11 +511,11 @@
 <!-- IMAGE PAIR -->
 <div class="cs-image-pair">
   <div>
-    <div class="cs-image-placeholder">Pre-production research & planning</div>
+    <img src="images/Documentary Project/Scottish-Enlightenment-Team.jpg" alt="The team brainstorming episodes on a whiteboard during pre-production">
     <p class="cs-image-caption">Nearly a year of research before traveling</p>
   </div>
   <div>
-    <div class="cs-image-placeholder">Storyboards or shot lists</div>
+    <img src="images/Documentary Project/Screenshot-Planning.png" alt="Script and episode planning document">
     <p class="cs-image-caption">Planning the narrative arc across 3 episodes</p>
   </div>
 </div>
