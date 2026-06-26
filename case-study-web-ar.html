@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web AR Mini Quest — Case Study | Elizabeth Powell</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0f0e;
+    --ink-mid: #3a3a38;
+    --ink-light: #8a8a86;
+    --paper: #fafaf8;
+    --paper-warm: #f3f2ee;
+    --accent: #0f0f0e;
+    --line: rgba(15,15,14,0.12);
+    --line-strong: rgba(15,15,14,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4vw;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 300; letter-spacing: 0.04em;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-back {
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-mid); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--ink); }
+
+  .cs-hero {
+    width: 100%; min-height: 85vh;
+    background: var(--ink); color: var(--paper);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 6rem 6vw 5rem; margin-top: 3.5rem;
+    position: relative; overflow: hidden;
+  }
+  .cs-hero-image-placeholder {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1b0a2e 0%, #2d1b69 40%, #5b21b6 100%);
+    opacity: 0.9;
+  }
+  .cs-hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .cs-hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .cs-tag {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(250,250,248,0.7); border: 0.5px solid rgba(250,250,248,0.3); padding: 4px 12px;
+  }
+  .cs-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5rem); font-weight: 300;
+    line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 1.25rem;
+  }
+  .cs-hero-title em { font-style: italic; font-weight: 300; }
+  .cs-hero-subtitle {
+    font-size: 1.1rem; color: rgba(250,250,248,0.75);
+    max-width: 600px; line-height: 1.7;
+  }
+
+  .cs-meta {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .cs-meta-item {
+    padding: 2rem 4vw; border-right: 0.5px solid var(--line-strong);
+  }
+  .cs-meta-item:last-child { border-right: none; }
+  .cs-meta-label {
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 0.4rem;
+  }
+  .cs-meta-value { font-size: 0.95rem; font-weight: 500; }
+
+  .cs-section {
+    max-width: 760px; margin: 0 auto; padding: 5rem 4vw;
+  }
+  .cs-section-label {
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .cs-section-label::after {
+    content: ''; display: block; flex: 1; height: 0.5px; background: var(--line-strong);
+  }
+  .cs-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 300;
+    line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .cs-heading em { font-style: italic; }
+  .cs-body {
+    color: var(--ink-mid); line-height: 1.85; margin-bottom: 1.5rem; font-size: 0.95rem;
+  }
+
+  .cs-image-full {
+    width: 100%; background: var(--paper-warm);
+    border-top: 0.5px solid var(--line-strong); border-bottom: 0.5px solid var(--line-strong);
+    overflow: hidden;
+  }
+  .cs-image-full-inner { max-width: 1400px; margin: 0 auto; padding: 3rem 4vw; }
+  .cs-image-placeholder {
+    width: 100%; aspect-ratio: 16/9; background: var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-light); font-size: 0.8rem; letter-spacing: 0.08em;
+    text-transform: uppercase; border: 0.5px dashed var(--line-strong);
+  }
+  .cs-image-caption {
+    font-size: 0.78rem; color: var(--ink-light); margin-top: 0.75rem; text-align: center;
+  }
+
+  .cs-image-pair {
+    max-width: 1200px; margin: 0 auto; padding: 3rem 4vw;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+  .cs-image-pair .cs-image-placeholder { aspect-ratio: 4/3; }
+
+  /* PHONE MOCKUP SECTION */
+  .cs-phone-showcase {
+    background: var(--ink);
+    padding: 5rem 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+  }
+  .cs-phone-frame {
+    width: 220px;
+    aspect-ratio: 9/19;
+    background: #1a1a1a;
+    border-radius: 28px;
+    border: 3px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-light);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+  }
+  .cs-phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 20px;
+    background: #111;
+    border-radius: 10px;
+  }
+
+  /* TOOLS */
+  .cs-tools {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 4vw 4rem;
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .cs-tools-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+  }
+  .cs-tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .cs-tool {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-mid);
+    border: 0.5px solid var(--line-strong);
+    padding: 5px 14px;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+  }
+  .cs-tool:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .cs-highlight {
+    background: var(--ink); color: var(--paper);
+    padding: 5rem 6vw; text-align: center;
+  }
+  .cs-highlight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 300;
+    line-height: 1.4; max-width: 700px; margin: 0 auto;
+  }
+  .cs-highlight-text em { font-style: italic; }
+
+  .cs-results {
+    max-width: 900px; margin: 0 auto; padding: 5rem 4vw;
+  }
+  .cs-results-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border: 0.5px solid var(--line-strong); margin-top: 2rem;
+  }
+  .cs-result-item {
+    padding: 2rem; border-right: 0.5px solid var(--line-strong); text-align: center;
+  }
+  .cs-result-item:last-child { border-right: none; }
+  .cs-result-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; line-height: 1; margin-bottom: 0.5rem;
+  }
+  .cs-result-label { font-size: 0.78rem; color: var(--ink-light); letter-spacing: 0.06em; }
+
+  .cs-next {
+    border-top: 0.5px solid var(--line-strong);
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 40vh;
+  }
+  .cs-next-left {
+    padding: 4rem 4vw; display: flex; flex-direction: column;
+    justify-content: center; border-right: 0.5px solid var(--line-strong);
+  }
+  .cs-next-label {
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 1rem;
+  }
+  .cs-next-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 300;
+    line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .cs-next-link {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid var(--ink); padding-bottom: 2px; transition: gap 0.2s;
+  }
+  .cs-next-link:hover { gap: 1rem; }
+  .cs-next-right {
+    background: var(--paper-warm); display: flex; align-items: center; justify-content: center;
+  }
+  .cs-next-thumb {
+    width: 60%; aspect-ratio: 16/10; background: var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-light); font-size: 0.75rem; letter-spacing: 0.08em;
+    text-transform: uppercase; border: 0.5px dashed var(--line-strong);
+  }
+
+  footer {
+    padding: 1.5rem 4vw; display: flex; justify-content: space-between;
+    align-items: center; border-top: 0.5px solid var(--line);
+  }
+  footer p { font-size: 0.78rem; color: var(--ink-light); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .cs-hero-tags { animation: fadeUp 0.6s ease forwards; }
+  .cs-hero-title { animation: fadeUp 0.6s 0.1s ease both; }
+  .cs-hero-subtitle { animation: fadeUp 0.6s 0.2s ease both; }
+
+  @media (max-width: 768px) {
+    .cs-meta { grid-template-columns: 1fr 1fr; }
+    .cs-meta-item:nth-child(2) { border-right: none; }
+    .cs-meta-item:nth-child(-n+2) { border-bottom: 0.5px solid var(--line-strong); }
+    .cs-image-pair { grid-template-columns: 1fr; }
+    .cs-results-grid { grid-template-columns: 1fr; }
+    .cs-result-item { border-right: none; border-bottom: 0.5px solid var(--line-strong); }
+    .cs-result-item:last-child { border-bottom: none; }
+    .cs-next { grid-template-columns: 1fr; }
+    .cs-next-right { min-height: 30vh; }
+    .cs-phone-showcase { flex-direction: column; gap: 2rem; }
+    .cs-phone-frame { width: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Elizabeth Powell</a>
+  <a class="nav-back" href="index.html#work">← Back to all work</a>
+</nav>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-image-placeholder"></div>
+  <div class="cs-hero-content">
+    <div class="cs-hero-tags">
+      <span class="cs-tag">Web AR</span>
+      <span class="cs-tag">Mobile</span>
+      <span class="cs-tag">Acquisition</span>
+    </div>
+    <h1 class="cs-hero-title">The Rift<br><em>Web AR Mini Quest</em></h1>
+    <p class="cs-hero-subtitle">A browser-based augmented reality experience that lets anyone try The Rift on their phone — no app, no download, no cost.</p>
+  </div>
+</section>
+
+<!-- META BAR -->
+<div class="cs-meta">
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Role</div>
+    <div class="cs-meta-value">Product Lead</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Company</div>
+    <div class="cs-meta-value">Paladin & Archer Software Systems</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Platform</div>
+    <div class="cs-meta-value">Mobile Web · WebXR</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Focus</div>
+    <div class="cs-meta-value">Acquisition · Engagement</div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="cs-tools">
+  <div class="cs-tools-label">Tools Used</div>
+  <div class="cs-tools-row">
+    <span class="cs-tool">HTML</span>
+    <span class="cs-tool">CSS</span>
+    <span class="cs-tool">GitHub</span>
+    <span class="cs-tool">VS Code</span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="cs-section">
+  <div class="cs-section-label">Overview</div>
+  <h2 class="cs-heading">Bringing the experience <em>out of the venue.</em></h2>
+  <p class="cs-body">The Rift's core product is an in-venue AR experience — but that means you have to physically show up to know what it feels like. The Web AR Mini Quest solves that problem by giving potential customers a taste of the experience directly in their phone's browser.</p>
+  <p class="cs-body">No app store. No download. No friction. Just open the link on your phone and start an interactive AR quest wherever you are.</p>
+</div>
+
+<!-- FULL BLEED IMAGE -->
+<div class="cs-image-full">
+  <div class="cs-image-full-inner">
+    <div class="cs-image-placeholder">Web AR experience screenshot — phone browser view</div>
+    <p class="cs-image-caption">The mini quest running in a mobile browser — no app required</p>
+  </div>
+</div>
+
+<!-- CHALLENGE -->
+<div class="cs-section">
+  <div class="cs-section-label">The Challenge</div>
+  <h2 class="cs-heading">How do you sell an experience <em>people can't imagine?</em></h2>
+  <p class="cs-body">AR experiences are hard to market. Screenshots and videos don't capture the magic of interacting with digital objects in physical space. And asking someone to commit to a venue visit (plus booking, travel, and cost) based on marketing alone is a big ask.</p>
+  <p class="cs-body">We needed a way to lower the barrier to entry — to let people feel the product before committing to it. The challenge was delivering something genuinely immersive through just a web browser, without the control of a dedicated app or venue hardware.</p>
+</div>
+
+<!-- PHONE SHOWCASE -->
+<div class="cs-phone-showcase">
+  <div class="cs-phone-frame">Screen 1</div>
+  <div class="cs-phone-frame">Screen 2</div>
+  <div class="cs-phone-frame">Screen 3</div>
+</div>
+
+<!-- APPROACH -->
+<div class="cs-section">
+  <div class="cs-section-label">Approach</div>
+  <h2 class="cs-heading">Design for the <em>first 10 seconds.</em></h2>
+  <p class="cs-body">The Web AR experience had to hook people immediately. There's no onboarding patience for a free browser experience — if it doesn't feel magical in the first few seconds, people close the tab.</p>
+  <p class="cs-body">I focused the product design on three principles: instant start (camera permission is the only gate), visual reward in under 5 seconds (something appears in your space right away), and a clear path to the full venue experience (the CTA to book).</p>
+  <p class="cs-body">The mini quest is deliberately short — it's a teaser, not a replacement. The goal is to create just enough delight that booking the real thing feels like the obvious next step.</p>
+</div>
+
+<!-- HIGHLIGHT -->
+<div class="cs-highlight">
+  <p class="cs-highlight-text">No app. No download. No cost.<br><em>Just open and play.</em></p>
+</div>
+
+<!-- SOLUTION -->
+<div class="cs-section">
+  <div class="cs-section-label">Solution</div>
+  <h2 class="cs-heading">A new acquisition channel <em>built on the web.</em></h2>
+  <p class="cs-body">The Web AR Mini Quest extends The Rift's reach beyond the venue. It works as a shareable link — embeddable on the website, sendable via text or social, and scannable via QR code at events and partner locations.</p>
+  <p class="cs-body">This turns every phone into a demo device. Instead of relying on word-of-mouth descriptions of what AR feels like, potential customers can experience a version of it themselves and share it with friends.</p>
+  <p class="cs-body">The experience ends with a direct path to booking — creating a measurable funnel from "curious" to "booked" that we can track and optimize.</p>
+</div>
+
+<!-- IMAGE PAIR -->
+<div class="cs-image-pair">
+  <div>
+    <div class="cs-image-placeholder">Website integration</div>
+    <p class="cs-image-caption">Mini Quest CTA embedded on The Rift website</p>
+  </div>
+  <div>
+    <div class="cs-image-placeholder">Booking funnel connection</div>
+    <p class="cs-image-caption">From AR experience to booking in one tap</p>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="cs-results">
+  <div class="cs-section-label">Impact</div>
+  <h2 class="cs-heading">Extending reach <em>beyond the venue.</em></h2>
+  <p class="cs-body" style="max-width: 760px;">The Web AR Mini Quest opened a new channel for The Rift — turning a venue-locked product into something anyone with a phone can experience and share.</p>
+  <div class="cs-results-grid">
+    <div class="cs-result-item">
+      <div class="cs-result-num">0</div>
+      <div class="cs-result-label">Downloads required</div>
+    </div>
+    <div class="cs-result-item">
+      <div class="cs-result-num">~10s</div>
+      <div class="cs-result-label">Time to first AR moment</div>
+    </div>
+    <div class="cs-result-item">
+      <div class="cs-result-num">1 tap</div>
+      <div class="cs-result-label">From quest to booking</div>
+    </div>
+  </div>
+</div>
+
+<!-- REFLECTION -->
+<div class="cs-section">
+  <div class="cs-section-label">Reflection</div>
+  <h2 class="cs-heading">The product <em>is the marketing.</em></h2>
+  <p class="cs-body">The biggest lesson from this project is that the best way to market an experience product is to give people a piece of the experience itself. No amount of copywriting or video can replace the feeling of seeing something appear in your physical space through your phone camera.</p>
+  <p class="cs-body">Building for the web also forced extreme simplicity. Every decision had to pass the test: "Will this work on a 3-year-old phone on a mediocre connection?" That constraint made the product better.</p>
+</div>
+
+<!-- NEXT PROJECT -->
+<section class="cs-next">
+  <div class="cs-next-left">
+    <div class="cs-next-label">Next project</div>
+    <h3 class="cs-next-title">The UVU Review — 338K-Reader Newsroom</h3>
+    <a class="cs-next-link" href="case-study-uvu-review.html">View project →</a>
+  </div>
+  <div class="cs-next-right">
+    <div class="cs-next-thumb">Project image</div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Elizabeth Powell. All rights reserved.</p>
+  <p>Designed & built by Elizabeth Powell</p>
+</footer>
+
+</body>
+</html>

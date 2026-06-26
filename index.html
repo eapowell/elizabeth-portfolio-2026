@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elizabeth Powell — Product & Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0f0e;
+    --ink-mid: #3a3a38;
+    --ink-light: #8a8a86;
+    --paper: #fafaf8;
+    --paper-warm: #f3f2ee;
+    --accent: #0f0f0e;
+    --line: rgba(15,15,14,0.12);
+    --line-strong: rgba(15,15,14,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4vw;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 0.5px solid var(--line-strong);
+    padding-top: 5rem;
+  }
+  .hero-left {
+    padding: 8vw 5vw 6vw 4vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 0.5px solid var(--line-strong);
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1.75rem;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    font-weight: 300;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    max-width: 380px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: gap 0.2s;
+  }
+  .hero-cta:hover { gap: 1rem; }
+
+  .hero-right {
+    background: var(--paper-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-visual {
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 3/4;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-visual-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--ink-light);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 0.5px dashed var(--line-strong);
+  }
+  .photo-icon {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--ink-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+
+  /* SECTION COMMON */
+  section { border-bottom: 0.5px solid var(--line-strong); }
+  .section-inner { padding: 6rem 4vw; max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 3rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 0.5px;
+    background: var(--line-strong);
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 6vw;
+    align-items: start;
+  }
+  .about-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .about-headline em { font-style: italic; }
+  .about-body { color: var(--ink-mid); line-height: 1.8; margin-bottom: 1.25rem; }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 0.5px solid var(--line-strong);
+  }
+  .stat-item {
+    padding: 1.5rem;
+    border-right: 0.5px solid var(--line-strong);
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .stat-item:nth-child(even) { border-right: none; }
+  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--ink-light); letter-spacing: 0.06em; }
+
+  /* WORK */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 0.5px solid var(--line-strong);
+  }
+  .work-card {
+    padding: 2.5rem;
+    border-right: 0.5px solid var(--line-strong);
+    border-bottom: 0.5px solid var(--line-strong);
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .work-card:nth-child(even) { border-right: none; }
+  .work-card:nth-last-child(-n+2) { border-bottom: none; }
+  .work-card:hover { background: var(--paper-warm); }
+  .work-thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: var(--paper-warm);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-light);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 0.5px dashed var(--line-strong);
+    position: relative;
+    overflow: hidden;
+  }
+  .work-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+  .tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    border: 0.5px solid var(--line-strong);
+    padding: 2px 8px;
+  }
+  .work-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+  .work-desc { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.7; }
+  .work-arrow {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-bottom: 0.5px solid var(--ink);
+    padding-bottom: 1px;
+  }
+
+  /* RESUME */
+  .resume-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 6vw;
+  }
+  .resume-section { margin-bottom: 3rem; }
+  .resume-section-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid var(--line);
+  }
+  .resume-item { margin-bottom: 1.75rem; }
+  .resume-item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.2rem; }
+  .resume-item-title { font-weight: 500; font-size: 0.95rem; }
+  .resume-item-date { font-size: 0.78rem; color: var(--ink-light); }
+  .resume-item-sub { font-size: 0.85rem; color: var(--ink-light); margin-bottom: 0.4rem; font-style: italic; }
+  .resume-item-desc { font-size: 0.85rem; color: var(--ink-mid); line-height: 1.7; }
+  .skill-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+  .skill-pill {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-mid);
+    border: 0.5px solid var(--line-strong);
+    padding: 3px 10px;
+  }
+  .resume-dl-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 0.5px solid var(--ink);
+    padding: 0.65rem 1.5rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 0.2s, color 0.2s;
+    margin-bottom: 3rem;
+  }
+  .resume-dl-link:hover { background: var(--ink); color: var(--paper); }
+
+  /* CONTACT */
+  #contact { border-bottom: none; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: start;
+  }
+  .contact-left {
+    border-right: 0.5px solid var(--line-strong);
+    padding-right: 6vw;
+    padding-bottom: 2rem;
+  }
+  .contact-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+  .contact-headline em { font-style: italic; }
+  .contact-sub { color: var(--ink-mid); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--ink); }
+  .contact-link-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    min-width: 60px;
+  }
+  .contact-right { padding-left: 6vw; padding-top: 0.5rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.5rem;
+  }
+  .form-input, .form-textarea {
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid var(--line-strong);
+    padding: 0.5rem 0;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--ink); }
+  .form-textarea { resize: none; height: 80px; }
+  .form-submit {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    border: none;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { opacity: 0.75; }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 4vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid var(--line);
+  }
+  footer p { font-size: 0.78rem; color: var(--ink-light); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.6s ease forwards; }
+  .hero-name { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-cta { animation: fadeUp 0.6s 0.3s ease both; }
+
+  /* ACTIVE NAV */
+  .nav-links a.active { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">Elizabeth Powell</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#resume">Résumé</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Product Management · Design · Strategy</p>
+    <h1 class="hero-name">Elizabeth<br><em>builds with</em><br>purpose.</h1>
+    <p class="hero-desc">I build products that empower people to do what they care about — turning complex problems into clear, delightful experiences.</p>
+    <a class="hero-cta" href="#work">View selected work →</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-visual-placeholder">
+        <div class="photo-icon">☺</div>
+        <span>Your photo here</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">About</div>
+    <div class="about-grid">
+      <div>
+        <h2 class="about-headline">Product thinking meets<br><em>design craft.</em></h2>
+        <p class="about-body">I'm a product manager with an MBA and a design background — which means I care just as much about why something gets built as how it looks and works. I bring rigor to discovery, clarity to complex systems, and a strategic lens to every product decision.</p>
+        <p class="about-body">My work spans AR platforms, media organizations, and enterprise software — from zero-to-one builds to growth and optimization. I've led a 58-person cross-functional team, shipped products used by hundreds of thousands of people, and I integrate AI into every layer of how I work.</p>
+        <p class="about-body">Based in Utah. Open to remote and hybrid opportunities.</p>
+      </div>
+      <div>
+        <div class="about-stats">
+          <div class="stat-item">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Years in product</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">338K</div>
+            <div class="stat-label">Readers reached</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">MBA</div>
+            <div class="stat-label">Marketing & Entrepreneurship</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">58</div>
+            <div class="stat-label">Person team built</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-inner">
+    <div class="section-label">Selected work</div>
+    <div class="work-grid">
+      <a class="work-card" href="case-study-the-rift.html">
+        <div class="work-thumb">Project image</div>
+        <div class="work-tags"><span class="tag">AR Platform</span><span class="tag">0→1</span><span class="tag">Product Lead</span></div>
+        <h3 class="work-title">The Rift — Augmented Reality Experience</h3>
+        <p class="work-desc">End-to-end product management for an AR platform built in Unity — from concept and MVP through growth. Used multi-source data synthesis to optimize group experiences and moved Google ratings from 4.3 to 4.6 in 8 weeks.</p>
+        <span class="work-arrow">View case study →</span>
+      </a>
+      <a class="work-card" href="case-study-web-ar.html">
+        <div class="work-thumb">Project image</div>
+        <div class="work-tags"><span class="tag">Web AR</span><span class="tag">Mobile</span></div>
+        <h3 class="work-title">The Rift — Web AR Mini Quest</h3>
+        <p class="work-desc">A browser-based AR experience that lets anyone try The Rift on their phone — no app, no download. Extended the in-venue product to a new acquisition channel on the web.</p>
+        <span class="work-arrow">View case study →</span>
+      </a>
+      <a class="work-card" href="case-study-uvu-review.html">
+        <div class="work-thumb">Project image</div>
+        <div class="work-tags"><span class="tag">Media</span><span class="tag">Team Building</span></div>
+        <h3 class="work-title">The UVU Review — 338K-Reader Newsroom</h3>
+        <p class="work-desc">Built and led a 58-person cross-functional team from zero. Grew audience to 338K readers, nearly doubled social following, and rebuilt the publication website using Claude Code.</p>
+        <span class="work-arrow">View case study →</span>
+      </a>
+      <a class="work-card" href="case-study-documentary.html">
+        <div class="work-thumb">Project image</div>
+        <div class="work-tags"><span class="tag">Documentary</span><span class="tag">Multi-Platform</span><span class="tag">AR</span></div>
+        <h3 class="work-title">The Scottish Enlightenment — Documentary Series</h3>
+        <p class="work-desc">Led a team of 6 designers to produce a 3-episode documentary series in the U.K. on the Scottish Enlightenment's impact on America. Shipped a multi-platform experience: episodes, a 360-photo website, printed AR books, activity books, and business cards for 160 students across 3 classrooms (2023).</p>
+        <span class="work-arrow">View case study →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="section-inner">
+    <div class="section-label">Résumé</div>
+    <a class="resume-dl-link" href="#">Download PDF résumé ↓</a>
+    <div class="resume-cols">
+      <div>
+        <div class="resume-section">
+          <div class="resume-section-title">Experience</div>
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <span class="resume-item-title">Product Lead & Board Director</span>
+              <span class="resume-item-date">Apr 2021 – Present</span>
+            </div>
+            <div class="resume-item-sub">Paladin & Archer Software Systems</div>
+            <div class="resume-item-desc">Own end-to-end product strategy for The Rift (AR platform) and VisiCX (healthcare compliance). Drive execution across engineering, design, and operations.</div>
+          </div>
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <span class="resume-item-title">Executive News Director — Product & Platform Lead</span>
+              <span class="resume-item-date">Apr 2024 – Apr 2026</span>
+            </div>
+            <div class="resume-item-sub">The UVU Review, Utah Valley University</div>
+            <div class="resume-item-desc">Built and led a 58-person cross-functional team from zero. Grew audience to 338K readers across 9 platforms.</div>
+          </div>
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <span class="resume-item-title">Web Designer & Brand Consultant</span>
+              <span class="resume-item-date">Jun 2017 – Apr 2021</span>
+            </div>
+            <div class="resume-item-sub">Self-Employed</div>
+            <div class="resume-item-desc">Designed and launched websites, landing pages, and marketing funnels for small businesses.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="resume-section">
+          <div class="resume-section-title">Education</div>
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <span class="resume-item-title">Master of Business Administration (MBA)</span>
+              <span class="resume-item-date">2024 – 2026</span>
+            </div>
+            <div class="resume-item-sub">Utah Valley University · Marketing & Entrepreneurship</div>
+          </div>
+          <div class="resume-item">
+            <div class="resume-item-header">
+              <span class="resume-item-title">B.S. Web & App Development, Interaction Design</span>
+              <span class="resume-item-date">2019 – 2023</span>
+            </div>
+            <div class="resume-item-sub">Utah Valley University · NSLS Honors Program</div>
+          </div>
+        </div>
+        <div class="resume-section">
+          <div class="resume-section-title">Skills & Tools</div>
+          <div class="skill-row">
+            <span class="skill-pill">Product Roadmapping</span>
+            <span class="skill-pill">User Research</span>
+            <span class="skill-pill">A/B Testing</span>
+            <span class="skill-pill">Go-to-Market</span>
+            <span class="skill-pill">Agile/Lean UX</span>
+            <span class="skill-pill">Claude Code</span>
+            <span class="skill-pill">Figma</span>
+            <span class="skill-pill">Google Analytics</span>
+            <span class="skill-pill">Unity</span>
+            <span class="skill-pill">HTML/CSS</span>
+            <span class="skill-pill">Cross-functional Leadership</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Contact</div>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <h2 class="contact-headline">Let's make<br><em>something good.</em></h2>
+        <p class="contact-sub">Whether it's a new role, a collaboration, or just a conversation about design — I'd love to hear from you.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:lizzyapowell@gmail.com">
+            <span class="contact-link-label">Email</span>
+            lizzyapowell@gmail.com
+          </a>
+          <a class="contact-link" href="https://linkedin.com/in/elizabeth-powell2000">
+            <span class="contact-link-label">LinkedIn</span>
+            linkedin.com/in/elizabeth-powell2000
+          </a>
+          <a class="contact-link" href="https://github.com/eapowell">
+            <span class="contact-link-label">GitHub</span>
+            github.com/eapowell
+          </a>
+        </div>
+      </div>
+      <div class="contact-right">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input class="form-input" type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell me what you're working on..."></textarea>
+        </div>
+        <button class="form-submit">Send message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Elizabeth Powell. All rights reserved.</p>
+  <p>Designed & built by Elizabeth Powell</p>
+</footer>
+
+<script>
+  const links = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id]');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

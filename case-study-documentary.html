@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scottish Enlightenment Documentary — Case Study | Elizabeth Powell</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0f0e;
+    --ink-mid: #3a3a38;
+    --ink-light: #8a8a86;
+    --paper: #fafaf8;
+    --paper-warm: #f3f2ee;
+    --accent: #0f0f0e;
+    --line: rgba(15,15,14,0.12);
+    --line-strong: rgba(15,15,14,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4vw;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 300; letter-spacing: 0.04em;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-back {
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-mid); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--ink); }
+
+  .cs-hero {
+    width: 100%; min-height: 85vh;
+    background: var(--ink); color: var(--paper);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 6rem 6vw 5rem; margin-top: 3.5rem;
+    position: relative; overflow: hidden;
+  }
+  .cs-hero-image-placeholder {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #2c1810 0%, #5c3a28 40%, #8b6914 100%);
+    opacity: 0.9;
+  }
+  .cs-hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .cs-hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .cs-tag {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(250,250,248,0.7); border: 0.5px solid rgba(250,250,248,0.3); padding: 4px 12px;
+  }
+  .cs-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5rem); font-weight: 300;
+    line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 1.25rem;
+  }
+  .cs-hero-title em { font-style: italic; font-weight: 300; }
+  .cs-hero-subtitle {
+    font-size: 1.1rem; color: rgba(250,250,248,0.75);
+    max-width: 600px; line-height: 1.7;
+  }
+
+  .cs-meta {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .cs-meta-item {
+    padding: 2rem 4vw; border-right: 0.5px solid var(--line-strong);
+  }
+  .cs-meta-item:last-child { border-right: none; }
+  .cs-meta-label {
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 0.4rem;
+  }
+  .cs-meta-value { font-size: 0.95rem; font-weight: 500; }
+
+  .cs-section { max-width: 760px; margin: 0 auto; padding: 5rem 4vw; }
+  .cs-section-label {
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .cs-section-label::after {
+    content: ''; display: block; flex: 1; height: 0.5px; background: var(--line-strong);
+  }
+  .cs-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 300;
+    line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .cs-heading em { font-style: italic; }
+  .cs-body {
+    color: var(--ink-mid); line-height: 1.85; margin-bottom: 1.5rem; font-size: 0.95rem;
+  }
+
+  /* TOOLS */
+  .cs-tools {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 4vw 4rem;
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .cs-tools-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+  }
+  .cs-tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .cs-tool {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-mid);
+    border: 0.5px solid var(--line-strong);
+    padding: 5px 14px;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+  }
+  .cs-tool:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .cs-image-full {
+    width: 100%; background: var(--paper-warm);
+    border-top: 0.5px solid var(--line-strong); border-bottom: 0.5px solid var(--line-strong);
+    overflow: hidden;
+  }
+  .cs-image-full-inner { max-width: 1400px; margin: 0 auto; padding: 3rem 4vw; }
+  .cs-image-placeholder {
+    width: 100%; aspect-ratio: 16/9; background: var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-light); font-size: 0.8rem; letter-spacing: 0.08em;
+    text-transform: uppercase; border: 0.5px dashed var(--line-strong);
+  }
+  .cs-image-caption {
+    font-size: 0.78rem; color: var(--ink-light); margin-top: 0.75rem; text-align: center;
+  }
+
+  .cs-image-pair {
+    max-width: 1200px; margin: 0 auto; padding: 3rem 4vw;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+  .cs-image-pair .cs-image-placeholder { aspect-ratio: 4/3; }
+
+  /* THREE-UP IMAGES */
+  .cs-image-trio {
+    max-width: 1200px; margin: 0 auto; padding: 3rem 4vw;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem;
+  }
+  .cs-image-trio .cs-image-placeholder { aspect-ratio: 3/4; }
+
+  .cs-highlight {
+    background: var(--ink); color: var(--paper);
+    padding: 5rem 6vw; text-align: center;
+  }
+  .cs-highlight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 300;
+    line-height: 1.4; max-width: 700px; margin: 0 auto;
+  }
+  .cs-highlight-text em { font-style: italic; }
+
+  /* DELIVERABLES GRID */
+  .cs-deliverables {
+    max-width: 1000px; margin: 0 auto; padding: 4rem 4vw;
+  }
+  .cs-deliverables-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border: 0.5px solid var(--line-strong); margin-top: 2rem;
+  }
+  .cs-deliverable {
+    padding: 2rem 1.5rem;
+    border-right: 0.5px solid var(--line-strong);
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .cs-deliverable:nth-child(3n) { border-right: none; }
+  .cs-deliverable:nth-last-child(-n+3) { border-bottom: none; }
+  .cs-deliverable-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .cs-deliverable-title {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+  .cs-deliverable-desc {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  .cs-results { max-width: 900px; margin: 0 auto; padding: 5rem 4vw; }
+  .cs-results-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border: 0.5px solid var(--line-strong); margin-top: 2rem;
+  }
+  .cs-result-item {
+    padding: 2rem 1.5rem; border-right: 0.5px solid var(--line-strong); text-align: center;
+  }
+  .cs-result-item:last-child { border-right: none; }
+  .cs-result-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300; line-height: 1; margin-bottom: 0.5rem;
+  }
+  .cs-result-label { font-size: 0.75rem; color: var(--ink-light); letter-spacing: 0.04em; }
+
+  .cs-next {
+    border-top: 0.5px solid var(--line-strong);
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 40vh;
+  }
+  .cs-next-left {
+    padding: 4rem 4vw; display: flex; flex-direction: column;
+    justify-content: center; border-right: 0.5px solid var(--line-strong);
+  }
+  .cs-next-label {
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 1rem;
+  }
+  .cs-next-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 300;
+    line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .cs-next-link {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid var(--ink); padding-bottom: 2px; transition: gap 0.2s;
+  }
+  .cs-next-link:hover { gap: 1rem; }
+  .cs-next-right {
+    background: var(--paper-warm); display: flex; align-items: center; justify-content: center;
+  }
+  .cs-next-thumb {
+    width: 60%; aspect-ratio: 16/10; background: var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-light); font-size: 0.75rem; letter-spacing: 0.08em;
+    text-transform: uppercase; border: 0.5px dashed var(--line-strong);
+  }
+
+  footer {
+    padding: 1.5rem 4vw; display: flex; justify-content: space-between;
+    align-items: center; border-top: 0.5px solid var(--line);
+  }
+  footer p { font-size: 0.78rem; color: var(--ink-light); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .cs-hero-tags { animation: fadeUp 0.6s ease forwards; }
+  .cs-hero-title { animation: fadeUp 0.6s 0.1s ease both; }
+  .cs-hero-subtitle { animation: fadeUp 0.6s 0.2s ease both; }
+
+  @media (max-width: 768px) {
+    .cs-meta { grid-template-columns: 1fr 1fr; }
+    .cs-meta-item:nth-child(2) { border-right: none; }
+    .cs-meta-item:nth-child(-n+2) { border-bottom: 0.5px solid var(--line-strong); }
+    .cs-image-pair { grid-template-columns: 1fr; }
+    .cs-image-trio { grid-template-columns: 1fr; }
+    .cs-deliverables-grid { grid-template-columns: 1fr; }
+    .cs-deliverable { border-right: none !important; border-bottom: 0.5px solid var(--line-strong); }
+    .cs-deliverable:last-child { border-bottom: none; }
+    .cs-results-grid { grid-template-columns: 1fr 1fr; }
+    .cs-result-item:nth-child(2) { border-right: none; }
+    .cs-result-item:nth-child(-n+2) { border-bottom: 0.5px solid var(--line-strong); }
+    .cs-next { grid-template-columns: 1fr; }
+    .cs-next-right { min-height: 30vh; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Elizabeth Powell</a>
+  <a class="nav-back" href="index.html#work">← Back to all work</a>
+</nav>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-image-placeholder"></div>
+  <div class="cs-hero-content">
+    <div class="cs-hero-tags">
+      <span class="cs-tag">Documentary</span>
+      <span class="cs-tag">Multi-Platform</span>
+      <span class="cs-tag">AR</span>
+      <span class="cs-tag">Education</span>
+    </div>
+    <h1 class="cs-hero-title">The Scottish<br>Enlightenment<br><em>Documentary Series</em></h1>
+    <p class="cs-hero-subtitle">A 3-episode documentary filmed in the U.K., paired with AR books, a 360-photo website, and activity books for 160 students — designed, produced, and shipped in 10 days on location.</p>
+  </div>
+</section>
+
+<!-- META BAR -->
+<div class="cs-meta">
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Role</div>
+    <div class="cs-meta-value">Team Lead — 6 Designers</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Program</div>
+    <div class="cs-meta-value">UVU UXpedition · Documentary Production (U.K.)</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Completed</div>
+    <div class="cs-meta-value">May 2023</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Audience</div>
+    <div class="cs-meta-value">160 Students · 3 Classrooms</div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="cs-tools">
+  <div class="cs-tools-label">Tools Used</div>
+  <div class="cs-tools-row">
+    <span class="cs-tool">InDesign</span>
+    <span class="cs-tool">Illustrator</span>
+    <span class="cs-tool">Framer</span>
+    <span class="cs-tool">Premiere Pro</span>
+    <span class="cs-tool">ChatGPT</span>
+    <span class="cs-tool">Figma</span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="cs-section">
+  <div class="cs-section-label">Overview</div>
+  <h2 class="cs-heading">Teaching history through <em>design and storytelling.</em></h2>
+  <p class="cs-body">How did the ideas of a few Scottish thinkers in the 1700s shape the Declaration of Independence, the founding of the United States, and the culture of innovation that defines America today? That was the question at the heart of this project — and we had to answer it in a way that 6th graders would actually care about.</p>
+  <p class="cs-body">I led a team of 5 other designers through nearly a year of research and pre-production, then traveled to the U.K. for 10 days to film, edit, and publish a 3-episode documentary series on location. But the documentary was just one piece — we shipped an entire multi-platform learning experience.</p>
+</div>
+
+<!-- FULL BLEED IMAGE -->
+<div class="cs-image-full">
+  <div class="cs-image-full-inner">
+    <div class="cs-image-placeholder">Filming in Scotland — team on location</div>
+    <p class="cs-image-caption">The production team filming on location in Scotland</p>
+  </div>
+</div>
+
+<!-- CHALLENGE -->
+<div class="cs-section">
+  <div class="cs-section-label">The Challenge</div>
+  <h2 class="cs-heading">Make 300-year-old history <em>feel alive for 11-year-olds.</em></h2>
+  <p class="cs-body">The Scottish Enlightenment isn't exactly a topic that grabs a room of 6th graders. Adam Smith, David Hume, the philosophical underpinnings of modern democracy — these are abstract concepts even adults struggle with. We needed to make it tangible, visual, and fun.</p>
+  <p class="cs-body">On top of the creative challenge, we had real production constraints: film 3 episodes in 10 days, edit and publish while still on location, and deliver supplementary materials for 160 students across 3 classrooms — all while coordinating a team of 6 across an unfamiliar country.</p>
+</div>
+
+<!-- IMAGE PAIR -->
+<div class="cs-image-pair">
+  <div>
+    <div class="cs-image-placeholder">Pre-production research & planning</div>
+    <p class="cs-image-caption">Nearly a year of research before traveling</p>
+  </div>
+  <div>
+    <div class="cs-image-placeholder">Storyboards or shot lists</div>
+    <p class="cs-image-caption">Planning the narrative arc across 3 episodes</p>
+  </div>
+</div>
+
+<!-- APPROACH -->
+<div class="cs-section">
+  <div class="cs-section-label">Approach</div>
+  <h2 class="cs-heading">Design every touchpoint, <em>not just the film.</em></h2>
+  <p class="cs-body">From the start, we knew the documentary alone wouldn't be enough. 6th graders need multiple ways into a story — watching, reading, touching, exploring. So we designed a complete multi-platform experience around the content.</p>
+  <p class="cs-body">We created Haggis, an animated unicorn character (Scotland's national animal) who served as the guide across all materials — tying the episodes, website, AR books, and activity books into a cohesive experience that felt playful rather than academic.</p>
+  <p class="cs-body">The team spent months on research and pre-production — studying the historical figures, scouting filming locations remotely, designing the print materials, and building the website framework before we ever stepped on a plane.</p>
+</div>
+
+<!-- HIGHLIGHT -->
+<div class="cs-highlight">
+  <p class="cs-highlight-text">3 episodes. 10 days on location.<br><em>Filmed, edited, and published in the U.K.</em></p>
+</div>
+
+<!-- DELIVERABLES -->
+<div class="cs-deliverables">
+  <div class="cs-section-label">What We Shipped</div>
+  <div class="cs-deliverables-grid">
+    <div class="cs-deliverable">
+      <div class="cs-deliverable-icon">&#9654;</div>
+      <div class="cs-deliverable-title">3-Episode Documentary</div>
+      <div class="cs-deliverable-desc">Filmed on location across Scotland, edited and published while still in the U.K. Embedded on YouTube.</div>
+    </div>
+    <div class="cs-deliverable">
+      <div class="cs-deliverable-icon">&#9741;</div>
+      <div class="cs-deliverable-title">360-Photo Website</div>
+      <div class="cs-deliverable-desc">Interactive site with 360-degree photos of filming locations, episode embeds, and a conversion funnel.</div>
+    </div>
+    <div class="cs-deliverable">
+      <div class="cs-deliverable-icon">&#9733;</div>
+      <div class="cs-deliverable-title">Printed AR Books</div>
+      <div class="cs-deliverable-desc">Augmented reality books for each of the 3 classrooms — physical pages that come alive with digital content.</div>
+    </div>
+    <div class="cs-deliverable">
+      <div class="cs-deliverable-icon">&#9998;</div>
+      <div class="cs-deliverable-title">Activity Books</div>
+      <div class="cs-deliverable-desc">15-page coloring and activity books for each of the 160 students as learning supplements.</div>
+    </div>
+    <div class="cs-deliverable">
+      <div class="cs-deliverable-icon">&#9878;</div>
+      <div class="cs-deliverable-title">Business Cards</div>
+      <div class="cs-deliverable-desc">Professional cards for the production team, designed to match the project's visual identity.</div>
+    </div>
+    <div class="cs-deliverable">
+      <div class="cs-deliverable-icon">&#10029;</div>
+      <div class="cs-deliverable-title">Haggis — Animated Character</div>
+      <div class="cs-deliverable-desc">A unicorn guide character created with an animator, appearing across all platforms to tie the experience together.</div>
+    </div>
+  </div>
+</div>
+
+<!-- THREE-UP IMAGES -->
+<div class="cs-image-trio">
+  <div>
+    <div class="cs-image-placeholder">AR book</div>
+    <p class="cs-image-caption">Printed AR book</p>
+  </div>
+  <div>
+    <div class="cs-image-placeholder">Activity book</div>
+    <p class="cs-image-caption">Student activity book</p>
+  </div>
+  <div>
+    <div class="cs-image-placeholder">Website</div>
+    <p class="cs-image-caption">360-photo website</p>
+  </div>
+</div>
+
+<!-- PRODUCTION -->
+<div class="cs-section">
+  <div class="cs-section-label">On Location</div>
+  <h2 class="cs-heading">10 days to film, edit, <em>and publish.</em></h2>
+  <p class="cs-body">Once in Scotland, every day was tightly planned. We filmed across multiple historic locations, conducted interviews, captured 360 photos, and began editing episodes in the evenings. The goal was to leave the U.K. with finished, published content — not raw footage to sort through later.</p>
+  <p class="cs-body">Leading a team of 6 in this environment meant constant coordination — managing schedules, reassigning roles on the fly, and making creative decisions in real time. It was the most compressed production timeline I've ever worked on, and it taught me how to ship under extreme constraints.</p>
+</div>
+
+<!-- FULL BLEED IMAGE -->
+<div class="cs-image-full">
+  <div class="cs-image-full-inner">
+    <div class="cs-image-placeholder">Students engaging with the documentary materials</div>
+    <p class="cs-image-caption">160 students across 3 classrooms experienced the full multi-platform series</p>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="cs-results">
+  <div class="cs-section-label">By the Numbers</div>
+  <h2 class="cs-heading">A complete experience, <em>shipped.</em></h2>
+  <div class="cs-results-grid">
+    <div class="cs-result-item">
+      <div class="cs-result-num">3</div>
+      <div class="cs-result-label">Episodes produced</div>
+    </div>
+    <div class="cs-result-item">
+      <div class="cs-result-num">160</div>
+      <div class="cs-result-label">Students reached</div>
+    </div>
+    <div class="cs-result-item">
+      <div class="cs-result-num">6</div>
+      <div class="cs-result-label">Platforms shipped</div>
+    </div>
+    <div class="cs-result-item">
+      <div class="cs-result-num">10</div>
+      <div class="cs-result-label">Days on location</div>
+    </div>
+  </div>
+</div>
+
+<!-- REFLECTION -->
+<div class="cs-section">
+  <div class="cs-section-label">Reflection</div>
+  <h2 class="cs-heading">Design is how you <em>make people care.</em></h2>
+  <p class="cs-body">This project proved to me that great design isn't about making things look good — it's about making people care about things they wouldn't otherwise pay attention to. The Scottish Enlightenment is objectively important, but it takes thoughtful design to make an 11-year-old feel that.</p>
+  <p class="cs-body">It also taught me how to lead under pressure. When you're in a foreign country with a tight deadline and a team counting on you, there's no room for indecision. You plan deeply, then you execute and adapt. That rhythm — research, plan, ship, iterate — is the same one I bring to product work today.</p>
+</div>
+
+<!-- NEXT PROJECT -->
+<section class="cs-next">
+  <div class="cs-next-left">
+    <div class="cs-next-label">Next project</div>
+    <h3 class="cs-next-title">The Rift — Augmented Reality Experience</h3>
+    <a class="cs-next-link" href="case-study-the-rift.html">View project →</a>
+  </div>
+  <div class="cs-next-right">
+    <div class="cs-next-thumb">Project image</div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Elizabeth Powell. All rights reserved.</p>
+  <p>Designed & built by Elizabeth Powell</p>
+</footer>
+
+</body>
+</html>

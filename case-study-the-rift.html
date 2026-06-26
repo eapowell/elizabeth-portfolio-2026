@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rift — Case Study | Elizabeth Powell</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0f0e;
+    --ink-mid: #3a3a38;
+    --ink-light: #8a8a86;
+    --paper: #fafaf8;
+    --paper-warm: #f3f2ee;
+    --accent: #0f0f0e;
+    --line: rgba(15,15,14,0.12);
+    --line-strong: rgba(15,15,14,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4vw;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-back {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--ink); }
+
+  /* CASE STUDY HERO — full bleed */
+  .cs-hero {
+    width: 100%;
+    min-height: 85vh;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6rem 6vw 5rem;
+    margin-top: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cs-hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+  }
+  .cs-hero-image-placeholder {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    opacity: 0.9;
+  }
+  .cs-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+  .cs-hero-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .cs-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(250,250,248,0.7);
+    border: 0.5px solid rgba(250,250,248,0.3);
+    padding: 4px 12px;
+  }
+  .cs-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+  }
+  .cs-hero-title em { font-style: italic; font-weight: 300; }
+  .cs-hero-subtitle {
+    font-size: 1.1rem;
+    color: rgba(250,250,248,0.75);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  /* META BAR */
+  .cs-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .cs-meta-item {
+    padding: 2rem 4vw;
+    border-right: 0.5px solid var(--line-strong);
+  }
+  .cs-meta-item:last-child { border-right: none; }
+  .cs-meta-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.4rem;
+  }
+  .cs-meta-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  /* CONTENT SECTIONS */
+  .cs-section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 5rem 4vw;
+  }
+  .cs-section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .cs-section-label::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 0.5px;
+    background: var(--line-strong);
+  }
+  .cs-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .cs-heading em { font-style: italic; }
+  .cs-body {
+    color: var(--ink-mid);
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* TOOLS */
+  .cs-tools {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 4vw 4rem;
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .cs-tools-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+  }
+  .cs-tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .cs-tool {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-mid);
+    border: 0.5px solid var(--line-strong);
+    padding: 5px 14px;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+  }
+  .cs-tool:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* FULL-BLEED IMAGE */
+  .cs-image-full {
+    width: 100%;
+    background: var(--paper-warm);
+    border-top: 0.5px solid var(--line-strong);
+    border-bottom: 0.5px solid var(--line-strong);
+    overflow: hidden;
+  }
+  .cs-image-full-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 4vw;
+  }
+  .cs-image-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-light);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 0.5px dashed var(--line-strong);
+  }
+  .cs-image-caption {
+    font-size: 0.78rem;
+    color: var(--ink-light);
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+
+  /* SIDE-BY-SIDE IMAGES */
+  .cs-image-pair {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 4vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .cs-image-pair .cs-image-placeholder {
+    aspect-ratio: 4/3;
+  }
+
+  /* HIGHLIGHT / PULL QUOTE */
+  .cs-highlight {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5rem 6vw;
+    text-align: center;
+  }
+  .cs-highlight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .cs-highlight-text em { font-style: italic; }
+
+  /* RESULTS GRID */
+  .cs-results {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 4vw;
+  }
+  .cs-results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 0.5px solid var(--line-strong);
+    margin-top: 2rem;
+  }
+  .cs-result-item {
+    padding: 2rem;
+    border-right: 0.5px solid var(--line-strong);
+    text-align: center;
+  }
+  .cs-result-item:last-child { border-right: none; }
+  .cs-result-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .cs-result-label {
+    font-size: 0.78rem;
+    color: var(--ink-light);
+    letter-spacing: 0.06em;
+  }
+
+  /* NEXT PROJECT */
+  .cs-next {
+    border-top: 0.5px solid var(--line-strong);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 40vh;
+  }
+  .cs-next-left {
+    padding: 4rem 4vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 0.5px solid var(--line-strong);
+  }
+  .cs-next-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+  }
+  .cs-next-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .cs-next-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: gap 0.2s;
+  }
+  .cs-next-link:hover { gap: 1rem; }
+  .cs-next-right {
+    background: var(--paper-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cs-next-thumb {
+    width: 60%;
+    aspect-ratio: 16/10;
+    background: var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-light);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 0.5px dashed var(--line-strong);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 4vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid var(--line);
+  }
+  footer p { font-size: 0.78rem; color: var(--ink-light); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .cs-hero-tags { animation: fadeUp 0.6s ease forwards; }
+  .cs-hero-title { animation: fadeUp 0.6s 0.1s ease both; }
+  .cs-hero-subtitle { animation: fadeUp 0.6s 0.2s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .cs-meta { grid-template-columns: 1fr 1fr; }
+    .cs-meta-item:nth-child(2) { border-right: none; }
+    .cs-meta-item:nth-child(-n+2) { border-bottom: 0.5px solid var(--line-strong); }
+    .cs-image-pair { grid-template-columns: 1fr; }
+    .cs-results-grid { grid-template-columns: 1fr; }
+    .cs-result-item { border-right: none; border-bottom: 0.5px solid var(--line-strong); }
+    .cs-result-item:last-child { border-bottom: none; }
+    .cs-next { grid-template-columns: 1fr; }
+    .cs-next-right { min-height: 30vh; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Elizabeth Powell</a>
+  <a class="nav-back" href="index.html#work">← Back to all work</a>
+</nav>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="cs-hero-image-placeholder"></div>
+  <!-- Replace with: <img class="cs-hero-image" src="your-image.jpg" alt="The Rift AR experience"> -->
+  <div class="cs-hero-content">
+    <div class="cs-hero-tags">
+      <span class="cs-tag">AR Platform</span>
+      <span class="cs-tag">Zero to One</span>
+      <span class="cs-tag">Product Lead</span>
+    </div>
+    <h1 class="cs-hero-title">The Rift<br><em>Augmented Reality Experience</em></h1>
+    <p class="cs-hero-subtitle">End-to-end product management and design for an augmented reality platform — from concept and MVP through growth, optimization, and iterative improvement.</p>
+  </div>
+</section>
+
+<!-- META BAR -->
+<div class="cs-meta">
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Role</div>
+    <div class="cs-meta-value">Product Lead & Board Director</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Company</div>
+    <div class="cs-meta-value">Paladin & Archer Software Systems</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Timeline</div>
+    <div class="cs-meta-value">Apr 2021 – Present</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Platform</div>
+    <div class="cs-meta-value">Unity · Web · In-Venue</div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="cs-tools">
+  <div class="cs-tools-label">Tools Used</div>
+  <div class="cs-tools-row">
+    <span class="cs-tool">Claude Code</span>
+    <span class="cs-tool">V0</span>
+    <span class="cs-tool">ChatGPT</span>
+    <span class="cs-tool">Unity</span>
+    <span class="cs-tool">Figma</span>
+    <span class="cs-tool">Google Analytics</span>
+    <span class="cs-tool">Jira</span>
+    <span class="cs-tool">Vbout</span>
+    <span class="cs-tool">Bookeo</span>
+    <span class="cs-tool">Adobe Suite</span>
+    <span class="cs-tool">Mural</span>
+    <span class="cs-tool">GitHub</span>
+    <span class="cs-tool">MCP</span>
+    <span class="cs-tool">Suno</span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="cs-section">
+  <div class="cs-section-label">Overview</div>
+  <h2 class="cs-heading">An AR experience that merges <em>physical space with storytelling.</em></h2>
+  <p class="cs-body">The Rift is an augmented reality platform built in Unity that merges physical environments, storytelling, and real-time interaction. I've owned the product end-to-end through multiple life cycle phases — defining success metrics, setting the roadmap, and driving execution across engineering, design, and operations.</p>
+  <p class="cs-body">The product spans the full customer journey: from newsletter and marketing funnel to online booking, the in-venue AR experience itself, and the post-experience review pipeline.</p>
+</div>
+
+<!-- FULL BLEED IMAGE -->
+<div class="cs-image-full">
+  <div class="cs-image-full-inner">
+    <div class="cs-image-placeholder">Product overview image</div>
+    <p class="cs-image-caption">The Rift AR experience — players interact with augmented elements in a physical venue</p>
+  </div>
+</div>
+
+<!-- CHALLENGE -->
+<div class="cs-section">
+  <div class="cs-section-label">The Challenge</div>
+  <h2 class="cs-heading">How do you optimize an experience <em>you can't fully see?</em></h2>
+  <p class="cs-body">AR experiences are hard to measure. Unlike a typical SaaS product, the user journey spans digital touchpoints (website, booking) and physical ones (the venue, the game itself, the staff interaction after). Data was scattered across five different sources — surveys, gameplay telemetry, booking data, an issue tracker, and the CMS — with no unified picture of what was actually driving satisfaction.</p>
+  <p class="cs-body">At the same time, we had a clear gap between how users felt about the experience (great in-venue survey scores) and what they actually did afterward (very few posted Google reviews). The rating sat at 4.3 — good, but not enough to drive organic growth.</p>
+</div>
+
+<!-- IMAGE PAIR -->
+<div class="cs-image-pair">
+  <div>
+    <div class="cs-image-placeholder">Data analysis screenshot</div>
+    <p class="cs-image-caption">Multi-source data synthesis using Claude</p>
+  </div>
+  <div>
+    <div class="cs-image-placeholder">Booking funnel analysis</div>
+    <p class="cs-image-caption">Google Analytics funnel tracking setup</p>
+  </div>
+</div>
+
+<!-- APPROACH -->
+<div class="cs-section">
+  <div class="cs-section-label">Approach</div>
+  <h2 class="cs-heading">Data synthesis, <em>then qualitative depth.</em></h2>
+  <p class="cs-body">I used Claude to simultaneously analyze all five data sources — surveys, gameplay telemetry, booking data, the issue tracker, and the CMS. This surfaced a high-impact finding: groups of 3–4 players rate 4.7 on average vs. 4.0 for pairs, with 0% negative reviews. That insight reshaped how we thought about group size and pricing.</p>
+  <p class="cs-body">To validate before building, I designed and ran qualitative user tests with mic'd participants, screen recordings, and post-session interviews. The combination of quantitative pattern-finding and qualitative depth gave us confidence to prioritize real changes.</p>
+  <p class="cs-body">I also set up Google Analytics to track conversion across the entire booking funnel. This revealed that average transaction value (~$35) needed to reach $85 to unlock profitable paid acquisition — a finding that reprioritized the roadmap toward upsell and group-size optimization.</p>
+</div>
+
+<!-- HIGHLIGHT -->
+<div class="cs-highlight">
+  <p class="cs-highlight-text">Groups of 3–4 players rate <em>4.7 avg</em> vs. 4.0 for pairs,<br>with <em>0% negative reviews.</em></p>
+</div>
+
+<!-- SOLUTION -->
+<div class="cs-section">
+  <div class="cs-section-label">Solution</div>
+  <h2 class="cs-heading">Closing the gap between <em>delight and action.</em></h2>
+  <p class="cs-body">The biggest single win was tackling the review pipeline. I identified a 67% drop-off between in-venue 5-star survey responses and posted Google reviews. The problem wasn't satisfaction — it was the handoff.</p>
+  <p class="cs-body">I defined the problem, designed a new handoff flow, built a 14-slide staff training deck, and created a guided review script. The solution was deliberately low-tech — it had to work with a front desk team in a fast-paced venue environment.</p>
+  <p class="cs-body">Beyond the review pipeline, I rebuilt the company website and marketing funnels using Claude Code and V0 — expanding our technical output without an engineering team. Every change was tracked, tested, and tied back to the metrics we set.</p>
+</div>
+
+<!-- FULL BLEED IMAGE -->
+<div class="cs-image-full">
+  <div class="cs-image-full-inner">
+    <div class="cs-image-placeholder">Solution implementation — review flow, training materials, website</div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="cs-results">
+  <div class="cs-section-label">Results</div>
+  <h2 class="cs-heading">Measurable, <em>data-tracked improvement.</em></h2>
+  <p class="cs-body" style="max-width: 760px;">Every initiative tied back to defined metrics. The review pipeline redesign alone produced dramatic, measurable results in just 8 weeks.</p>
+  <div class="cs-results-grid">
+    <div class="cs-result-item">
+      <div class="cs-result-num">4.6</div>
+      <div class="cs-result-label">Google rating (from 4.3)</div>
+    </div>
+    <div class="cs-result-item">
+      <div class="cs-result-num">54</div>
+      <div class="cs-result-label">New reviews in 8 weeks</div>
+    </div>
+    <div class="cs-result-item">
+      <div class="cs-result-num">67%</div>
+      <div class="cs-result-label">Drop-off identified & fixed</div>
+    </div>
+  </div>
+</div>
+
+<!-- REFLECTION -->
+<div class="cs-section">
+  <div class="cs-section-label">Reflection</div>
+  <h2 class="cs-heading">What I learned <em>building at the edge.</em></h2>
+  <p class="cs-body">The Rift taught me that product management for physical + digital experiences requires a different kind of thinking. You can't A/B test the feeling of walking into a room with AR overlays. But you can instrument everything around it — the booking flow, the group dynamics, the post-experience moment — and use that data to make the core experience better.</p>
+  <p class="cs-body">Working as a solo PM with board-level responsibility also shaped how I communicate tradeoffs. When you're explaining to investors why group-size optimization matters more than a new feature, you need to be precise about the data and clear about the strategy.</p>
+</div>
+
+<!-- NEXT PROJECT -->
+<section class="cs-next">
+  <div class="cs-next-left">
+    <div class="cs-next-label">Next project</div>
+    <h3 class="cs-next-title">The Rift — Web AR Mini Quest</h3>
+    <a class="cs-next-link" href="#">View project →</a>
+  </div>
+  <div class="cs-next-right">
+    <div class="cs-next-thumb">Project image</div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Elizabeth Powell. All rights reserved.</p>
+  <p>Designed & built by Elizabeth Powell</p>
+</footer>
+
+</body>
+</html>
