@@ -1,0 +1,5 @@
+# Large video files
+*.mov
+
+# OS files
+.DS_Store
