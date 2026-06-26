@@ -430,6 +430,199 @@
 
   /* ACTIVE NAV */
   .nav-links a.active { color: var(--ink); font-weight: 500; }
+
+  /* MODE TOGGLE */
+  .mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-left: 2rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .mode-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    transition: color 0.4s;
+  }
+  .mode-label.active-label { color: var(--ink); font-weight: 500; }
+  .toggle-track {
+    width: 36px;
+    height: 20px;
+    background: var(--line-strong);
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.4s;
+  }
+  .toggle-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--ink);
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), background 0.4s;
+  }
+
+  /* FUN THEME */
+  body.fun {
+    --ink: #f0f0f0;
+    --ink-mid: #c0c0c0;
+    --ink-light: #888;
+    --paper: #0a0a0a;
+    --paper-warm: #141414;
+    --line: rgba(255,255,255,0.1);
+    --line-strong: rgba(255,255,255,0.2);
+    --neon-pink: #ff2d95;
+    --neon-green: #39ff14;
+    --neon-orange: #ff6b2b;
+    --neon-blue: #00d4ff;
+    transition: background 0.5s, color 0.5s;
+  }
+  body:not(.fun) {
+    transition: background 0.5s, color 0.5s;
+  }
+  body.fun nav {
+    background: rgba(10,10,10,0.92);
+  }
+  body.fun .toggle-track {
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+  }
+  body.fun .toggle-thumb {
+    transform: translateX(16px);
+    background: #0a0a0a;
+  }
+  body.fun .hero-name em {
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-orange), var(--neon-green), var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  body.fun .hero-eyebrow {
+    color: var(--neon-pink);
+  }
+  body.fun .hero-cta {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+  }
+  body.fun .hero-right {
+    background: #141414;
+  }
+  body.fun .section-label {
+    color: var(--neon-pink);
+  }
+  body.fun .section-label::after {
+    background: linear-gradient(90deg, var(--neon-pink), transparent);
+  }
+  body.fun .stat-num {
+    background: linear-gradient(135deg, var(--neon-orange), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  body.fun .tag {
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+  }
+  body.fun .work-card:hover {
+    background: #1a1a1a;
+    box-shadow: inset 0 0 30px rgba(255,45,149,0.05);
+  }
+  body.fun .work-arrow {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+  }
+  body.fun .work-title {
+    transition: color 0.3s;
+  }
+  body.fun .work-card:hover .work-title {
+    color: var(--neon-pink);
+  }
+  body.fun .skill-pill {
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+    transition: all 0.3s;
+  }
+  body.fun .skill-pill:hover {
+    background: var(--neon-blue);
+    color: #0a0a0a;
+  }
+  body.fun .resume-dl-link {
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+  }
+  body.fun .resume-dl-link:hover {
+    background: var(--neon-green);
+    color: #0a0a0a;
+  }
+  body.fun .form-submit {
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-orange));
+    color: #0a0a0a;
+    font-weight: 500;
+  }
+  body.fun .form-input:focus, body.fun .form-textarea:focus {
+    border-color: var(--neon-pink);
+  }
+  body.fun .contact-headline em {
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  body.fun .about-headline em {
+    background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  body.fun .footer-socials a:hover {
+    color: var(--neon-pink);
+  }
+  body.fun .nav-links a:hover {
+    color: var(--neon-pink);
+  }
+  body.fun .nav-links a.active {
+    color: var(--neon-pink);
+  }
+  body.fun .nav-logo {
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Fun mode animations */
+  @keyframes neonPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  body.fun .stat-item {
+    transition: transform 0.3s;
+  }
+  body.fun .stat-item:hover {
+    transform: scale(1.05);
+  }
+  body.fun .hero-name {
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  body.fun .photo-icon {
+    border-color: var(--neon-pink);
+    animation: neonPulse 2s ease infinite;
+  }
+  body.fun .work-thumb {
+    border-color: var(--neon-blue);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  body.fun .work-card:hover .work-thumb {
+    box-shadow: 0 0 20px rgba(0,212,255,0.2);
+  }
 </style>
 </head>
 <body>
@@ -442,6 +635,11 @@
     <li><a href="#resume">Résumé</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <div class="mode-toggle" id="modeToggle" role="button" aria-label="Toggle fun mode">
+    <span class="mode-label active-label" id="labelPro">Pro</span>
+    <div class="toggle-track"><div class="toggle-thumb"></div></div>
+    <span class="mode-label" id="labelFun">Fun</span>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -676,6 +874,18 @@
     });
   }, { threshold: 0.4 });
   sections.forEach(s => obs.observe(s));
+
+  const toggle = document.getElementById('modeToggle');
+  const labelPro = document.getElementById('labelPro');
+  const labelFun = document.getElementById('labelFun');
+  let isFun = false;
+
+  toggle.addEventListener('click', () => {
+    isFun = !isFun;
+    document.body.classList.toggle('fun', isFun);
+    labelPro.classList.toggle('active-label', !isFun);
+    labelFun.classList.toggle('active-label', isFun);
+  });
 </script>
 </body>
 </html>
