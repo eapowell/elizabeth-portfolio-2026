@@ -281,15 +281,17 @@
   .cs-deliverable.revealed:nth-child(6) { animation-delay: 0.5s; }
 
   /* Haggis floating animation */
-  .haggis-img {
-    width: 64px;
+  .haggis-img, .haggis-video {
+    width: 80px;
     height: auto;
     margin-bottom: 0.5rem;
     animation: haggisFloat 3s ease-in-out infinite;
     filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
     transition: transform 0.3s ease;
+    border-radius: 4px;
   }
-  .cs-deliverable:hover .haggis-img {
+  .cs-deliverable:hover .haggis-img,
+  .cs-deliverable:hover .haggis-video {
     animation: haggisBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   @keyframes haggisFloat {
@@ -417,7 +419,7 @@
 
 <!-- HERO -->
 <section class="cs-hero">
-  <div class="cs-hero-image-placeholder"></div>
+  <img class="cs-hero-image" src="images/Documentary Project/HeroImage-Filming.JPG" alt="Filming the Scottish Enlightenment documentary on location">
   <div class="cs-hero-content">
     <div class="cs-hero-tags">
       <span class="cs-tag">Documentary</span>
@@ -543,7 +545,7 @@
       <div class="cs-deliverable-desc">Professional cards for the production team, designed to match the project's visual identity.</div>
     </div>
     <div class="cs-deliverable">
-      <img class="haggis-img" src="images/Documentary Project/Unicorn Ref.png" alt="Haggis the unicorn">
+      <video class="haggis-video" autoplay loop muted playsinline src="images/Documentary Project/haggis-BeforeWeGo-1.mp4"></video>
       <div class="cs-deliverable-title">Haggis — Animated Character</div>
       <div class="cs-deliverable-desc">A unicorn guide character created with an animator, appearing across all platforms to tie the experience together.</div>
     </div>
