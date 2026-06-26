@@ -173,6 +173,41 @@
   }
   .cs-image-trio .cs-image-placeholder { aspect-ratio: 3/4; }
 
+  /* EPISODE EMBEDS */
+  .cs-episodes {
+    max-width: 1200px; margin: 0 auto; padding: 3rem 4vw 4rem;
+  }
+  .cs-episodes-label {
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .cs-episodes-label::after {
+    content: ''; display: block; flex: 1; height: 0.5px; background: var(--line-strong);
+  }
+  .cs-episodes-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem;
+  }
+  .cs-episode {
+    display: flex; flex-direction: column;
+  }
+  .cs-episode-video {
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+    background: #000; border: 0.5px solid var(--line-strong);
+  }
+  .cs-episode-video iframe {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+  }
+  .cs-episode-title {
+    font-size: 0.82rem; font-weight: 500; margin-top: 0.75rem;
+  }
+  .cs-episode-desc {
+    font-size: 0.78rem; color: var(--ink-light); margin-top: 0.25rem;
+  }
+  @media (max-width: 768px) {
+    .cs-episodes-grid { grid-template-columns: 1fr; }
+  }
+
   .cs-highlight {
     background: var(--ink); color: var(--paper);
     padding: 5rem 6vw; text-align: center;
@@ -515,19 +550,31 @@
   </div>
 </div>
 
-<!-- THREE-UP IMAGES -->
-<div class="cs-image-trio">
-  <div>
-    <div class="cs-image-placeholder">AR book</div>
-    <p class="cs-image-caption">Printed AR book</p>
-  </div>
-  <div>
-    <div class="cs-image-placeholder">Activity book</div>
-    <p class="cs-image-caption">Student activity book</p>
-  </div>
-  <div>
-    <div class="cs-image-placeholder">Website</div>
-    <p class="cs-image-caption">360-photo website</p>
+<!-- EPISODES -->
+<div class="cs-episodes">
+  <div class="cs-episodes-label">Watch the Episodes</div>
+  <div class="cs-episodes-grid">
+    <div class="cs-episode">
+      <div class="cs-episode-video">
+        <iframe src="https://www.youtube-nocookie.com/embed/OTzbFxVXBWM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="cs-episode-title">Prequel</div>
+      <div class="cs-episode-desc">Setting the stage for the Scottish Enlightenment</div>
+    </div>
+    <div class="cs-episode">
+      <div class="cs-episode-video">
+        <iframe src="https://www.youtube-nocookie.com/embed/6NgB3D-_NwM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="cs-episode-title">Episode 1</div>
+      <div class="cs-episode-desc">The ideas that shaped a nation</div>
+    </div>
+    <div class="cs-episode">
+      <div class="cs-episode-video">
+        <iframe src="https://www.youtube-nocookie.com/embed/WrYW5B79xYQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="cs-episode-title">Episode 2</div>
+      <div class="cs-episode-desc">From Scotland to America</div>
+    </div>
   </div>
 </div>
 
