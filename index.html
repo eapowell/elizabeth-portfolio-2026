@@ -246,6 +246,18 @@
     position: relative;
     overflow: hidden;
   }
+  .work-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    position: absolute; inset: 0;
+    transition: transform 0.4s ease;
+  }
+  .work-card:hover .work-thumb img {
+    transform: scale(1.05);
+  }
+  .work-thumb:has(img) {
+    border: none;
+  }
   .work-tags {
     display: flex;
     gap: 0.5rem;
@@ -698,7 +710,7 @@
     <div class="section-label">Selected work</div>
     <div class="work-grid">
       <a class="work-card" href="case-study-the-rift.html">
-        <div class="work-thumb">Project image</div>
+        <div class="work-thumb"><img src="https://img.youtube.com/vi/dKNS_XCKj9s/maxresdefault.jpg" alt="The Rift AR Experience"></div>
         <div class="work-tags"><span class="tag">AR Platform</span><span class="tag">0→1</span><span class="tag">Product Lead</span></div>
         <h3 class="work-title">The Rift — Augmented Reality Experience</h3>
         <p class="work-desc">End-to-end product management for an AR platform built in Unity — from concept and MVP through growth. Used multi-source data synthesis to optimize group experiences and moved Google ratings from 4.3 to 4.6 in 8 weeks.</p>
@@ -719,7 +731,7 @@
         <span class="work-arrow">View case study →</span>
       </a>
       <a class="work-card" href="case-study-documentary.html">
-        <div class="work-thumb">Project image</div>
+        <div class="work-thumb"><img src="images/Documentary Project/HeroImage-Filming.JPG" alt="Scottish Enlightenment Documentary filming on location"></div>
         <div class="work-tags"><span class="tag">Documentary</span><span class="tag">Multi-Platform</span><span class="tag">AR</span></div>
         <h3 class="work-title">The Scottish Enlightenment — Documentary Series</h3>
         <p class="work-desc">Led a team of 6 designers to produce a 3-episode documentary series in the U.K. on the Scottish Enlightenment's impact on America. Shipped a multi-platform experience: episodes, a 360-photo website, printed AR books, activity books, and business cards for 160 students across 3 classrooms (2023).</p>
