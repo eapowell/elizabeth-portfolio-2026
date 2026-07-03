@@ -637,6 +637,26 @@
   }
 
   /* RESPONSIVE */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--ink);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
   @media (max-width: 768px) {
     nav {
       flex-wrap: wrap;
@@ -644,9 +664,26 @@
       padding: 0.75rem 4vw;
     }
     .nav-logo { font-size: 1.1rem; }
-    .nav-links { gap: 1rem; }
-    .nav-links a { font-size: 0.7rem; letter-spacing: 0.06em; }
-    .mode-toggle { margin-left: auto; }
+    .hamburger { display: flex; margin-left: auto; }
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      gap: 0;
+      order: 3;
+      padding-top: 0.75rem;
+      border-top: 0.5px solid var(--line);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { padding: 0.6rem 0; }
+    .nav-links a { font-size: 0.85rem; letter-spacing: 0.06em; }
+    .mode-toggle {
+      order: 4;
+      width: 100%;
+      justify-content: center;
+      margin-left: 0;
+      padding: 0.75rem 0 0.25rem;
+    }
 
     #hero {
       grid-template-columns: 1fr;
@@ -712,7 +749,10 @@
 
 <nav>
   <a class="nav-logo" href="#hero">Elizabeth Powell</a>
-  <ul class="nav-links">
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#resume">Résumé</a></li>
@@ -959,6 +999,19 @@
   const labelPro = document.getElementById('labelPro');
   const labelFun = document.getElementById('labelFun');
   let isFun = false;
+
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
 
   toggle.addEventListener('click', () => {
     isFun = !isFun;
