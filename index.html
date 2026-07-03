@@ -635,6 +635,77 @@
   body.fun .work-card:hover .work-thumb {
     box-shadow: 0 0 20px rgba(0,212,255,0.2);
   }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.75rem 4vw;
+    }
+    .nav-logo { font-size: 1.1rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.7rem; letter-spacing: 0.06em; }
+    .mode-toggle { margin-left: auto; }
+
+    #hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .hero-left {
+      border-right: none;
+      padding: 6rem 6vw 3rem;
+    }
+    .hero-right {
+      padding: 2rem;
+      min-height: 50vh;
+    }
+    .hero-visual { max-width: 280px; }
+
+    .section-inner { padding: 3.5rem 5vw; }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+    .work-card:nth-child(even) { border-right: 0.5px solid var(--line-strong); }
+    .work-card:nth-last-child(-n+2) { border-bottom: 0.5px solid var(--line-strong); }
+    .work-card:last-child { border-bottom: none; }
+    .work-card { padding: 1.75rem; }
+
+    .resume-cols {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .resume-item-header {
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .contact-left {
+      border-right: none;
+      padding-right: 0;
+      padding-bottom: 2.5rem;
+      border-bottom: 0.5px solid var(--line-strong);
+    }
+    .contact-right {
+      padding-left: 0;
+      padding-top: 2.5rem;
+    }
+
+    footer {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
 </style>
 </head>
 <body>
