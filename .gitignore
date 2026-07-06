@@ -1,5 +1,8 @@
 # Large video files
 *.mov
 
+# Resume source
+resume-source.html
+
 # OS files
 .DS_Store
