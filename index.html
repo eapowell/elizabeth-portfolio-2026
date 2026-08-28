@@ -416,6 +416,21 @@
     margin-top: 0.5rem;
   }
   .form-submit:hover { opacity: 0.75; }
+  .form-submit:disabled { opacity: 0.5; cursor: default; }
+  .form-success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 200px;
+    text-align: center;
+  }
+  .form-success p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
 
   /* FOOTER */
   footer {
@@ -951,19 +966,24 @@
         </div>
       </div>
       <div class="contact-right">
-        <div class="form-group">
-          <label class="form-label">Name</label>
-          <input class="form-input" type="text" placeholder="Your name">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input class="form-input" type="email" placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Message</label>
-          <textarea class="form-textarea" placeholder="Tell me what you're working on..."></textarea>
-        </div>
-        <button class="form-submit">Send message</button>
+        <form id="contactForm" action="https://formsubmit.co/lizzyapowell@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Portfolio message">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none">
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            <input class="form-input" type="text" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" name="message" placeholder="Tell me what you're working on..." required></textarea>
+          </div>
+          <button class="form-submit" type="submit">Send message</button>
+        </form>
       </div>
     </div>
   </div>
@@ -1019,6 +1039,31 @@
     document.body.classList.toggle('fun', isFun);
     labelPro.classList.toggle('active-label', !isFun);
     labelFun.classList.toggle('active-label', isFun);
+  });
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = this;
+    const btn = form.querySelector('.form-submit');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res) {
+      if (res.ok) {
+        form.innerHTML = '<div class="form-success"><p>Thanks for reaching out!<br>I\'ll get back to you soon.</p></div>';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Send message';
+        alert('Something went wrong — please try emailing me directly.');
+      }
+    }).catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Send message';
+      alert('Something went wrong — please try emailing me directly.');
+    });
   });
 </script>
 </body>
