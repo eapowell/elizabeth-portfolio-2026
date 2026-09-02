@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rift Strike — Case Study | Elizabeth Powell</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0f0e;
+    --ink-mid: #3a3a38;
+    --ink-light: #8a8a86;
+    --paper: #fafaf8;
+    --paper-warm: #f3f2ee;
+    --accent: #0f0f0e;
+    --line: rgba(15,15,14,0.12);
+    --line-strong: rgba(15,15,14,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4vw;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-back {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--ink); }
+
+  /* CASE STUDY HERO — full bleed */
+  .cs-hero {
+    width: 100%;
+    min-height: 85vh;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6rem 6vw 5rem;
+    margin-top: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cs-hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+  }
+  .cs-hero-image-placeholder {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    opacity: 0.9;
+  }
+  .cs-hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .cs-hero-video iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: 177.78vh;
+    height: 56.25vw;
+    transform: translate(-50%, -50%);
+    border: none;
+    opacity: 0.45;
+  }
+  .cs-hero-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,20,0.85) 0%, rgba(10,10,20,0.3) 50%, rgba(10,10,20,0.5) 100%);
+    z-index: 1;
+  }
+  .cs-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+  .cs-hero-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .cs-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(250,250,248,0.7);
+    border: 0.5px solid rgba(250,250,248,0.3);
+    padding: 4px 12px;
+  }
+  .cs-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+  }
+  .cs-hero-title em { font-style: italic; font-weight: 300; }
+  .cs-hero-subtitle {
+    font-size: 1.1rem;
+    color: rgba(250,250,248,0.75);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  /* META BAR */
+  .cs-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .cs-meta-item {
+    padding: 2rem 4vw;
+    border-right: 0.5px solid var(--line-strong);
+  }
+  .cs-meta-item:last-child { border-right: none; }
+  .cs-meta-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.4rem;
+  }
+  .cs-meta-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  /* CONTENT SECTIONS */
+  .cs-section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 5rem 4vw;
+  }
+  .cs-section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .cs-section-label::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 0.5px;
+    background: var(--line-strong);
+  }
+  .cs-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .cs-heading em { font-style: italic; }
+  .cs-body {
+    color: var(--ink-mid);
+    line-height: 1.85;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* TOOLS */
+  .cs-tools {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 4vw 4rem;
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .cs-tools-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+  }
+  .cs-tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .cs-tool {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-mid);
+    border: 0.5px solid var(--line-strong);
+    padding: 5px 14px;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+  }
+  .cs-tool:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* FULL-BLEED IMAGE */
+  .cs-image-full {
+    width: 100%;
+    background: var(--paper-warm);
+    border-top: 0.5px solid var(--line-strong);
+    border-bottom: 0.5px solid var(--line-strong);
+    overflow: hidden;
+  }
+  .cs-image-full-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 4vw;
+  }
+  .cs-image-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-light);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 0.5px dashed var(--line-strong);
+  }
+  .cs-image-caption {
+    font-size: 0.78rem;
+    color: var(--ink-light);
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+
+  /* SIDE-BY-SIDE IMAGES */
+  .cs-image-pair {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 4vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .cs-image-pair .cs-image-placeholder {
+    aspect-ratio: 4/3;
+  }
+
+  /* HIGHLIGHT / PULL QUOTE */
+  .cs-highlight {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5rem 6vw;
+    text-align: center;
+  }
+  .cs-highlight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .cs-highlight-text em { font-style: italic; }
+
+  /* RESULTS GRID */
+  .cs-results {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 4vw;
+  }
+  .cs-results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 0.5px solid var(--line-strong);
+    margin-top: 2rem;
+  }
+  .cs-result-item {
+    padding: 2rem;
+    border-right: 0.5px solid var(--line-strong);
+    text-align: center;
+  }
+  .cs-result-item:last-child { border-right: none; }
+  .cs-result-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .cs-result-label {
+    font-size: 0.78rem;
+    color: var(--ink-light);
+    letter-spacing: 0.06em;
+  }
+
+  /* NEXT PROJECT */
+  .cs-next {
+    border-top: 0.5px solid var(--line-strong);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 40vh;
+  }
+  .cs-next-left {
+    padding: 4rem 4vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 0.5px solid var(--line-strong);
+  }
+  .cs-next-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 1rem;
+  }
+  .cs-next-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .cs-next-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: gap 0.2s;
+  }
+  .cs-next-link:hover { gap: 1rem; }
+  .cs-next-right {
+    background: var(--paper-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cs-next-thumb {
+    width: 60%;
+    aspect-ratio: 16/10;
+    background: var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-light);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 0.5px dashed var(--line-strong);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 4vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid var(--line);
+  }
+  footer p { font-size: 0.78rem; color: var(--ink-light); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .cs-hero-tags { animation: fadeUp 0.6s ease forwards; }
+  .cs-hero-title { animation: fadeUp 0.6s 0.1s ease both; }
+  .cs-hero-subtitle { animation: fadeUp 0.6s 0.2s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .cs-meta { grid-template-columns: 1fr 1fr; }
+    .cs-meta-item:nth-child(2) { border-right: none; }
+    .cs-meta-item:nth-child(-n+2) { border-bottom: 0.5px solid var(--line-strong); }
+    .cs-image-pair { grid-template-columns: 1fr; }
+    .cs-results-grid { grid-template-columns: 1fr; }
+    .cs-result-item { border-right: none; border-bottom: 0.5px solid var(--line-strong); }
+    .cs-result-item:last-child { border-bottom: none; }
+    .cs-next { grid-template-columns: 1fr; }
+    .cs-next-right { min-height: 30vh; }
+  }
+
+  /* ============ RIFT STRIKE — case-study specific ============ */
+  :root {
+    --rs-key: #9A7010;        /* brass — the key path in diagrams */
+    --rs-alt: #3F5BA8;        /* second series */
+    --rs-good: #2F7D57;
+    --rs-crit: #B03A34;
+    --rs-dark: #14120F;       /* device ground */
+    --rs-dark-2: #1F1B15;
+  }
+
+  /* ---- session player (device module, deliberately dark) ---- */
+  .rs-player {
+    background: var(--rs-dark);
+    color: #EDE5D5;
+    border-top: 0.5px solid var(--line-strong);
+    border-bottom: 0.5px solid var(--line-strong);
+  }
+  .rs-player-inner {
+    max-width: 1100px; margin: 0 auto; padding: 4rem 4vw;
+    display: grid; grid-template-columns: minmax(0,270px) minmax(0,1fr); gap: 3rem; align-items: start;
+  }
+  .rs-phone {
+    position: relative; width: 100%; aspect-ratio: 460/1022;
+    border-radius: 18px; overflow: hidden;
+    background: #0B0A08; border: 0.5px solid rgba(237,229,213,0.18);
+  }
+  .rs-phone img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0; transition: opacity 0.5s ease;
+  }
+  .rs-phone img.on { opacity: 1; }
+  .rs-readout { display: flex; flex-direction: column; gap: 2rem; }
+  .rs-hud { display: grid; grid-template-columns: 1fr 1fr; border: 0.5px solid rgba(237,229,213,0.2); }
+  .rs-hud > div { padding: 1.1rem 1.25rem; }
+  .rs-hud > div + div { border-left: 0.5px solid rgba(237,229,213,0.2); }
+  .rs-hud-label {
+    font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(237,229,213,0.55);
+  }
+  .rs-hud-value {
+    font-family: 'Cormorant Garamond', serif; font-weight: 400;
+    font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.05; margin-top: 0.4rem;
+    font-variant-numeric: tabular-nums; letter-spacing: 0.02em; color: #F0E4C8;
+  }
+  .rs-hud-value.team { color: #EDE5D5; }
+  .rs-beat-copy { min-height: 150px; }
+  .rs-phase {
+    display: inline-block; font-size: 0.66rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: #D8BC7E;
+    border: 0.5px solid rgba(216,188,126,0.45); padding: 4px 12px;
+  }
+  .rs-beat-title {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.25; margin: 1rem 0 0.6rem;
+  }
+  .rs-beat-body { font-size: 0.92rem; line-height: 1.8; color: rgba(237,229,213,0.75); }
+  .rs-transport { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+  .rs-btn {
+    font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; background: transparent; color: #D8BC7E;
+    border: 0.5px solid rgba(216,188,126,0.45); padding: 8px 16px; cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .rs-btn:hover { background: #D8BC7E; color: var(--rs-dark); }
+  .rs-dots { display: flex; gap: 6px; flex-wrap: wrap; }
+  .rs-dot {
+    width: 24px; height: 3px; padding: 0; border: 0; cursor: pointer;
+    background: rgba(237,229,213,0.25); transition: background 0.25s;
+  }
+  .rs-dot[aria-current="true"] { background: #D8BC7E; }
+  .rs-dot:hover { background: rgba(216,188,126,0.6); }
+  .rs-player-note { font-size: 0.72rem; color: rgba(237,229,213,0.45); line-height: 1.6; }
+  .rs-player :focus-visible { outline: 2px solid #D8BC7E; outline-offset: 3px; }
+
+  /* ---- the run: 12-beat timeline ---- */
+  .rs-run { max-width: 1000px; margin: 0 auto; padding: 1rem 4vw 4rem; }
+  .rs-beat {
+    display: grid; grid-template-columns: 92px 0.5px minmax(0,1fr);
+    gap: 0 2rem; padding-bottom: 3rem;
+  }
+  .rs-stamp { text-align: right; padding-top: 2px; }
+  .rs-stamp b {
+    display: block; font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink); font-weight: 500; margin-bottom: 0.35rem;
+  }
+  .rs-stamp span {
+    font-size: 0.78rem; color: var(--ink-light); font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+  .rs-spine { position: relative; background: var(--line); }
+  .rs-spine i {
+    position: absolute; top: 4px; left: -2.75px; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--paper); border: 0.5px solid var(--line-strong);
+    transition: background 0.4s ease, border-color 0.4s ease;
+  }
+  .rs-beat.on .rs-spine i { background: var(--ink); border-color: var(--ink); }
+  .rs-beat-grid { display: grid; grid-template-columns: minmax(0,1fr) 190px; gap: 2rem; align-items: start; }
+  .rs-beat-grid.wide { grid-template-columns: minmax(0,1fr) 320px; }
+  .rs-beat h3 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: clamp(1.3rem, 2.4vw, 1.75rem); line-height: 1.25; margin-bottom: 0.6rem;
+  }
+  .rs-beat h3 em { font-style: italic; }
+  .rs-beat p.rs-what { font-size: 0.92rem; line-height: 1.8; color: var(--ink-mid); }
+  .rs-note { margin-top: 1.1rem; padding-left: 1.1rem; border-left: 1px solid var(--ink); }
+  .rs-note b {
+    display: block; font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-light); font-weight: 500; margin-bottom: 0.4rem;
+  }
+  .rs-note p { font-size: 0.88rem; line-height: 1.75; color: var(--ink-mid); }
+  .rs-note p em { font-style: italic; color: var(--ink); }
+  .rs-shot { border: 0.5px solid var(--line-strong); background: var(--paper-warm); }
+  .rs-shot img { width: 100%; display: block; }
+  .rs-shot figcaption {
+    font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-light); padding: 0.6rem 0.75rem; border-top: 0.5px solid var(--line);
+  }
+
+  /* ---- figures ---- */
+  .rs-figs { max-width: 1000px; margin: 0 auto; padding: 0 4vw 4rem; }
+  .rs-fig {
+    background: var(--paper-warm); border: 0.5px solid var(--line-strong);
+    padding: 2rem 1.75rem 1.5rem; margin-bottom: 2rem;
+  }
+  .rs-fig-scroll { overflow-x: auto; }
+  .rs-fig svg { width: 100%; min-width: 640px; height: auto; display: block; color: var(--ink); overflow: visible; }
+  .rs-fig figcaption {
+    margin-top: 1.5rem; padding-top: 1rem; border-top: 0.5px solid var(--line);
+    font-size: 0.86rem; line-height: 1.75; color: var(--ink-mid);
+  }
+  .rs-fig figcaption b { color: var(--ink); font-weight: 500; }
+  .rs-fig figcaption em { font-style: italic; }
+  .svg-t { font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 500; fill: var(--ink); }
+  .svg-s { font-family: 'DM Sans', sans-serif; font-size: 10.5px; letter-spacing: 0.06em; fill: var(--ink-light); }
+  .svg-k { font-family: 'DM Sans', sans-serif; font-size: 10.5px; letter-spacing: 0.09em; fill: var(--rs-key); }
+  .svg-up { text-transform: uppercase; letter-spacing: 0.14em; font-size: 9.5px; }
+  .svg-box { fill: var(--paper); stroke: var(--line-strong); stroke-width: 0.75; }
+  .svg-edge { stroke: var(--ink-light); stroke-width: 1; fill: none; }
+  .svg-key { stroke: var(--rs-key); stroke-width: 1.5; fill: none; }
+  .rs-flow { stroke-dasharray: 5 6; animation: rsMarch 1.7s linear infinite; }
+  @keyframes rsMarch { to { stroke-dashoffset: -22; } }
+
+  /* ---- two-run comparison ---- */
+  .rs-runs {
+    max-width: 900px; margin: 2rem auto 0;
+    display: grid; grid-template-columns: 1fr 1fr; border: 0.5px solid var(--line-strong);
+  }
+  .rs-card { padding: 2rem; }
+  .rs-card + .rs-card { border-left: 0.5px solid var(--line-strong); }
+  .rs-card h3 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 1.5rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .rs-swatch { width: 9px; height: 9px; flex: 0 0 9px; }
+  .rs-total {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 3.25rem;
+    line-height: 1; margin-top: 0.9rem; font-variant-numeric: tabular-nums;
+  }
+  .rs-total span {
+    display: block; font-family: 'DM Sans', sans-serif; font-size: 0.66rem;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-light); margin-top: 0.5rem;
+  }
+  .rs-metric { margin-top: 1.4rem; }
+  .rs-metric-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light);
+  }
+  .rs-metric-row b { font-size: 1rem; color: var(--ink); font-weight: 500; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+  .rs-meter { height: 4px; background: var(--line); margin-top: 0.5rem; }
+  .rs-meter i { display: block; height: 100%; }
+  .rs-players { margin-top: 1.4rem; font-size: 0.84rem; line-height: 1.9; color: var(--ink-mid); }
+  .rs-players b { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .rs-players span { color: var(--ink-light); }
+  .rs-pills { margin-top: 1.4rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .rs-pill {
+    font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 5px 11px; border: 0.5px solid;
+  }
+  .rs-pill.good { color: var(--rs-good); border-color: var(--rs-good); }
+  .rs-pill.crit { color: var(--rs-crit); border-color: var(--rs-crit); }
+
+  /* ---- gallery ---- */
+  .rs-gallery {
+    max-width: 1200px; margin: 0 auto; padding: 3rem 4vw;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;
+  }
+  .rs-gallery figure { border: 0.5px solid var(--line-strong); background: var(--paper-warm); }
+  .rs-gallery img { width: 100%; display: block; }
+  .rs-gallery figcaption {
+    font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-light); padding: 0.6rem 0.75rem;
+  }
+
+  @media (max-width: 900px) {
+    .rs-player-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .rs-phone { max-width: 300px; }
+  }
+  @media (max-width: 768px) {
+    .rs-beat { grid-template-columns: 66px 0.5px minmax(0,1fr); gap: 0 1.1rem; }
+    .rs-beat-grid, .rs-beat-grid.wide { grid-template-columns: 1fr; gap: 1.25rem; }
+    .rs-runs { grid-template-columns: 1fr; }
+    .rs-card + .rs-card { border-left: none; border-top: 0.5px solid var(--line-strong); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rs-flow { animation: none; }
+    .rs-phone img { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Elizabeth Powell</a>
+  <a class="nav-back" href="index.html#work">← Back to all work</a>
+</nav>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <img class="cs-hero-image" src="images/The Rift-Strike/hero-strike-gearfloor.jpg" alt="A creature struck by a beam on the gear-patterned floor of The Rift">
+  <div class="cs-hero-video-overlay"></div>
+  <div class="cs-hero-content">
+    <div class="cs-hero-tags">
+      <span class="cs-tag">Experience Design</span>
+      <span class="cs-tag">AR Systems</span>
+      <span class="cs-tag">Game Loop</span>
+    </div>
+    <h1 class="cs-hero-title">Rift Strike<br><em>Anatomy of a run</em></h1>
+    <p class="cs-hero-subtitle">Ten minutes inside The Rift, pulled apart — the guest journey beat by beat, then the three mechanisms underneath it. Every frame on this page is real session capture.</p>
+  </div>
+</section>
+
+<!-- META BAR -->
+<div class="cs-meta">
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Role</div>
+    <div class="cs-meta-value">Product Lead &amp; Board Director</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Company</div>
+    <div class="cs-meta-value">Paladin &amp; Archer Software Systems</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Venue</div>
+    <div class="cs-meta-value">The Rift · Provo Towne Centre</div>
+  </div>
+  <div class="cs-meta-item">
+    <div class="cs-meta-label">Platform</div>
+    <div class="cs-meta-value">Unity · UI Toolkit · In-Venue AR</div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="cs-section">
+  <div class="cs-section-label">Overview</div>
+  <h2 class="cs-heading">Every shorthand people reach for <em>is wrong.</em></h2>
+  <p class="cs-body">It isn't VR — nothing goes on your head, and you walk through real rooms with real furniture. It isn't an escape room — there are no locks and you are never trapped. It isn't laser tag — you aren't shooting each other. The thing that makes Rift Strike worth building is exactly the thing that makes it hard to sell in a sentence.</p>
+  <p class="cs-body">The closest true sentence is this: <em>the rooms are already full of things you can't see, and the device is the only way to see them.</em> Everything below is how a guest gets to that realisation in under two minutes, and what has to be true underneath for it to land.</p>
+</div>
+
+<!-- SESSION PLAYER -->
+<section class="rs-player" aria-label="Session player">
+  <div class="rs-player-inner">
+    <div class="rs-phone" id="rsPhone">
+      <img class="on" src="images/The Rift-Strike/sync-portrait.jpg" alt="Localization instructions: find the matching portrait and align it to fill the frame">
+      <img src="images/The Rift-Strike/practice-dart.jpg" alt="Practice phase card: you recovered your DART">
+      <img src="images/The Rift-Strike/wall-scanning.jpg" alt="A framed painting being scanned through the device">
+      <img src="images/The Rift-Strike/first-contact.jpg" alt="A spider anchored to a real wall">
+      <img src="images/The Rift-Strike/strike.jpg" alt="A strike resolving in world space">
+      <img src="images/The Rift-Strike/boss-arrival.jpg" alt="The Boss Spider filling the frame">
+      <img src="images/The Rift-Strike/late-round-swarm.jpg" alt="Multiple creatures late in the round">
+      <img src="images/The Rift-Strike/endcard-fallen-orreries.jpg" alt="End-of-round scoreboard for team Fallen Orreries">
+    </div>
+
+    <div class="rs-readout">
+      <div class="rs-hud">
+        <div>
+          <div class="rs-hud-label">Time remaining</div>
+          <div class="rs-hud-value" id="rsTime">Begin</div>
+        </div>
+        <div>
+          <div class="rs-hud-label">Team total</div>
+          <div class="rs-hud-value team" id="rsTeam">0</div>
+        </div>
+      </div>
+
+      <div class="rs-beat-copy">
+        <span class="rs-phase" id="rsPhase">Sync</span>
+        <h3 class="rs-beat-title" id="rsTitle">Align the portrait</h3>
+        <p class="rs-beat-body" id="rsBody">A printed drawing in the foyer is the anchor. Fill the frame with it and the app knows exactly where you are standing — no headset, no beacons, no floor markers.</p>
+      </div>
+
+      <div class="rs-transport">
+        <button class="rs-btn" id="rsToggle" type="button" aria-label="Pause playback">Pause</button>
+        <div class="rs-dots" id="rsDots" role="tablist" aria-label="Session beats"></div>
+      </div>
+
+      <p class="rs-player-note">One captured round, eight beats. The clock and team total are the values showing on the HUD in each frame.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACT I -->
+<div class="cs-section">
+  <div class="cs-section-label">Act I — The run</div>
+  <h2 class="cs-heading">A guest is on site for forty minutes. <em>Ten of them are the round.</em></h2>
+  <p class="cs-body">The other thirty are doing quiet, deliberate work: turning a group of individuals into a team, teaching four mechanics without breaking character, and solving a hard spatial-computing problem by asking someone to take a photograph. Twelve beats, in order.</p>
+</div>
+
+<div class="rs-run">
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Foyer</b><span>Pre-round</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid">
+      <div>
+        <h3>Name yourselves before you play</h3>
+        <p class="rs-what">Two columns &mdash; an adjective and a noun &mdash; each with a filter box and a <em>Roll</em>. A party lands on <em>Feathered Charms</em> or <em>Fake Cheetahs</em> in about forty seconds of laughing at each other, and one person puts it up for the team.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>This is the first thing a guest touches, and it is a naming toy rather than a form. Nobody has to invent a name from nothing, and the constraint is what makes it funny. By the time the round starts, a group of coworkers has become a team with a name they chose &mdash; which is most of the work of making a shared score matter.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/name-builder.jpg" alt="Team name generator" loading="lazy">
+        <figcaption>Team name generator</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Briefing</b><span>Pre-round</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid wide">
+      <div>
+        <h3>A person tells you the problem</h3>
+        <p class="rs-what">A live-action agent of the Rift Investigation Society explains that the Rift has destabilised, that spiders are coming through, and that Thomas disappeared into it with Abigail. Then he explains the DART, and that it only works on creatures that aren&rsquo;t fully anchored.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>Rules delivered as exposition by a character on camera, not a stack of tooltips. Every mechanic a guest needs &mdash; what the weapon is, what it can hit, that there is a clock &mdash; arrives inside the fiction, and the missing-persons thread gives a ten-minute shooter a reason to exist.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/briefing-agent.jpg" alt="Orientation film" loading="lazy">
+        <figcaption>Orientation film</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Sync</b><span>Pre-round</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid">
+      <div>
+        <h3>Find the portrait. Fill the frame.</h3>
+        <p class="rs-what">Three lines of instruction: find the matching portrait in the foyer, align it to fill the frame, your position will sync automatically. The group code &mdash; <em>GEEK</em> &mdash; sits underneath it.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>The hardest technical problem in the product is handed to the guest as a photograph task, and they never learn it was hard. The group code is a pronounceable four-letter word rather than a QR code or a six-digit number, because it has to survive being shouted across a noisy lobby.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/sync-portrait.jpg" alt="Localization step" loading="lazy">
+        <figcaption>Localization step</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Practice</b><span>Pre-round</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid">
+      <div>
+        <h3>You recover the DART, you aren&rsquo;t issued it</h3>
+        <p class="rs-what">Five numbered steps, gated one at a time: recover it, equip it, toggle it on, shoot a training target above a painting, then lead a moving one. Each step waits until you actually do it.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>Standard onboarding, rewritten so that no step breaks character. The final step &mdash; leading a moving target &mdash; exists because it is the single skill the round punishes most, and teaching it here is cheaper than losing a guest to frustration at minute four.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/practice-dart.jpg" alt="Practice phase, step 2 of 5" loading="lazy">
+        <figcaption>Practice phase, step 2 of 5</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Practice</b><span>Pre-round</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid">
+      <div>
+        <h3>Ammunition is something you find in the room</h3>
+        <p class="rs-what"><em>You got 3 Fire Crystal.</em> Crystals are scattered through the physical space and power the DART; their counter lives permanently in the bottom bar beside the weapon.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>This is the mechanic that makes people walk. Nothing forces exploration in a maze you can see the end of &mdash; but a consumable found only by looking into corners turns the whole floorplan into playable surface, at zero cost in additional set dressing.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/fire-crystals.jpg" alt="Pickup toast" loading="lazy">
+        <figcaption>Pickup toast</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Round start</b><span>00:00</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid">
+      <div>
+        <h3>The clock starts and the decor wakes up</h3>
+        <p class="rs-what">Six live values arrive at once: time remaining, personal score, accuracy, team total, an objective chip and a hint button &mdash; plus the party roster, carrying photographs of the other players.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>Six values and never a menu; the stack is readable at a glance while walking. The roster uses face photos rather than usernames, so when a teammate&rsquo;s number jumps you know which body in the room did it.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/round-scan.jpg" alt="Live HUD" loading="lazy">
+        <figcaption>Live HUD</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Hunt</b><span>00:54</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid">
+      <div>
+        <h3>It stays where it is when you look away</h3>
+        <p class="rs-what">A spider holds position on a real wall. Walk toward it and it grows; step sideways and it holds. Its shadow falls on the actual paint.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>Persistence is the entire illusion. A creature that tracked the camera would read as a sticker on the screen; one that stays on the wall reads as a thing in the building. Everything else in this case study is in service of this one moment landing.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/first-contact.jpg" alt="First contact" loading="lazy">
+        <figcaption>First contact</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Hunt</b><span>03:32</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid">
+      <div>
+        <h3>Sparks land in the room, not on the glass</h3>
+        <p class="rs-what">Impacts resolve at the creature&rsquo;s position in world space, with the DART barrel and muzzle glow rendered along the bottom-right edge of frame in the same brass as the physical props.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>The weapon art is anchored to the device rather than centred like a console shooter, so the guest&rsquo;s actual hand and the rendered barrel occupy the same corner of vision. It is a small thing, and it is what stops the device reading as a screen you are holding up.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/strike.jpg" alt="Hit resolution" loading="lazy">
+        <figcaption>Hit resolution</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Gate</b><span>~05:00</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid">
+      <div>
+        <h3>500 team points lures out the Boss</h3>
+        <p class="rs-what"><em>New objective unlocked. Reach 500 Team points to lure out the Boss Spider. Every spider you eliminate gets your team closer.</em></p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>The gate reads the team total, not yours. A strong player cannot unlock the boss alone and a weak one cannot lock it out, so the fast player&rsquo;s incentive is to keep the slow one shooting. One threshold does the work that cooperative design usually needs a whole mechanic for.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/objective-500.jpg" alt="Objective card, build capture" loading="lazy">
+        <figcaption>Objective card, build capture</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Boss</b><span>06:12</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid wide">
+      <div>
+        <h3>It comes through a doorway you just walked through</h3>
+        <p class="rs-what">The Boss Spider fills the frame, legs past both edges, backlit orange. A <em>Goal completed</em> toast slides in underneath it.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>Scale is the payoff for a round spent shooting things the size of a hand. Because it spawns in a corridor the party has already cleared, the space they thought was safe is the space it arrives in &mdash; the reveal costs a doorway, not a set.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/boss-arrival.jpg" alt="Boss arrival" loading="lazy">
+        <figcaption>Boss arrival</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Debrief</b><span>10:00</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid">
+      <div>
+        <h3>The number you argue about in the car</h3>
+        <p class="rs-what">Team total up top, then a card per player: score, MVP badge, accuracy, hits over shots, a per-creature kill breakdown, and two verdicts &mdash; boss <em>unlocked</em>, boss <em>killed</em>.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>Separating <em>unlocked</em> from <em>killed</em> is the sharpest call in the scoring. It gives a team that got close a real result to be annoyed about rather than a flat loss, and it names precisely what a second round would buy them.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/endcard-fake-cheetahs.jpg" alt="End card" loading="lazy">
+        <figcaption>End card</figcaption>
+      </figure>
+    </div>
+  </article>
+  <article class="rs-beat">
+    <div class="rs-stamp"><b>Front desk</b><span>Post</span></div>
+    <div class="rs-spine"><i></i></div>
+    <div class="rs-beat-grid">
+      <div>
+        <h3>Spend it on something you can eat</h3>
+        <p class="rs-what"><em>Rift Dove Chocolate Treat &mdash; purchasing this item allows you to pick one up from a RIS Agent at the front desk. Limit one per explorer.</em> Seventy-five points.</p>
+        <div class="rs-note">
+          <b>Design note</b>
+          <p>The in-game economy settles in the real building. Points earned shooting spiders are redeemed from a staff member who is in character as an Agent, which closes the loop the sync step opened: the digital layer reaches back out and puts an object in your hand.</p>
+        </div>
+      </div>
+      <figure class="rs-shot">
+        <img src="images/The Rift-Strike/shop-chocolate.jpg" alt="In-app shop" loading="lazy">
+        <figcaption>In-app shop</figcaption>
+      </figure>
+    </div>
+  </article>
+</div>
+
+<!-- ACT II -->
+<div class="cs-section">
+  <div class="cs-section-label">Act II — The machine</div>
+  <h2 class="cs-heading">Three mechanisms carry <em>the whole illusion.</em></h2>
+  <p class="cs-body">Each one is a place where the digital layer and the physical building have to agree with each other. Break any of them and the product collapses back into a phone game people happen to be playing in a themed room.</p>
+</div>
+
+<div class="rs-figs">
+
+  <figure class="rs-fig">
+    <div class="rs-fig-scroll">
+    <svg viewBox="0 0 920 372" role="img" aria-label="Without an anchor each device keeps its own arbitrary origin and creatures land off the wall. Framing a known printed portrait solves the device pose and drops every player into one shared room coordinate space.">
+      <defs>
+        <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a86"></path></marker>
+        <marker id="a1k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9A7010"></path></marker>
+      </defs>
+
+      <text class="svg-k svg-up" x="0" y="14">The anchor path</text>
+
+      <rect class="svg-box" x="10" y="44" width="118" height="44"></rect>
+      <text class="svg-t" x="69" y="71" text-anchor="middle">P1 device</text>
+      <rect class="svg-box" x="10" y="140" width="118" height="44"></rect>
+      <text class="svg-t" x="69" y="167" text-anchor="middle">P2 device</text>
+
+      <rect x="196" y="88" width="158" height="52" fill="#fafaf8" stroke="#9A7010" stroke-width="1.5"></rect>
+      <text class="svg-t" x="275" y="110" text-anchor="middle">Printed portrait</text>
+      <text class="svg-s" x="275" y="127" text-anchor="middle">known image · foyer wall</text>
+
+      <rect class="svg-box" x="416" y="88" width="140" height="52"></rect>
+      <text class="svg-t" x="486" y="110" text-anchor="middle">Pose solved</text>
+      <text class="svg-s" x="486" y="127" text-anchor="middle">position + heading</text>
+
+      <rect class="svg-box" x="616" y="88" width="150" height="52"></rect>
+      <text class="svg-t" x="691" y="110" text-anchor="middle">Room origin</text>
+      <text class="svg-s" x="691" y="127" text-anchor="middle">one space, every device</text>
+
+      <rect x="810" y="60" width="100" height="108" fill="none" stroke="#8a8a86" stroke-width="1"></rect>
+      <line x1="810" y1="88" x2="910" y2="88" stroke="#c9c9c5" stroke-width="1"></line>
+      <circle cx="838" cy="88" r="4.5" fill="#9A7010"></circle>
+      <circle cx="874" cy="88" r="4.5" fill="#9A7010"></circle>
+      <circle cx="856" cy="140" r="4.5" fill="#9A7010"></circle>
+      <text class="svg-s" x="860" y="186" text-anchor="middle">room geometry</text>
+
+      <path class="svg-key" d="M128,66 C160,66 168,104 194,108" marker-end="url(#a1k)"></path>
+      <path class="svg-key" d="M128,162 C160,162 168,126 194,122" marker-end="url(#a1k)"></path>
+      <text class="svg-k" x="150" y="200" text-anchor="middle">frame it</text>
+
+      <line class="svg-key" x1="354" y1="114" x2="408" y2="114" marker-end="url(#a1k)"></line>
+      <text class="svg-k" x="382" y="103" text-anchor="middle">match</text>
+
+      <line class="svg-key" x1="556" y1="114" x2="608" y2="114" marker-end="url(#a1k)"></line>
+      <text class="svg-k" x="583" y="103" text-anchor="middle">publish</text>
+
+      <line class="svg-key" x1="766" y1="114" x2="802" y2="114" marker-end="url(#a1k)"></line>
+      <text class="svg-k" x="786" y="165" text-anchor="middle">spawn</text>
+
+      <path class="svg-edge" stroke-dasharray="4 5" d="M69,88 L69,300 L798,300" marker-end="url(#a1)"></path>
+      <text class="svg-s" x="300" y="291">no anchor · each device keeps its own arbitrary origin</text>
+      <line x1="820" y1="292" x2="836" y2="308" stroke="#8a8a86" stroke-width="1.5"></line>
+      <line x1="836" y1="292" x2="820" y2="308" stroke="#8a8a86" stroke-width="1.5"></line>
+      <text class="svg-s" x="860" y="332" text-anchor="middle">creature lands<tspan x="860" dy="13">off the wall</tspan></text>
+    </svg>
+    </div>
+    <figcaption><b>Figure 1 · Localization.</b> The problem a headset solves with inside-out tracking, The Rift solves with a picture frame. Framing a known printed artwork recovers the device&rsquo;s position and heading, and every device that frames the same portrait lands in the same coordinate space &mdash; which is what lets a creature stay on a wall while two people walk around it. Remove that one edge and the creature is only ever on the screen.</figcaption>
+  </figure>
+
+  <figure class="rs-fig">
+    <div class="rs-fig-scroll">
+    <svg viewBox="0 0 980 340" role="img" aria-label="Round state machine: setup, five gated practice steps, free hunt, a gate at 500 combined team points, boss unlocked, then either boss killed or time out, both ending at the end card, with a staff-driven return edge that adds time or another round and sends the party back into free hunt.">
+      <defs>
+        <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a86"></path></marker>
+        <marker id="a2k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9A7010"></path></marker>
+      </defs>
+
+      <rect class="svg-box" x="12" y="52" width="100" height="44"></rect>
+      <text class="svg-t" x="62" y="80" text-anchor="middle">Setup</text>
+
+      <rect class="svg-box" x="148" y="52" width="120" height="44"></rect>
+      <text class="svg-t" x="208" y="73" text-anchor="middle">Practice</text>
+      <text class="svg-s" x="208" y="89" text-anchor="middle">5 gated steps</text>
+
+      <rect class="svg-box" x="304" y="52" width="112" height="44"></rect>
+      <text class="svg-t" x="360" y="80" text-anchor="middle">Free hunt</text>
+
+      <polygon points="500,32 552,74 500,116 448,74" fill="#fafaf8" stroke="#9A7010" stroke-width="1.5"></polygon>
+      <text class="svg-k" x="500" y="71" text-anchor="middle">team</text>
+      <text class="svg-k" x="500" y="86" text-anchor="middle">&#8805; 500</text>
+
+      <rect class="svg-box" x="588" y="52" width="124" height="44"></rect>
+      <text class="svg-t" x="650" y="80" text-anchor="middle">Boss unlocked</text>
+
+      <rect x="748" y="18" width="112" height="42" fill="#fafaf8" stroke="#2F7D57" stroke-width="1"></rect>
+      <text class="svg-t" x="804" y="45" text-anchor="middle" fill="#2F7D57">Boss killed</text>
+
+      <rect x="748" y="90" width="112" height="42" fill="#fafaf8" stroke="#B03A34" stroke-width="1"></rect>
+      <text class="svg-t" x="804" y="117" text-anchor="middle" fill="#B03A34">Time out</text>
+
+      <rect class="svg-box" x="890" y="52" width="80" height="44"></rect>
+      <text class="svg-t" x="930" y="73" text-anchor="middle">End</text>
+      <text class="svg-t" x="930" y="89" text-anchor="middle">card</text>
+
+      <rect class="svg-box" x="304" y="162" width="196" height="44"></rect>
+      <text class="svg-t" x="402" y="183" text-anchor="middle">P1 kills + P2 kills</text>
+      <text class="svg-s" x="402" y="199" text-anchor="middle">summed, not compared</text>
+
+      <line class="svg-edge" x1="112" y1="74" x2="140" y2="74" marker-end="url(#a2)"></line>
+      <line class="svg-edge" x1="268" y1="74" x2="296" y2="74" marker-end="url(#a2)"></line>
+      <line class="svg-edge" x1="416" y1="74" x2="440" y2="74" marker-end="url(#a2)"></line>
+      <line class="svg-key" x1="552" y1="74" x2="580" y2="74" marker-end="url(#a2k)"></line>
+      <path class="svg-edge" d="M712,68 L740,41" marker-end="url(#a2)"></path>
+      <path class="svg-edge" d="M712,82 L740,109" marker-end="url(#a2)"></path>
+      <path class="svg-edge" d="M860,39 L900,39 L900,46" marker-end="url(#a2)"></path>
+      <path class="svg-edge" d="M860,111 L900,111 L900,104" marker-end="url(#a2)"></path>
+      <path class="svg-key" d="M468,162 L498,120" marker-end="url(#a2k)"></path>
+      <line class="svg-edge" x1="360" y1="96" x2="360" y2="154" marker-end="url(#a2)"></line>
+
+      <path class="rs-flow" fill="none" stroke="#9A7010" stroke-width="1.5" d="M930,96 L930,296 L360,296 L360,104" marker-end="url(#a2k)"></path>
+      <text class="svg-k" x="645" y="288" text-anchor="middle">RIS Agent adds time, or sells another round &mdash; the party never leaves the fiction</text>
+    </svg>
+    </div>
+    <figcaption><b>Figure 2 · The round.</b> One threshold carries the cooperative design: the gate reads the <b>combined</b> team total, so a strong player cannot unlock the boss alone and a weak one cannot lock it out. The dashed return edge is the commercial loop &mdash; staff can extend a round or sell another from the desk, and because staff are in character as Agents, the upsell happens inside the story rather than beside it.</figcaption>
+  </figure>
+
+  <figure class="rs-fig">
+    <div class="rs-fig-scroll">
+    <svg viewBox="0 0 760 320" role="img" aria-label="A loop crossing the boundary between the building and the screen twice: Fire Crystals lie in the physical rooms and are collected through the lens to power the DART; strikes become points and a team total; points buy an item in the app; the item is redeemed from a staff Agent at the front desk, who hands over a physical object back in the building.">
+      <defs>
+        <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a8a86"></path></marker>
+        <marker id="a3k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9A7010"></path></marker>
+      </defs>
+
+      <line x1="368" y1="12" x2="368" y2="306" stroke="#c9c9c5" stroke-width="1" stroke-dasharray="3 6"></line>
+      <text class="svg-s svg-up" x="20" y="20">In the building</text>
+      <text class="svg-s svg-up" x="470" y="20">On the screen</text>
+
+      <rect class="svg-box" x="20" y="48" width="210" height="52"></rect>
+      <text class="svg-t" x="125" y="71" text-anchor="middle">Fire Crystals in the rooms</text>
+      <text class="svg-s" x="125" y="88" text-anchor="middle">invisible without the device</text>
+
+      <rect class="svg-box" x="20" y="212" width="210" height="52"></rect>
+      <text class="svg-t" x="125" y="235" text-anchor="middle">RIS Agent · front desk</text>
+      <text class="svg-s" x="125" y="252" text-anchor="middle">staff, in character</text>
+
+      <rect class="svg-box" x="470" y="40" width="220" height="46"></rect>
+      <text class="svg-t" x="580" y="69" text-anchor="middle">DART ammunition</text>
+
+      <rect class="svg-box" x="470" y="116" width="220" height="46"></rect>
+      <text class="svg-t" x="580" y="137" text-anchor="middle">Strike &#8594; points &#8594; team total</text>
+      <text class="svg-s" x="580" y="153" text-anchor="middle">accuracy tracked per shot</text>
+
+      <rect class="svg-box" x="470" y="192" width="220" height="46"></rect>
+      <text class="svg-t" x="580" y="213" text-anchor="middle">In-app shop</text>
+      <text class="svg-s" x="580" y="229" text-anchor="middle">Rift Dove Chocolate · 75</text>
+
+      <path class="svg-key" d="M230,68 C300,68 400,63 462,63" marker-end="url(#a3k)"></path>
+      <text class="svg-k" x="348" y="52" text-anchor="middle">collected through the lens</text>
+
+      <line class="svg-edge" x1="580" y1="86" x2="580" y2="108" marker-end="url(#a3)"></line>
+      <line class="svg-edge" x1="580" y1="162" x2="580" y2="184" marker-end="url(#a3)"></line>
+
+      <path class="svg-key" d="M470,222 C400,222 300,232 238,234" marker-end="url(#a3k)"></path>
+      <text class="svg-k" x="352" y="284" text-anchor="middle">redeemed at the desk</text>
+
+      <path class="svg-edge" d="M125,212 L125,108" marker-end="url(#a3)"></path>
+      <text class="svg-s" x="116" y="158" text-anchor="end">hands you<tspan x="116" dy="13">a real object</tspan></text>
+    </svg>
+    </div>
+    <figcaption><b>Figure 3 · The economy settles physically.</b> Most in-app currencies are closed loops. This one crosses the boundary twice: crystals lie in the real rooms and can only be picked up through the device, and points earned shooting spiders are redeemed from a staff member in character at the front desk, who puts an actual object in your hand. That second crossing is the part guests describe to other people.</figcaption>
+  </figure>
+
+</div>
+
+<!-- ACT III -->
+<div class="cs-section">
+  <div class="cs-section-label">Act III — Reading the data</div>
+  <h2 class="cs-heading">Two runs, <em>three points apart.</em></h2>
+  <p class="cs-body">These are unedited end-of-round scoreboards from two different teams. Their totals land three points apart. Almost nothing else about them matches.</p>
+</div>
+
+<div class="rs-runs">
+  <div class="rs-card">
+    <h3><span class="rs-swatch" style="background:#9A7010"></span>Fallen Orreries</h3>
+    <div class="rs-total">709<span>Team points</span></div>
+
+    <div class="rs-metric">
+      <div class="rs-metric-row"><span>Accuracy · P1</span><b>58%</b></div>
+      <div class="rs-meter"><i style="width:58%; background:#9A7010"></i></div>
+    </div>
+    <div class="rs-metric">
+      <div class="rs-metric-row"><span>Shots fired · P1</span><b>207</b></div>
+      <div class="rs-meter"><i style="width:100%; background:#9A7010"></i></div>
+    </div>
+
+    <p class="rs-players">P2 Yellow Sunshine <b>432</b> <span>MVP</span><br>P1 Pay Party <b>277</b> <span>121 / 207 hits</span></p>
+
+    <div class="rs-pills">
+      <span class="rs-pill good">Boss unlocked</span>
+      <span class="rs-pill good">Boss killed</span>
+    </div>
+  </div>
+
+  <div class="rs-card">
+    <h3><span class="rs-swatch" style="background:#3F5BA8"></span>Fake Cheetahs</h3>
+    <div class="rs-total">706<span>Team points</span></div>
+
+    <div class="rs-metric">
+      <div class="rs-metric-row"><span>Accuracy · best</span><b>78%</b></div>
+      <div class="rs-meter"><i style="width:78%; background:#3F5BA8"></i></div>
+    </div>
+    <div class="rs-metric">
+      <div class="rs-metric-row"><span>Shots fired · both</span><b>138</b></div>
+      <div class="rs-meter"><i style="width:67%; background:#3F5BA8"></i></div>
+    </div>
+
+    <p class="rs-players">P1 Geez Louise <b>367</b> <span>MVP · 45 / 58 hits</span><br>P2 tailgate <b>339</b> <span>61 / 80 hits</span></p>
+
+    <div class="rs-pills">
+      <span class="rs-pill good">Boss unlocked</span>
+      <span class="rs-pill crit">Boss not killed</span>
+    </div>
+  </div>
+</div>
+
+<div class="cs-section">
+  <p class="cs-body">Fallen Orreries sprayed &mdash; 207 shots at 58% to reach 709. Fake Cheetahs were surgical &mdash; 138 shots, 78% on the better gun &mdash; and landed on 706. The scoring is doing what it should: it rewards two completely different ways of playing, and neither team can tell from the number alone that they played nothing alike.</p>
+  <p class="cs-body">The split is at the bottom of the card. Both teams cleared the 500-point gate and pulled the Boss Spider out. Only the team that had been firing constantly still had the volume to put it down before the clock ran out.</p>
+</div>
+
+<!-- PULL QUOTE -->
+<div class="cs-highlight">
+  <p class="cs-highlight-text">The gate is generous. <em>The boss is not.</em> That difference is the most reliable reason a group walks back to the desk and buys another round.</p>
+</div>
+
+<!-- RESULTS -->
+<div class="cs-results">
+  <div class="cs-section-label">Where it landed</div>
+  <h2 class="cs-heading">A second experience, <em>shipped and selling.</em></h2>
+  <p class="cs-body" style="max-width:760px;">Rift Strike was built as the shorter, faster counterpart to Dragon Capture &mdash; aimed at kids, families and returning players who wanted a quicker way back in.</p>
+  <div class="cs-results-grid">
+    <div class="cs-result-item">
+      <div class="cs-result-num">10</div>
+      <div class="cs-result-label">Minute round, extendable at the desk</div>
+    </div>
+    <div class="cs-result-item">
+      <div class="cs-result-num">4.7</div>
+      <div class="cs-result-label">Google rating across 220 reviews</div>
+    </div>
+    <div class="cs-result-item">
+      <div class="cs-result-num">3</div>
+      <div class="cs-result-label">Experiences now running in one venue</div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="rs-gallery">
+  <figure><img src="images/The Rift-Strike/gallery-corridor.jpg" alt="Gallery corridor with the DART in hand" loading="lazy"><figcaption>Gallery corridor — DART in hand</figcaption></figure>
+  <figure><img src="images/The Rift-Strike/spider-tapestry.jpg" alt="Creatures staged against a real tapestry" loading="lazy"><figcaption>Creatures staged against real set dressing</figcaption></figure>
+  <figure><img src="images/The Rift-Strike/rift-opening.jpg" alt="A rift opening on a hallway wall" loading="lazy"><figcaption>A rift opening on a hallway wall</figcaption></figure>
+  <figure><img src="images/The Rift-Strike/beam-opart-wall.jpg" alt="Live beam against an op-art wall" loading="lazy"><figcaption>Op-art room, live beam</figcaption></figure>
+  <figure><img src="images/The Rift-Strike/name-builder.jpg" alt="The team name builder" loading="lazy"><figcaption>Name builder — adjective × noun</figcaption></figure>
+  <figure><img src="images/The Rift-Strike/hit-burst.jpg" alt="A hit resolving in world space" loading="lazy"><figcaption>Hit resolution in world space</figcaption></figure>
+</div>
+
+<!-- REFLECTION -->
+<div class="cs-section">
+  <div class="cs-section-label">Reflection</div>
+  <h2 class="cs-heading">The best decisions here <em>look like nothing.</em></h2>
+  <p class="cs-body">Nobody walks out of The Rift talking about image-target localization. They talk about the spider that was still on the wall when they looked back. The work of this product is choosing, over and over, to spend engineering on the thing a guest will feel and never name &mdash; and to hand them the hard parts as something easy, like taking a photograph of a portrait.</p>
+  <p class="cs-body">The other lesson is about where a design ends. I used to think the product stopped at the edge of the screen. It doesn&rsquo;t: it stops at the front desk, where a staff member in character hands over a chocolate someone earned by shooting spiders. Designing that hand-off &mdash; and the moment an Agent sells you another round without breaking the story &mdash; turned out to matter as much as anything inside the app.</p>
+</div>
+
+<!-- NEXT PROJECT -->
+<section class="cs-next">
+  <div class="cs-next-left">
+    <div class="cs-next-label">Next project</div>
+    <h3 class="cs-next-title">The Rift — Augmented Reality Experience</h3>
+    <a class="cs-next-link" href="case-study-the-rift.html">View project →</a>
+  </div>
+  <div class="cs-next-right">
+    <img src="images/The Rift-AR-App/Rift-AR-interaction.jpg" alt="The Rift AR experience" style="width:60%; aspect-ratio:16/10; object-fit:cover;">
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Elizabeth Powell. All rights reserved.</p>
+  <p>Designed &amp; built by Elizabeth Powell</p>
+</footer>
+
+<script>
+(function () {
+  var BEATS = [
+    { time: 'Begin',   team: '0',   phase: 'Sync',     title: 'Align the portrait',                     body: 'A printed drawing in the foyer is the anchor. Fill the frame with it and the app knows exactly where you are standing — no headset, no beacons, no floor markers.' },
+    { time: 'Begin',   team: '0',   phase: 'Practice', title: 'Recover the DART',                       body: 'The tutorial is written as story: you do not get a weapon, you recover one. Five guided steps teach equip, toggle, fire, and leading a moving target.' },
+    { time: 'Begin',   team: '0',   phase: 'Scan',     title: 'The wall starts scanning',               body: 'Real framed art on the walls doubles as tracking targets. Point at a painting and it resolves — the decor is load-bearing.' },
+    { time: '9:06',    team: '30',  phase: 'Contact',  title: 'Something is on that wall',              body: 'A spider sits on the actual wall in front of you and holds its position as you walk past. It is anchored to the room, not painted on the screen.' },
+    { time: '6:28',    team: '178', phase: 'Strike',   title: 'Hits land in world space',               body: 'Sparks resolve at the creature’s position in the room. Accuracy is tracked per shot, which is why two players with the same score can have played completely differently.' },
+    { time: '3:48',    team: '499', phase: 'Boss',     title: '500 points lures it out',                body: 'The gate is a team number, not a personal one. Crossing it brings the Boss Spider through, filling a doorway the party has already walked past.' },
+    { time: '3:09',    team: '628', phase: 'Press',    title: 'The room fights back',                   body: 'Late in the round, creatures arrive in numbers and behave differently by type — Tarantula, Shiny and Steampunk each move on their own rules.' },
+    { time: '0:00',    team: '709', phase: 'Debrief',  title: 'The card everybody photographs',         body: 'Team total, MVP, accuracy, hits, a per-creature breakdown, and two blunt verdicts on the boss. This screen is what guests argue about on the drive home.' }
+  ];
+
+  var phone = document.getElementById('rsPhone');
+  if (!phone) return;
+  var imgs = phone.querySelectorAll('img');
+  var dots = document.getElementById('rsDots');
+  var toggle = document.getElementById('rsToggle');
+  var elTime = document.getElementById('rsTime');
+  var elTeam = document.getElementById('rsTeam');
+  var elPhase = document.getElementById('rsPhase');
+  var elTitle = document.getElementById('rsTitle');
+  var elBody = document.getElementById('rsBody');
+  var index = 0, timer = null, playing = false;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  BEATS.forEach(function (b, n) {
+    var d = document.createElement('button');
+    d.className = 'rs-dot';
+    d.type = 'button';
+    d.setAttribute('role', 'tab');
+    d.setAttribute('aria-label', 'Beat ' + (n + 1) + ': ' + b.phase);
+    d.addEventListener('click', function () { stop(); show(n); });
+    dots.appendChild(d);
+  });
+  var dotEls = dots.querySelectorAll('.rs-dot');
+
+  function show(n) {
+    index = n;
+    for (var k = 0; k < imgs.length; k++) { imgs[k].classList.toggle('on', k === n); }
+    for (var j = 0; j < dotEls.length; j++) { dotEls[j].setAttribute('aria-current', j === n ? 'true' : 'false'); }
+    var b = BEATS[n];
+    elTime.textContent = b.time;
+    elTeam.textContent = b.team;
+    elPhase.textContent = b.phase;
+    elTitle.textContent = b.title;
+    elBody.textContent = b.body;
+  }
+  function start() {
+    if (reduce) return;
+    playing = true;
+    toggle.textContent = 'Pause';
+    toggle.setAttribute('aria-label', 'Pause playback');
+    clearInterval(timer);
+    timer = setInterval(function () { show((index + 1) % BEATS.length); }, 3600);
+  }
+  function stop() {
+    playing = false;
+    toggle.textContent = 'Play';
+    toggle.setAttribute('aria-label', 'Play playback');
+    clearInterval(timer);
+  }
+  toggle.addEventListener('click', function () { playing ? stop() : start(); });
+
+  show(0);
+  if (reduce) { stop(); } else { start(); }
+
+  var beats = document.querySelectorAll('.rs-beat');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -15% 0px' });
+    beats.forEach(function (b) { io.observe(b); });
+  } else {
+    beats.forEach(function (b) { b.classList.add('on'); });
+  }
+})();
+</script>
+
+</body>
+</html>
