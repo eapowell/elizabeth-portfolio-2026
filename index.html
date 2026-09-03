@@ -38,12 +38,8 @@
     transition:background .45s ease,color .45s ease;
   }
 
-  /* FUN MODE — the inversion. Not a re-skin: a different room. */
-  body.fun{--ground:var(--tar);--ink:var(--bone);--plate:var(--oxide);--spark:var(--acid)}
-  body.fun .plate-name{color:var(--acid)}
-  body.fun .void-word{color:var(--oxide)}
-  body.fun .ticker{background:var(--acid);color:var(--tar);border-color:var(--tar)}
-  body.fun .card-thumb{filter:saturate(.5) contrast(1.25)}
+  /* FUN = this layer as-is: bone ground, ultramarine plates, chartreuse.
+     PRO is the classic paper-and-ink override further down. */
 
   /* the grid everything snaps to, even when placement is deranged */
   .grid{
@@ -592,7 +588,7 @@
   }
 </style>
 </head>
-<body>
+<body class="fun">
 
 <nav>
   <a class="nav-logo" href="#hero">Elizabeth<br><span class="logo-2">Powell</span></a>
@@ -825,8 +821,8 @@
   var toggle = document.getElementById('modeToggle');
   var labelPro = document.getElementById('labelPro');
   var labelFun = document.getElementById('labelFun');
-  var isFun = false;
-  try { isFun = localStorage.getItem('ep-mode') === 'fun'; } catch (err) { isFun = false; }
+  var isFun = true;
+  try { isFun = localStorage.getItem('ep-mode') !== 'pro'; } catch (err) { isFun = true; }
   function paint() {
     document.body.classList.toggle('fun', isFun);
     labelPro.classList.toggle('active-label', !isFun);
