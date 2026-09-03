@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -132,7 +132,7 @@
     transition:background .45s ease;
   }
   .plate-name{
-    font-size:clamp(30px,8.4vw,148px);color:var(--spark);
+    font-size:clamp(26px,11vw,150px);color:var(--spark);
     display:block;white-space:nowrap;
   }
   .hero-desc{
@@ -288,7 +288,7 @@
 
   /* ---------- RESPONSIVE — the asymmetry relaxes, it does not vanish ---------- */
   @media (max-width:1000px){
-    .hero-line-1,.plate-name{font-size:clamp(52px,17vw,150px)}
+    .hero-line-1{font-size:clamp(52px,17vw,150px)}
     .hero-desc{grid-column:1/9}
     .hero-cta{grid-column:1/9}
     .hero-portrait{grid-column:8/13;margin-top:clamp(20px,5vw,50px)}
@@ -311,7 +311,6 @@
     .nav-stack{grid-column:8/13;grid-row:1/3}
     .hero-eyebrow{grid-column:1/13;grid-row:1;margin-top:1.4rem}
     .hero-line-1{grid-column:1/13;font-size:clamp(44px,15vw,90px)}
-    .plate-name{font-size:clamp(44px,15vw,90px)}
     .hero-desc,.hero-cta{grid-column:1/13}
     .hero-portrait{grid-column:1/9;grid-row:6;margin-top:2.2rem}
     #void{min-height:42vh}
@@ -330,12 +329,273 @@
     .ticker-inner{animation:none}
     *{transition-duration:.01ms !important}
   }
+
+  /* ══════════════════════════════════════════════════════════════════
+     PRO — the classic paper-and-ink system.
+     This is the DEFAULT (no body class). It restyles the exact same
+     markup the FUN layer above uses: one document, two design systems.
+     ══════════════════════════════════════════════════════════════════ */
+  body:not(.fun){
+    --paper:#FAFAF8; --paper-warm:#F3F2EE;
+    --pink:#0F0F0E; --pmid:#3A3A38; --plight:#8A8A86;
+    --pline:rgba(15,15,14,.12); --pline-2:rgba(15,15,14,.25);
+    background:var(--paper); color:var(--pink);
+    font-family:'DM Sans',system-ui,sans-serif; font-size:15px; line-height:1.6;
+  }
+  body:not(.fun) ::selection{background:var(--pink);color:var(--paper)}
+  body:not(.fun) :focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+
+  /* structure: gutters on both sides, nothing bleeds */
+  body:not(.fun) .grid{--padr:clamp(16px,4vw,64px);padding-left:clamp(16px,4vw,64px)}
+
+  /* elements that exist only for FUN */
+  body:not(.fun) .ticker,
+  body:not(.fun) #void{display:none}
+
+  /* NAV — back to a real bar */
+  body:not(.fun) nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;display:flex;
+    justify-content:space-between;align-items:center;
+    padding:1.25rem clamp(16px,4vw,64px);
+    background:rgba(250,250,248,.92);backdrop-filter:blur(12px);
+    border-bottom:.5px solid var(--pline);
+  }
+  body:not(.fun) .nav-logo{
+    font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:300;
+    letter-spacing:.04em;text-transform:none;line-height:1.2;color:var(--pink);
+  }
+  body:not(.fun) .nav-logo br{display:none}
+  body:not(.fun) .logo-2::before{content:'\00a0'}
+  body:not(.fun) .nav-stack{flex-direction:row;gap:2rem;align-items:center}
+  body:not(.fun) .nav-stack a{
+    font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.1em;
+    color:var(--pmid);background:none;padding:0;
+  }
+  body:not(.fun) .nav-stack a:hover,
+  body:not(.fun) .nav-stack a.active{color:var(--pink);background:none}
+  body:not(.fun) .mode-toggle{order:3;padding-top:0}
+  body:not(.fun) .mode-label{font-family:'DM Sans',sans-serif;color:var(--plight)}
+  body:not(.fun) .mode-label.active-label{color:var(--pink)}
+  body:not(.fun) .toggle-track{border-color:var(--pink)}
+  body:not(.fun) .toggle-thumb{background:var(--pink)}
+
+  /* HERO — two calm columns */
+  body:not(.fun) #hero{padding-top:clamp(96px,12vw,150px);padding-bottom:clamp(50px,8vw,90px);align-items:center}
+  body:not(.fun) .hero-eyebrow{
+    grid-column:1/7;grid-row:1;font-family:'DM Sans',sans-serif;font-size:.72rem;
+    letter-spacing:.16em;color:var(--plight);line-height:1.8;margin:0 0 1.5rem;
+  }
+  body:not(.fun) .hero-line-1,
+  body:not(.fun) .plate-name{
+    font-family:'Cormorant Garamond',serif;font-weight:300;text-transform:none;
+    font-size:clamp(2.9rem,5.6vw,5rem);line-height:1.02;letter-spacing:-.01em;color:var(--pink);
+    white-space:normal;
+  }
+  body:not(.fun) .hero-line-1{grid-column:1/7;grid-row:2;margin:0}
+  body:not(.fun) .plate-wrap{
+    grid-column:1/7;grid-row:3;background:none;margin:0;padding:0;overflow:visible;
+  }
+  body:not(.fun) .plate-name{font-style:italic;display:block}
+  body:not(.fun) .hero-desc{
+    grid-column:1/6;grid-row:4;font-family:'DM Sans',sans-serif;
+    font-size:1rem;line-height:1.75;color:var(--pmid);margin-top:1.5rem;max-width:420px;
+  }
+  body:not(.fun) .hero-cta{
+    grid-column:1/6;grid-row:5;margin-top:2rem;font-family:'DM Sans',sans-serif;
+    font-size:.8rem;letter-spacing:.1em;color:var(--pink);
+    border-bottom:1px solid var(--pink);padding-bottom:2px;
+  }
+  body:not(.fun) .hero-cta:hover{background:none;color:var(--pink)}
+  body:not(.fun) .hero-portrait{
+    grid-column:8/13;grid-row:1/6;margin-top:0;border:0;align-self:center;
+  }
+  body:not(.fun) .hero-portrait img{filter:none;aspect-ratio:4/5}
+  body:not(.fun) .hero-portrait figcaption{display:none}
+
+  /* SECTION LABELS */
+  body:not(.fun) .slab{
+    background:none;color:var(--plight);padding:0;
+    font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.16em;
+    display:flex;align-items:center;gap:1rem;grid-column:1/13!important;grid-row:1;
+    margin-bottom:1.5rem;
+  }
+  body:not(.fun) .slab::after{content:'';flex:1;height:.5px;background:var(--pline-2)}
+
+  body:not(.fun) .about-head,
+  body:not(.fun) .work-head,
+  body:not(.fun) .res-head,
+  body:not(.fun) .con-head{
+    font-family:'Cormorant Garamond',serif;font-weight:300;text-transform:none;
+    font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.2;letter-spacing:0;
+    color:var(--pink);margin:0 0 1.5rem;
+  }
+
+  /* ABOUT — copy left, an even 2×2 of stats right */
+  body:not(.fun) #about{padding-top:clamp(60px,9vw,110px)}
+  body:not(.fun) .about-head{grid-column:1/8;grid-row:2}
+  body:not(.fun) .about-copy{grid-column:1/7;grid-row:3;margin-top:0;gap:1.5rem}
+  body:not(.fun) .about-copy p{font-size:.95rem;line-height:1.85;color:var(--pmid)}
+  body:not(.fun) .about-copy p:last-child{color:var(--pmid);font-weight:400}
+  body:not(.fun) .stat-huge{grid-column:8/11;grid-row:3;margin-top:0;padding:0 0 2rem}
+  body:not(.fun) .stat-a{grid-column:11/13;grid-row:3;margin-top:0;padding:0 0 2rem}
+  body:not(.fun) .stat-b{grid-column:8/11;grid-row:4;margin-top:0}
+  body:not(.fun) .stat-c{grid-column:11/13;grid-row:4;margin-top:0}
+  body:not(.fun) .stat-huge .n,
+  body:not(.fun) .stat-sm .n{
+    font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:2.6rem;line-height:1;color:var(--pink);
+  }
+  body:not(.fun) .stat-huge .l,
+  body:not(.fun) .stat-sm .l{
+    font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.04em;
+    text-transform:none;color:var(--plight);margin-top:.5rem;
+  }
+
+  /* WORK — an even two-column grid of equals */
+  body:not(.fun) #work{padding-top:clamp(60px,9vw,110px)}
+  body:not(.fun) .work-head{grid-column:1/9;grid-row:2}
+  body:not(.fun) .cards{grid-row:3;margin-top:1rem;row-gap:3.5rem}
+  body:not(.fun) .card{
+    grid-column:span 6!important;margin-top:0!important;
+    border-top:.5px solid var(--pline-2);padding-top:1.5rem;padding-bottom:0;
+  }
+  body:not(.fun) .card-n{
+    font-family:'DM Sans',sans-serif;font-size:.7rem;letter-spacing:.1em;color:var(--plight);
+  }
+  body:not(.fun) .card-title{
+    font-family:'Cormorant Garamond',serif!important;font-weight:300;text-transform:none;
+    font-size:1.65rem!important;line-height:1.2;letter-spacing:0;color:var(--pink);margin-top:.6rem;
+  }
+  body:not(.fun) .card-title br{display:none}
+  body:not(.fun) .card-tags span{
+    font-family:'DM Sans',sans-serif;font-size:.68rem;letter-spacing:.06em;
+    border-color:var(--pline-2);color:var(--pmid);padding:3px 9px;
+  }
+  body:not(.fun) .card-desc{
+    font-family:'DM Sans',sans-serif;font-size:.9rem;line-height:1.75;color:var(--pmid);
+  }
+  body:not(.fun) .card-thumb{border:.5px solid var(--pline-2);background:var(--paper-warm)}
+  body:not(.fun) .card-thumb img{aspect-ratio:16/10!important}
+  body:not(.fun) .card-go{
+    font-family:'DM Sans',sans-serif;font-size:.75rem;letter-spacing:.1em;
+    border-bottom:1px solid var(--pink);color:var(--pink);
+  }
+  body:not(.fun) .card:hover .card-title{color:var(--pmid)}
+  body:not(.fun) .card:hover .card-go{background:none}
+
+  /* RESUME */
+  body:not(.fun) #resume{padding-top:clamp(60px,9vw,110px)}
+  body:not(.fun) .res-head{grid-column:1/9;grid-row:2}
+  body:not(.fun) .res-dl{
+    grid-column:1/7;grid-row:3;background:none;color:var(--pink);padding:0 0 2px;
+    font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.1em;
+    border-bottom:1px solid var(--pink);margin-top:0;
+  }
+  body:not(.fun) .res-dl:hover{background:none}
+  body:not(.fun) .res-exp{grid-column:1/7;grid-row:4;margin-top:3rem}
+  body:not(.fun) .res-side{grid-column:8/13;grid-row:4;margin-top:3rem}
+  body:not(.fun) .res-h{
+    font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.16em;
+    color:var(--plight);border-bottom:.5px solid var(--pline-2);
+  }
+  body:not(.fun) .res-t{font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:500;color:var(--pink)}
+  body:not(.fun) .res-d{font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:0;color:var(--plight)}
+  body:not(.fun) .res-s{font-family:'DM Sans',sans-serif;font-size:.85rem;letter-spacing:0;color:var(--pmid)}
+  body:not(.fun) .res-x{font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--pmid);line-height:1.7}
+  body:not(.fun) .pills span{
+    font-family:'DM Sans',sans-serif;font-size:.75rem;letter-spacing:.02em;text-transform:none;
+    border:.5px solid var(--pline-2);color:var(--pmid);padding:5px 12px;background:none!important;
+  }
+
+  /* CONTACT */
+  body:not(.fun) #contact{padding-top:clamp(60px,9vw,110px)}
+  body:not(.fun) .con-head{grid-column:1/7;grid-row:2;margin-left:0}
+  body:not(.fun) .con-sub{
+    grid-column:1/6;grid-row:3;font-family:'DM Sans',sans-serif;
+    font-size:.95rem;line-height:1.75;color:var(--pmid);margin-top:0;
+  }
+  body:not(.fun) .con-links{grid-column:1/6;grid-row:4;margin-top:2.5rem}
+  body:not(.fun) .con-link{border-bottom:.5px solid var(--pline)}
+  body:not(.fun) .con-link span{
+    font-family:'DM Sans',sans-serif;font-size:.7rem;letter-spacing:.14em;color:var(--plight);
+  }
+  body:not(.fun) .con-link b{font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--pink)}
+  body:not(.fun) .con-link:hover b{background:none;color:var(--pmid)}
+  body:not(.fun) .con-form{grid-column:8/13;grid-row:2/6;margin-top:0}
+  body:not(.fun) .fl{
+    font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.14em;color:var(--plight);
+  }
+  body:not(.fun) .fi,body:not(.fun) .ft{
+    font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--pink);
+    border-bottom:.5px solid var(--pline-2);
+  }
+  body:not(.fun) .fi:focus,body:not(.fun) .ft:focus{
+    border-bottom-color:var(--pink);background:none;
+  }
+  body:not(.fun) .fs{
+    font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.1em;
+    background:var(--pink);color:var(--paper);padding:14px 30px;
+  }
+  body:not(.fun) .fs:hover{background:var(--pmid);color:var(--paper)}
+  body:not(.fun) .form-success p{font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--pmid)}
+
+  /* FOOTER */
+  body:not(.fun) footer{
+    padding-top:clamp(60px,9vw,100px);border-top:.5px solid var(--pline);
+    margin-top:clamp(50px,8vw,90px);
+  }
+  body:not(.fun) .foot-a{
+    font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:0;color:var(--plight);line-height:1.8;
+  }
+  body:not(.fun) .foot-b a{color:var(--pmid)}
+  body:not(.fun) .foot-b a:hover{color:var(--pink)}
+
+  /* PRO responsive — plain, predictable stacking */
+  @media (max-width:900px){
+    body:not(.fun) .hero-eyebrow,
+    body:not(.fun) .hero-line-1,
+    body:not(.fun) .plate-wrap,
+    body:not(.fun) .hero-desc,
+    body:not(.fun) .hero-cta{grid-column:1/13}
+    body:not(.fun) .hero-portrait{grid-column:1/9;grid-row:6;margin-top:2.5rem}
+    body:not(.fun) .about-head,
+    body:not(.fun) .about-copy{grid-column:1/13}
+    body:not(.fun) .stat-huge{grid-column:1/7;grid-row:4;margin-top:2.5rem}
+    body:not(.fun) .stat-a{grid-column:7/13;grid-row:4;margin-top:2.5rem}
+    body:not(.fun) .stat-b{grid-column:1/7;grid-row:5;margin-top:2rem}
+    body:not(.fun) .stat-c{grid-column:7/13;grid-row:5;margin-top:2rem}
+    body:not(.fun) .work-head,
+    body:not(.fun) .res-head,
+    body:not(.fun) .con-head{grid-column:1/13}
+    body:not(.fun) .res-exp{grid-column:1/13;grid-row:4}
+    body:not(.fun) .res-side{grid-column:1/13;grid-row:5;margin-top:2.5rem}
+    body:not(.fun) .res-dl{grid-column:1/13}
+    body:not(.fun) .con-sub,
+    body:not(.fun) .con-links{grid-column:1/13}
+    body:not(.fun) .con-form{grid-column:1/13;grid-row:5;margin-top:3rem}
+    body:not(.fun) .card{grid-column:span 12!important}
+  }
+  @media (max-width:640px){
+    body:not(.fun) nav{padding:1rem clamp(16px,4vw,64px)}
+    body:not(.fun) .nav-stack{gap:1rem}
+    body:not(.fun) .nav-stack a{font-size:.7rem}
+    body:not(.fun) .mode-toggle{grid-row:auto;margin-top:0}
+    body:not(.fun) #hero{padding-top:110px}
+  }
+  /* below this the logo + 4 links + toggle genuinely do not fit one row */
+  @media (max-width:560px){
+    body:not(.fun) nav{flex-wrap:wrap;row-gap:.55rem;align-items:center}
+    body:not(.fun) .nav-logo{order:1;font-size:1.15rem}
+    body:not(.fun) .mode-toggle{order:2}
+    body:not(.fun) .nav-stack{order:3;width:100%;gap:1.15rem;justify-content:flex-start}
+    body:not(.fun) #hero{padding-top:145px}
+  }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="#hero">Elizabeth<br>Powell</a>
+  <a class="nav-logo" href="#hero">Elizabeth<br><span class="logo-2">Powell</span></a>
   <div class="mode-toggle" id="modeToggle" role="button" tabindex="0" aria-label="Toggle fun mode">
     <span class="mode-label active-label" id="labelPro">Pro</span>
     <div class="toggle-track"><div class="toggle-thumb"></div></div>
@@ -566,13 +826,19 @@
   var labelPro = document.getElementById('labelPro');
   var labelFun = document.getElementById('labelFun');
   var isFun = false;
-  function flip() {
-    isFun = !isFun;
+  try { isFun = localStorage.getItem('ep-mode') === 'fun'; } catch (err) { isFun = false; }
+  function paint() {
     document.body.classList.toggle('fun', isFun);
     labelPro.classList.toggle('active-label', !isFun);
     labelFun.classList.toggle('active-label', isFun);
     toggle.setAttribute('aria-pressed', isFun ? 'true' : 'false');
   }
+  function flip() {
+    isFun = !isFun;
+    paint();
+    try { localStorage.setItem('ep-mode', isFun ? 'fun' : 'pro'); } catch (err) {}
+  }
+  paint();
   toggle.addEventListener('click', flip);
   toggle.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); }
