@@ -5,1000 +5,538 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elizabeth Powell — Product & Design</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-  :root {
-    --ink: #0f0f0e;
-    --ink-mid: #3a3a38;
-    --ink-light: #8a8a86;
-    --paper: #fafaf8;
-    --paper-warm: #f3f2ee;
-    --accent: #0f0f0e;
-    --line: rgba(15,15,14,0.12);
-    --line-strong: rgba(15,15,14,0.25);
-  }
+  :root{
+    --bone:#E9E5D8;
+    --tar:#0B0B0B;
+    --ultra:#1D1DE6;
+    --acid:#D9FF37;
+    --oxide:#C63A16;
+    --smoke:#6E6A5C;
 
-  html { scroll-behavior: smooth; }
+    --scream:'Anton','Arial Narrow',Impact,sans-serif;
+    --literary:'Instrument Serif',Georgia,serif;
+    --machine:'Space Mono','SF Mono',Menlo,monospace;
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 15px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    --ground:var(--bone);
+    --ink:var(--tar);
+    --plate:var(--ultra);
+    --spark:var(--acid);
   }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.25rem 4vw;
-    background: rgba(250,250,248,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 0.5px solid var(--line);
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem;
-    font-weight: 300;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--ink); }
-
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-bottom: 0.5px solid var(--line-strong);
-    padding-top: 5rem;
-  }
-  .hero-left {
-    padding: 8vw 5vw 6vw 4vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-right: 0.5px solid var(--line-strong);
-  }
-  .hero-eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 1.75rem;
-  }
-  .hero-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.5rem, 7vw, 6rem);
-    font-weight: 300;
-    line-height: 1.0;
-    letter-spacing: -0.01em;
-    margin-bottom: 1.5rem;
-  }
-  .hero-name em {
-    font-style: italic;
-    font-weight: 300;
-  }
-  .hero-desc {
-    font-size: 1rem;
-    color: var(--ink-mid);
-    max-width: 380px;
-    line-height: 1.75;
-    margin-bottom: 2.5rem;
-  }
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 2px;
-    transition: gap 0.2s;
-  }
-  .hero-cta:hover { gap: 1rem; }
-
-  .hero-right {
-    background: var(--paper-warm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-visual {
-    width: 100%;
-    max-width: 380px;
-    aspect-ratio: 3/4;
-    background: var(--line);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-visual-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    color: var(--ink-light);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: 0.5px dashed var(--line-strong);
-  }
-  .photo-icon {
-    width: 36px; height: 36px;
-    border: 1.5px solid var(--ink-light);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
+  html{scroll-behavior:smooth;overflow-x:clip}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:var(--machine); font-size:15px; line-height:1.55;
+    overflow-x:clip;
+    -webkit-font-smoothing:antialiased;
+    transition:background .45s ease,color .45s ease;
   }
 
-  /* SECTION COMMON */
-  section { border-bottom: 0.5px solid var(--line-strong); }
-  .section-inner { padding: 6rem 4vw; max-width: 1200px; margin: 0 auto; }
-  .section-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 3rem;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .section-label::after {
-    content: '';
-    display: block;
-    flex: 1;
-    height: 0.5px;
-    background: var(--line-strong);
+  /* FUN MODE — the inversion. Not a re-skin: a different room. */
+  body.fun{--ground:var(--tar);--ink:var(--bone);--plate:var(--oxide);--spark:var(--acid)}
+  body.fun .plate-name{color:var(--acid)}
+  body.fun .void-word{color:var(--oxide)}
+  body.fun .ticker{background:var(--acid);color:var(--tar);border-color:var(--tar)}
+  body.fun .card-thumb{filter:saturate(.5) contrast(1.25)}
+
+  /* the grid everything snaps to, even when placement is deranged */
+  .grid{
+    --padr:0;                      /* asymmetric on purpose — plates bleed right */
+    display:grid;
+    grid-template-columns:repeat(12,minmax(0,1fr));
+    column-gap:clamp(8px,1.4vw,26px);
+    padding-left:clamp(14px,3vw,54px);
+    padding-right:var(--padr);
   }
 
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 6vw;
-    align-items: start;
-  }
-  .about-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3.25rem);
-    font-weight: 300;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-  }
-  .about-headline em { font-style: italic; }
-  .about-body { color: var(--ink-mid); line-height: 1.8; margin-bottom: 1.25rem; }
-  .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border: 0.5px solid var(--line-strong);
-  }
-  .stat-item {
-    padding: 1.5rem;
-    border-right: 0.5px solid var(--line-strong);
-    border-bottom: 0.5px solid var(--line-strong);
-  }
-  .stat-item:nth-child(even) { border-right: none; }
-  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    font-weight: 300;
-    line-height: 1;
-    margin-bottom: 0.25rem;
-  }
-  .stat-label { font-size: 0.78rem; color: var(--ink-light); letter-spacing: 0.06em; }
+  a{color:inherit}
+  img{display:block;max-width:100%}
+  ::selection{background:var(--spark);color:var(--tar)}
+  :focus-visible{outline:3px solid var(--oxide);outline-offset:3px}
 
-  /* WORK */
-  .work-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-    border: 0.5px solid var(--line-strong);
+  /* ---------- type primitives ---------- */
+  .scream{
+    font-family:var(--scream); font-weight:400; text-transform:uppercase;
+    line-height:.82; letter-spacing:-.028em;
   }
-  .work-card {
-    padding: 2.5rem;
-    border-right: 0.5px solid var(--line-strong);
-    border-bottom: 0.5px solid var(--line-strong);
-    cursor: pointer;
-    transition: background 0.2s;
-    text-decoration: none;
-    color: inherit;
-    display: block;
+  .mono{font-family:var(--machine);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase}
+  .lit{font-family:var(--literary);font-weight:400;line-height:1.22}
+  .lit em{font-style:italic}
+
+  /* ---------- NAV — no bar, no centre, no symmetry ---------- */
+  nav{
+    position:relative;z-index:40;
+    display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+    column-gap:clamp(8px,1.4vw,26px);
+    padding:14px 0 0 clamp(14px,3vw,54px);
+    align-items:start;
   }
-  .work-card:nth-child(even) { border-right: none; }
-  .work-card:nth-last-child(-n+2) { border-bottom: none; }
-  .work-card:hover { background: var(--paper-warm); }
-  .work-thumb {
-    width: 100%;
-    aspect-ratio: 16/10;
-    background: var(--paper-warm);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ink-light);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: 0.5px dashed var(--line-strong);
-    position: relative;
-    overflow: hidden;
+  .nav-logo{
+    grid-column:1/5;
+    font-family:var(--scream);text-transform:uppercase;font-size:clamp(15px,1.5vw,20px);
+    letter-spacing:-.01em;text-decoration:none;line-height:1;
   }
-  .work-thumb img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    position: absolute; inset: 0;
-    transition: transform 0.4s ease;
+  .nav-stack{grid-column:11/13;display:flex;flex-direction:column;align-items:flex-start;gap:2px;list-style:none}
+  .nav-stack a{
+    font-family:var(--machine);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    text-decoration:none;color:var(--smoke);transition:color .18s,background .18s;padding:1px 3px;
   }
-  .work-card:hover .work-thumb img {
-    transform: scale(1.05);
+  .nav-stack a:hover,.nav-stack a.active{color:var(--ink);background:var(--spark)}
+  .mode-toggle{
+    grid-column:9/11;display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none;
+    justify-self:start;padding-top:2px;
   }
-  .work-thumb:has(img) {
-    border: none;
+  .mode-label{font-family:var(--machine);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--smoke)}
+  .mode-label.active-label{color:var(--ink)}
+  .toggle-track{width:30px;height:12px;border:1.5px solid var(--ink);position:relative}
+  .toggle-thumb{position:absolute;top:1px;left:1px;width:11px;height:8px;background:var(--ink);transition:transform .2s}
+  body.fun .toggle-thumb{transform:translateX(15px)}
+  .hamburger{display:none}
+
+  /* ---------- TICKER ---------- */
+  .ticker{
+    grid-column:1/-1;margin-top:20px;margin-right:calc(-1 * var(--padr));background:var(--plate);color:var(--spark);
+    border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+    overflow:hidden;white-space:nowrap;
   }
-  .work-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.75rem;
+  .ticker-inner{display:inline-block;padding:6px 0;animation:slide 34s linear infinite}
+  .ticker span{
+    font-family:var(--machine);font-weight:700;font-size:11px;letter-spacing:.28em;
+    text-transform:uppercase;padding:0 1.6rem;
   }
-  .tag {
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    border: 0.5px solid var(--line-strong);
-    padding: 2px 8px;
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- HERO ---------- */
+  #hero{padding-top:clamp(28px,5vw,60px);padding-bottom:0;position:relative}
+  .hero-eyebrow{
+    grid-column:9/13;align-self:start;
+    font-family:var(--machine);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--smoke);text-align:left;line-height:1.9;
   }
-  .work-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-    line-height: 1.25;
+  .hero-line-1{
+    grid-column:1/12;grid-row:2;
+    font-size:clamp(64px,15.5vw,240px);margin-top:.12em;
   }
-  .work-desc { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.7; }
-  .work-arrow {
-    display: inline-block;
-    margin-top: 1rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink);
-    border-bottom: 0.5px solid var(--ink);
-    padding-bottom: 1px;
+  .plate-wrap{
+    grid-column:1/-1;grid-row:3;background:var(--plate);
+    margin-top:-.04em;padding:.14em 0 .2em clamp(14px,3vw,54px);
+    margin-left:calc(-1 * clamp(14px,3vw,54px));
+    margin-right:calc(-1 * var(--padr));
+    overflow:hidden;
+    transition:background .45s ease;
+  }
+  .plate-name{
+    font-size:clamp(30px,8.4vw,148px);color:var(--spark);
+    display:block;white-space:nowrap;
+  }
+  .hero-desc{
+    grid-column:2/7;grid-row:4;margin-top:clamp(28px,4vw,58px);
+    font-family:var(--literary);font-size:clamp(19px,2.1vw,28px);line-height:1.32;
+  }
+  .hero-cta{
+    grid-column:2/7;grid-row:5;margin-top:1.6rem;justify-self:start;
+    font-family:var(--machine);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    text-decoration:none;border-bottom:2px solid var(--oxide);padding-bottom:3px;
+  }
+  .hero-cta:hover{background:var(--oxide);color:var(--bone);border-color:var(--oxide)}
+  .hero-portrait{
+    grid-column:10/13;grid-row:4/6;margin-top:clamp(28px,7vw,110px);
+    align-self:start;border:2px solid var(--ink);
+  }
+  .hero-portrait img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(1) contrast(1.15)}
+  .hero-portrait figcaption{
+    font-family:var(--machine);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--smoke);padding:5px 0 0;
   }
 
-  /* RESUME */
-  .resume-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 6vw;
+  /* ---------- THE VOID ---------- */
+  #void{min-height:58vh;position:relative;align-content:end;padding-bottom:clamp(40px,8vw,120px)}
+  .void-word{
+    grid-column:1/11;grid-row:1;font-size:clamp(90px,25vw,400px);color:var(--plate);
+    opacity:.13;line-height:.76;pointer-events:none;user-select:none;
+    align-self:start;margin-top:clamp(20px,4vw,60px);
+    white-space:nowrap;
   }
-  .resume-section { margin-bottom: 3rem; }
-  .resume-section-title {
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 0.5px solid var(--line);
+  .void-line{
+    grid-column:8/13;grid-row:1;align-self:end;
+    font-family:var(--literary);font-size:clamp(20px,2.6vw,36px);line-height:1.24;
   }
-  .resume-item { margin-bottom: 1.75rem; }
-  .resume-item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.2rem; }
-  .resume-item-title { font-weight: 500; font-size: 0.95rem; }
-  .resume-item-date { font-size: 0.78rem; color: var(--ink-light); }
-  .resume-item-sub { font-size: 0.85rem; color: var(--ink-light); margin-bottom: 0.4rem; font-style: italic; }
-  .resume-item-desc { font-size: 0.85rem; color: var(--ink-mid); line-height: 1.7; }
-  .skill-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
-  .skill-pill {
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    color: var(--ink-mid);
-    border: 0.5px solid var(--line-strong);
-    padding: 3px 10px;
-  }
-  .resume-dl-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    border: 0.5px solid var(--ink);
-    padding: 0.65rem 1.5rem;
-    text-decoration: none;
-    color: var(--ink);
-    transition: background 0.2s, color 0.2s;
-    margin-bottom: 3rem;
-  }
-  .resume-dl-link:hover { background: var(--ink); color: var(--paper); }
+  .void-line em{font-style:italic;color:var(--oxide)}
 
-  /* CONTACT */
-  #contact { border-bottom: none; }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    align-items: start;
-  }
-  .contact-left {
-    border-right: 0.5px solid var(--line-strong);
-    padding-right: 6vw;
-    padding-bottom: 2rem;
-  }
-  .contact-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 300;
-    line-height: 1.15;
-    margin-bottom: 1.25rem;
-  }
-  .contact-headline em { font-style: italic; }
-  .contact-sub { color: var(--ink-mid); line-height: 1.8; margin-bottom: 2rem; }
-  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.9rem;
-    color: var(--ink-mid);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .contact-link:hover { color: var(--ink); }
-  .contact-link-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    min-width: 60px;
-  }
-  .contact-right { padding-left: 6vw; padding-top: 0.5rem; }
-  .form-group { margin-bottom: 1.25rem; }
-  .form-label {
-    display: block;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 0.5rem;
-  }
-  .form-input, .form-textarea {
-    width: 100%;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    color: var(--ink);
-    background: transparent;
-    border: none;
-    border-bottom: 0.5px solid var(--line-strong);
-    padding: 0.5rem 0;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .form-input:focus, .form-textarea:focus { border-color: var(--ink); }
-  .form-textarea { resize: none; height: 80px; }
-  .form-submit {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--paper);
-    background: var(--ink);
-    border: none;
-    padding: 0.75rem 2rem;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    margin-top: 0.5rem;
-  }
-  .form-submit:hover { opacity: 0.75; }
-  .form-submit:disabled { opacity: 0.5; cursor: default; }
-  .form-success {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    min-height: 200px;
-    text-align: center;
-  }
-  .form-success p {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem;
-    color: var(--ink-mid);
-    line-height: 1.6;
+  /* ---------- SECTION LABEL ---------- */
+  .slab{
+    font-family:var(--machine);font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--ink);background:var(--spark);padding:3px 8px;justify-self:start;
   }
 
-  /* FOOTER */
-  footer {
-    padding: 1.5rem 4vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 0.5px solid var(--line);
-  }
-  footer p { font-size: 0.78rem; color: var(--ink-light); }
-  .footer-socials { display: flex; gap: 1rem; align-items: center; }
-  .footer-socials a { color: var(--ink-light); transition: color 0.2s; display: flex; }
-  .footer-socials a:hover { color: var(--ink); }
-  .footer-socials svg { width: 18px; height: 18px; }
+  /* ---------- ABOUT ---------- */
+  #about{padding-top:clamp(40px,7vw,110px)}
+  .about-label{grid-column:11/13;grid-row:1}
+  .about-head{grid-column:1/8;grid-row:2;font-size:clamp(40px,7.4vw,116px);margin-top:.2em}
+  .about-copy{grid-column:3/8;grid-row:3;margin-top:clamp(26px,3vw,44px);display:flex;flex-direction:column;gap:1.1rem}
+  .about-copy p{font-size:13.5px;line-height:1.85;color:var(--ink)}
+  .about-copy p:last-child{color:var(--oxide);font-weight:700}
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-eyebrow { animation: fadeUp 0.6s ease forwards; }
-  .hero-name { animation: fadeUp 0.6s 0.1s ease both; }
-  .hero-desc { animation: fadeUp 0.6s 0.2s ease both; }
-  .hero-cta { animation: fadeUp 0.6s 0.3s ease both; }
+  /* stats: deliberately not a grid of equals */
+  .stat-huge{grid-column:9/13;grid-row:3;margin-top:clamp(26px,3vw,44px)}
+  .stat-huge .n{font-family:var(--scream);font-size:clamp(74px,11vw,168px);line-height:.8;color:var(--plate)}
+  .stat-huge .l{font-family:var(--machine);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--smoke);margin-top:.5rem}
+  .stat-a{grid-column:9/11;grid-row:4;margin-top:clamp(34px,5vw,78px)}
+  .stat-b{grid-column:11/13;grid-row:4;margin-top:clamp(80px,13vw,190px)}
+  .stat-c{grid-column:4/7;grid-row:4;margin-top:clamp(30px,4vw,54px)}
+  .stat-sm .n{font-family:var(--scream);font-size:clamp(30px,3.6vw,54px);line-height:.85}
+  .stat-sm .l{font-family:var(--machine);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--smoke);margin-top:.4rem}
 
-  /* ACTIVE NAV */
-  .nav-links a.active { color: var(--ink); font-weight: 500; }
+  /* ---------- WORK ---------- */
+  #work{padding-top:clamp(70px,12vw,190px)}
+  .work-label{grid-column:1/4;grid-row:1}
+  .work-head{grid-column:1/11;grid-row:2;font-size:clamp(48px,10vw,168px);margin-top:.12em}
+  .cards{grid-column:1/-1;grid-row:3;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(8px,1.4vw,26px);margin-top:clamp(30px,5vw,70px)}
 
-  /* MODE TOGGLE */
-  .mode-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-left: 2rem;
-    cursor: pointer;
-    user-select: none;
-  }
-  .mode-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    transition: color 0.4s;
-  }
-  .mode-label.active-label { color: var(--ink); font-weight: 500; }
-  .toggle-track {
-    width: 36px;
-    height: 20px;
-    background: var(--line-strong);
-    border-radius: 10px;
-    position: relative;
-    transition: background 0.4s;
-  }
-  .toggle-thumb {
-    width: 16px;
-    height: 16px;
-    background: var(--ink);
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), background 0.4s;
-  }
+  .card{text-decoration:none;display:block;padding-bottom:2rem;border-top:2px solid var(--ink);padding-top:.9rem}
+  .card-n{font-family:var(--machine);font-size:9.5px;letter-spacing:.22em;color:var(--oxide)}
+  .card-title{font-family:var(--scream);text-transform:uppercase;line-height:.88;letter-spacing:-.02em;margin-top:.5rem}
+  .card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:.8rem}
+  .card-tags span{font-family:var(--machine);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--smoke);padding:2px 6px;color:var(--smoke)}
+  .card-desc{font-family:var(--literary);font-size:16px;line-height:1.34;margin-top:.9rem}
+  .card-thumb{margin-top:1rem;border:2px solid var(--ink);transition:filter .3s}
+  .card-thumb img{width:100%;object-fit:cover}
+  .card-go{display:inline-block;margin-top:1rem;font-family:var(--machine);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;border-bottom:2px solid var(--spark);padding-bottom:2px}
+  .card:hover .card-title{color:var(--plate)}
+  .card:hover .card-go{background:var(--spark)}
 
-  /* FUN THEME */
-  body.fun {
-    --ink: #f0f0f0;
-    --ink-mid: #c0c0c0;
-    --ink-light: #888;
-    --paper: #0a0a0a;
-    --paper-warm: #141414;
-    --line: rgba(255,255,255,0.1);
-    --line-strong: rgba(255,255,255,0.2);
-    --neon-pink: #ff2d95;
-    --neon-green: #39ff14;
-    --neon-orange: #ff6b2b;
-    --neon-blue: #00d4ff;
-    transition: background 0.5s, color 0.5s;
-  }
-  body:not(.fun) {
-    transition: background 0.5s, color 0.5s;
-  }
-  body.fun nav {
-    background: rgba(10,10,10,0.92);
-  }
-  body.fun .toggle-track {
-    background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
-  }
-  body.fun .toggle-thumb {
-    transform: translateX(16px);
-    background: #0a0a0a;
-  }
-  body.fun .hero-name em {
-    background: linear-gradient(135deg, var(--neon-pink), var(--neon-orange), var(--neon-green), var(--neon-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  body.fun .hero-eyebrow {
-    color: var(--neon-pink);
-  }
-  body.fun .hero-cta {
-    color: var(--neon-green);
-    border-color: var(--neon-green);
-  }
-  body.fun .hero-right {
-    background: #141414;
-  }
-  body.fun .section-label {
-    color: var(--neon-pink);
-  }
-  body.fun .section-label::after {
-    background: linear-gradient(90deg, var(--neon-pink), transparent);
-  }
-  body.fun .stat-num {
-    background: linear-gradient(135deg, var(--neon-orange), var(--neon-pink));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  body.fun .tag {
-    border-color: var(--neon-blue);
-    color: var(--neon-blue);
-  }
-  body.fun .work-card:hover {
-    background: #1a1a1a;
-    box-shadow: inset 0 0 30px rgba(255,45,149,0.05);
-  }
-  body.fun .work-arrow {
-    color: var(--neon-green);
-    border-color: var(--neon-green);
-  }
-  body.fun .work-title {
-    transition: color 0.3s;
-  }
-  body.fun .work-card:hover .work-title {
-    color: var(--neon-pink);
-  }
-  body.fun .skill-pill {
-    border-color: var(--neon-blue);
-    color: var(--neon-blue);
-    transition: all 0.3s;
-  }
-  body.fun .skill-pill:hover {
-    background: var(--neon-blue);
-    color: #0a0a0a;
-  }
-  body.fun .resume-dl-link {
-    border-color: var(--neon-green);
-    color: var(--neon-green);
-  }
-  body.fun .resume-dl-link:hover {
-    background: var(--neon-green);
-    color: #0a0a0a;
-  }
-  body.fun .form-submit {
-    background: linear-gradient(135deg, var(--neon-pink), var(--neon-orange));
-    color: #0a0a0a;
-    font-weight: 500;
-  }
-  body.fun .form-input:focus, body.fun .form-textarea:focus {
-    border-color: var(--neon-pink);
-  }
-  body.fun .contact-headline em {
-    background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  body.fun .about-headline em {
-    background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  body.fun .footer-socials a:hover {
-    color: var(--neon-pink);
-  }
-  body.fun .nav-links a:hover {
-    color: var(--neon-pink);
-  }
-  body.fun .nav-links a.active {
-    color: var(--neon-pink);
-  }
-  body.fun .nav-logo {
-    background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  /* every card a different span and a different baseline */
+  .c1{grid-column:1/8}
+  .c1 .card-title{font-size:clamp(34px,5.4vw,80px)}
+  .c1 .card-thumb img{aspect-ratio:16/9}
+  .c2{grid-column:8/12;margin-top:clamp(60px,14vw,230px)}
+  .c2 .card-title{font-size:clamp(24px,2.9vw,40px)}
+  .c2 .card-thumb img{aspect-ratio:4/5}
+  .c3{grid-column:4/10;margin-top:clamp(40px,7vw,110px)}
+  .c3 .card-title{font-size:clamp(28px,4vw,58px)}
+  .c3 .card-thumb img{aspect-ratio:21/9}
+  .c4{grid-column:1/6;margin-top:clamp(30px,5vw,70px)}
+  .c4 .card-title{font-size:clamp(24px,3.1vw,44px)}
+  .c5{grid-column:6/12;margin-top:clamp(50px,9vw,150px)}
+  .c5 .card-title{font-size:clamp(26px,3.5vw,50px)}
+  .c5 .card-thumb img{aspect-ratio:16/10}
 
-  /* Fun mode animations */
-  @keyframes neonPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-  }
-  body.fun .stat-item {
-    transition: transform 0.3s;
-  }
-  body.fun .stat-item:hover {
-    transform: scale(1.05);
-  }
-  body.fun .hero-name {
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-  body.fun .photo-icon {
-    border-color: var(--neon-pink);
-    animation: neonPulse 2s ease infinite;
-  }
-  body.fun .work-thumb {
-    border-color: var(--neon-blue);
-    transition: border-color 0.3s, box-shadow 0.3s;
-  }
-  body.fun .work-card:hover .work-thumb {
-    box-shadow: 0 0 20px rgba(0,212,255,0.2);
-  }
+  /* ---------- RESUME ---------- */
+  #resume{padding-top:clamp(80px,13vw,200px)}
+  .res-label{grid-column:9/12;grid-row:1}
+  .res-head{grid-column:1/9;grid-row:2;font-size:clamp(40px,7.6vw,120px);margin-top:.14em}
+  .res-dl{grid-column:1/6;grid-row:3;justify-self:start;margin-top:1.4rem;
+    font-family:var(--machine);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    text-decoration:none;background:var(--plate);color:var(--spark);padding:9px 16px;transition:background .2s}
+  .res-dl:hover{background:var(--oxide)}
+  .res-exp{grid-column:1/7;grid-row:4;margin-top:clamp(32px,5vw,70px)}
+  .res-side{grid-column:8/13;grid-row:4;margin-top:clamp(70px,12vw,180px)}
+  .res-h{font-family:var(--machine);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--oxide);border-bottom:2px solid var(--ink);padding-bottom:.5rem;margin-bottom:1.4rem}
+  .res-item{margin-bottom:1.7rem}
+  .res-t{font-family:var(--literary);font-size:19px;line-height:1.2;display:block}
+  .res-d{font-family:var(--machine);font-size:9.5px;letter-spacing:.14em;color:var(--oxide);display:block;margin-top:.3rem}
+  .res-s{font-family:var(--machine);font-size:10px;letter-spacing:.1em;color:var(--smoke);display:block;margin-top:.35rem}
+  .res-x{font-size:13px;line-height:1.75;margin-top:.6rem;color:var(--ink)}
+  .pills{display:flex;flex-wrap:wrap;gap:5px}
+  .pills span{font-family:var(--machine);font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--ink);padding:3px 7px}
+  .pills span:nth-child(3n){background:var(--spark)}
+  .pills span:nth-child(5n){background:var(--plate);color:var(--spark);border-color:var(--plate)}
 
-  /* RESPONSIVE */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 4px;
-    background: none;
-    border: none;
+  /* ---------- CONTACT ---------- */
+  #contact{padding-top:clamp(80px,14vw,210px)}
+  .con-label{grid-column:1/4;grid-row:1}
+  .con-head{grid-column:1/10;grid-row:2;font-size:clamp(44px,9.4vw,160px);margin-top:.12em;
+    margin-left:calc(-1 * clamp(6px,1.4vw,26px))}
+  .con-sub{grid-column:2/7;grid-row:3;margin-top:clamp(24px,3vw,44px);font-family:var(--literary);font-size:clamp(18px,2vw,26px);line-height:1.3}
+  .con-links{grid-column:2/7;grid-row:4;margin-top:1.8rem;display:flex;flex-direction:column;gap:.9rem}
+  .con-link{text-decoration:none;display:block;border-bottom:1px solid var(--smoke);padding-bottom:.5rem}
+  .con-link span{display:block;font-family:var(--machine);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--oxide);margin-bottom:.25rem}
+  .con-link b{font-family:var(--machine);font-size:12px;font-weight:400;letter-spacing:.02em}
+  .con-link:hover b{background:var(--spark)}
+  .con-form{grid-column:8/13;grid-row:3/6;margin-top:clamp(24px,3vw,44px)}
+  .fg{margin-bottom:1.3rem}
+  .fl{display:block;font-family:var(--machine);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--oxide);margin-bottom:.4rem}
+  .fi,.ft{
+    width:100%;background:transparent;border:0;border-bottom:2px solid var(--ink);
+    font-family:var(--machine);font-size:13px;color:var(--ink);padding:6px 0;border-radius:0;
   }
-  .hamburger span {
-    display: block;
-    width: 22px;
-    height: 1.5px;
-    background: var(--ink);
-    transition: transform 0.3s, opacity 0.3s;
+  .fi::placeholder,.ft::placeholder{color:var(--smoke)}
+  .fi:focus,.ft:focus{outline:0;border-bottom-color:var(--oxide);background:rgba(217,255,55,.16)}
+  .ft{min-height:96px;resize:vertical}
+  .fs{
+    font-family:var(--machine);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    background:var(--ink);color:var(--ground);border:0;padding:13px 26px;cursor:pointer;border-radius:0;
+    transition:background .2s,color .2s;
   }
-  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .fs:hover{background:var(--plate);color:var(--spark)}
+  .fs:disabled{opacity:.5;cursor:default}
+  .form-success p{font-family:var(--literary);font-size:20px;line-height:1.3}
 
-  @media (max-width: 768px) {
-    nav {
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      padding: 0.75rem 4vw;
-    }
-    .nav-logo { font-size: 1.1rem; }
-    .hamburger { display: flex; margin-left: auto; }
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      gap: 0;
-      order: 3;
-      padding-top: 0.75rem;
-      border-top: 0.5px solid var(--line);
-    }
-    .nav-links.open { display: flex; }
-    .nav-links li { padding: 0.6rem 0; }
-    .nav-links a { font-size: 0.85rem; letter-spacing: 0.06em; }
-    .mode-toggle {
-      order: 4;
-      width: 100%;
-      justify-content: center;
-      margin-left: 0;
-      padding: 0.75rem 0 0.25rem;
-    }
+  /* ---------- FOOTER ---------- */
+  footer{padding-top:clamp(80px,13vw,190px);padding-bottom:34px}
+  .foot-a{grid-column:1/5;font-family:var(--machine);font-size:9.5px;letter-spacing:.16em;color:var(--smoke);line-height:2}
+  .foot-b{grid-column:11/13;display:flex;gap:12px;align-items:flex-start}
+  .foot-b a{color:var(--ink)}
+  .foot-b svg{width:17px;height:17px;display:block}
+  .foot-b a:hover{color:var(--oxide)}
 
-    #hero {
-      grid-template-columns: 1fr;
-      min-height: auto;
-    }
-    .hero-left {
-      border-right: none;
-      padding: 6rem 6vw 3rem;
-    }
-    .hero-right {
-      padding: 2rem;
-      min-height: 50vh;
-    }
-    .hero-visual { max-width: 280px; }
-
-    .section-inner { padding: 3.5rem 5vw; }
-
-    .about-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-
-    .work-grid {
-      grid-template-columns: 1fr;
-    }
-    .work-card:nth-child(even) { border-right: 0.5px solid var(--line-strong); }
-    .work-card:nth-last-child(-n+2) { border-bottom: 0.5px solid var(--line-strong); }
-    .work-card:last-child { border-bottom: none; }
-    .work-card { padding: 1.75rem; }
-
-    .resume-cols {
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-    .resume-item-header {
-      flex-wrap: wrap;
-      gap: 0.25rem;
-    }
-
-    .contact-grid {
-      grid-template-columns: 1fr;
-    }
-    .contact-left {
-      border-right: none;
-      padding-right: 0;
-      padding-bottom: 2.5rem;
-      border-bottom: 0.5px solid var(--line-strong);
-    }
-    .contact-right {
-      padding-left: 0;
-      padding-top: 2.5rem;
-    }
-
-    footer {
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
-    }
+  /* ---------- RESPONSIVE — the asymmetry relaxes, it does not vanish ---------- */
+  @media (max-width:1000px){
+    .hero-line-1,.plate-name{font-size:clamp(52px,17vw,150px)}
+    .hero-desc{grid-column:1/9}
+    .hero-cta{grid-column:1/9}
+    .hero-portrait{grid-column:8/13;margin-top:clamp(20px,5vw,50px)}
+    .about-head{grid-column:1/11}
+    .about-copy{grid-column:1/8}
+    .stat-huge{grid-column:9/13}
+    .stat-c{grid-column:1/4;grid-row:5;margin-top:1.5rem}
+    .c1,.c3,.c5{grid-column:1/9}
+    .c2,.c4{grid-column:5/12}
+    .res-exp{grid-column:1/8}
+    .res-side{grid-column:1/9;grid-row:5;margin-top:clamp(40px,6vw,70px)}
+    .con-form{grid-column:1/10;grid-row:5;margin-top:2.5rem}
+    .con-sub,.con-links{grid-column:1/9}
+  }
+  @media (max-width:640px){
+    .grid{--padr:clamp(14px,4vw,28px)}
+    nav{padding-top:12px}
+    .nav-logo{grid-column:1/8}
+    .mode-toggle{grid-column:1/7;grid-row:2;margin-top:10px}
+    .nav-stack{grid-column:8/13;grid-row:1/3}
+    .hero-eyebrow{grid-column:1/13;grid-row:1;margin-top:1.4rem}
+    .hero-line-1{grid-column:1/13;font-size:clamp(44px,15vw,90px)}
+    .plate-name{font-size:clamp(44px,15vw,90px)}
+    .hero-desc,.hero-cta{grid-column:1/13}
+    .hero-portrait{grid-column:1/9;grid-row:6;margin-top:2.2rem}
+    #void{min-height:42vh}
+    .void-word{grid-column:1/13}
+    .void-line{grid-column:1/13;align-self:end;margin-top:6rem}
+    .about-copy,.about-head{grid-column:1/13}
+    .stat-huge,.stat-a,.stat-b,.stat-c{grid-column:1/13;grid-row:auto;margin-top:2rem}
+    .c1,.c2,.c3,.c4,.c5{grid-column:1/13;margin-top:2.6rem}
+    .res-exp,.res-side,.res-head,.res-dl{grid-column:1/13;grid-row:auto}
+    .con-head,.con-sub,.con-links,.con-form{grid-column:1/13;grid-row:auto}
+    .foot-a{grid-column:1/9}
+    .foot-b{grid-column:10/13}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .ticker-inner{animation:none}
+    *{transition-duration:.01ms !important}
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="#hero">Elizabeth Powell</a>
-  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-  <ul class="nav-links" id="navLinks">
+  <a class="nav-logo" href="#hero">Elizabeth<br>Powell</a>
+  <div class="mode-toggle" id="modeToggle" role="button" tabindex="0" aria-label="Toggle fun mode">
+    <span class="mode-label active-label" id="labelPro">Pro</span>
+    <div class="toggle-track"><div class="toggle-thumb"></div></div>
+    <span class="mode-label" id="labelFun">Fun</span>
+  </div>
+  <ul class="nav-stack" id="navLinks">
     <li><a href="#about">About</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#resume">Résumé</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <div class="mode-toggle" id="modeToggle" role="button" aria-label="Toggle fun mode">
-    <span class="mode-label active-label" id="labelPro">Pro</span>
-    <div class="toggle-track"><div class="toggle-thumb"></div></div>
-    <span class="mode-label" id="labelFun">Fun</span>
-  </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow">Product Management · Design · Strategy</p>
-    <h1 class="hero-name">Elizabeth<br><em>builds with</em><br>purpose.</h1>
-    <p class="hero-desc">I build products that empower people to do what they care about — turning complex problems into clear, delightful experiences.</p>
-    <a class="hero-cta" href="#work">View selected work →</a>
-  </div>
-  <div class="hero-right">
-    <div class="hero-visual">
-      <img src="images/20251107_Elizabeth Powell_0362_1.jpg" alt="Elizabeth Powell" style="width:100%;height:100%;object-fit:cover;">
+<div class="grid">
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-inner">
+      <span>Product management</span><span>·</span><span>Design craft</span><span>·</span><span>AR platforms</span><span>·</span><span>Zero to one</span><span>·</span><span>Discovery</span><span>·</span><span>Go-to-market</span><span>·</span><span>MBA</span><span>·</span>
+      <span>Product management</span><span>·</span><span>Design craft</span><span>·</span><span>AR platforms</span><span>·</span><span>Zero to one</span><span>·</span><span>Discovery</span><span>·</span><span>Go-to-market</span><span>·</span><span>MBA</span><span>·</span>
     </div>
   </div>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="grid">
+  <p class="hero-eyebrow">Product management<br>Design · Strategy<br>Utah — remote / hybrid</p>
+  <h1 class="hero-line-1 scream">Elizabeth</h1>
+  <div class="plate-wrap"><span class="plate-name scream">Builds&nbsp;on&nbsp;purpose</span></div>
+  <p class="hero-desc">I build products that empower people to do what they care about &mdash; turning complex problems into clear, delightful experiences.</p>
+  <a class="hero-cta" href="#work">View selected work →</a>
+  <figure class="hero-portrait">
+    <img src="images/20251107_Elizabeth Powell_0362_1.jpg" alt="Elizabeth Powell">
+    <figcaption>Fig. 1 — the product manager</figcaption>
+  </figure>
+</section>
+
+<!-- VOID -->
+<section id="void" class="grid" aria-label="Statement">
+  <p class="void-word scream" aria-hidden="true">Why before how</p>
+  <p class="void-line lit">I care just as much about <em>why</em> something gets built as how it looks and works.</p>
 </section>
 
 <!-- ABOUT -->
-<section id="about">
-  <div class="section-inner">
-    <div class="section-label">About</div>
-    <div class="about-grid">
-      <div>
-        <h2 class="about-headline">Product thinking meets<br><em>design craft.</em></h2>
-        <p class="about-body">I'm a product manager with an MBA and a design background — which means I care just as much about why something gets built as how it looks and works. I bring rigor to discovery, clarity to complex systems, and a strategic lens to every product decision.</p>
-        <p class="about-body">My work spans AR platforms, media organizations, and enterprise software — from zero-to-one builds to growth and optimization. I've led a 58-person cross-functional team, shipped products used by hundreds of thousands of people, and I integrate AI into every layer of how I work.</p>
-        <p class="about-body">Based in Utah. Open to remote and hybrid opportunities.</p>
-      </div>
-      <div>
-        <div class="about-stats">
-          <div class="stat-item">
-            <div class="stat-num">5+</div>
-            <div class="stat-label">Years in product</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">338K</div>
-            <div class="stat-label">Readers reached</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">MBA</div>
-            <div class="stat-label">Marketing & Entrepreneurship</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">58</div>
-            <div class="stat-label">Person team built</div>
-          </div>
-        </div>
-      </div>
-    </div>
+<section id="about" class="grid">
+  <div class="slab about-label">About</div>
+  <h2 class="about-head scream">Product thinking,<br>design craft</h2>
+  <div class="about-copy">
+    <p>I&rsquo;m a product manager with an MBA and a design background. I bring rigor to discovery, clarity to complex systems, and a strategic lens to every product decision.</p>
+    <p>My work spans AR platforms, media organizations, and enterprise software &mdash; from zero-to-one builds to growth and optimization. I&rsquo;ve led a 58-person cross-functional team, shipped products used by hundreds of thousands of people, and I integrate AI into every layer of how I work.</p>
+    <p>Based in Utah. Open to remote and hybrid opportunities.</p>
   </div>
+  <div class="stat-huge">
+    <div class="n">338K</div>
+    <div class="l">Readers reached</div>
+  </div>
+  <div class="stat-a stat-sm"><div class="n">5+</div><div class="l">Years in product</div></div>
+  <div class="stat-b stat-sm"><div class="n">58</div><div class="l">Person team built</div></div>
+  <div class="stat-c stat-sm"><div class="n">MBA</div><div class="l">Marketing &amp; Entrepreneurship</div></div>
 </section>
 
 <!-- WORK -->
-<section id="work">
-  <div class="section-inner">
-    <div class="section-label">Selected work</div>
-    <div class="work-grid">
-      <a class="work-card" href="case-study-the-rift.html">
-        <div class="work-thumb"><img src="images/The Rift-AR-App/Rift-AR-interaction.jpg" alt="The Rift AR Experience"></div>
-        <div class="work-tags"><span class="tag">AR Platform</span><span class="tag">0→1</span><span class="tag">Product Lead</span></div>
-        <h3 class="work-title">The Rift — Augmented Reality Experience</h3>
-        <p class="work-desc">End-to-end product management for an AR platform built in Unity — from concept and MVP through growth. Used multi-source data synthesis to optimize group experiences and moved Google ratings from 4.3 to 4.7 in 8 weeks.</p>
-        <span class="work-arrow">View case study →</span>
-      </a>
-      <a class="work-card" href="case-study-rift-strike.html">
-        <div class="work-thumb"><img src="images/The Rift-Strike/hero-strike-gearfloor.jpg" alt="Rift Strike — a creature struck by a beam on the gear floor"></div>
-        <div class="work-tags"><span class="tag">Experience Design</span><span class="tag">AR Systems</span><span class="tag">Game Loop</span></div>
-        <h3 class="work-title">Rift Strike — Anatomy of a Run</h3>
-        <p class="work-desc">A teardown of the second experience shipped at The Rift: the twelve-beat guest journey, then the three mechanisms underneath it — image-target localization, a cooperative score gate, and an in-game economy that settles at the front desk. Built from real session capture.</p>
-        <span class="work-arrow">View case study →</span>
-      </a>
-      <a class="work-card" href="case-study-web-ar.html">
-        <div class="work-thumb">Project image</div>
-        <div class="work-tags"><span class="tag">Web AR</span><span class="tag">Mobile</span></div>
-        <h3 class="work-title">The Rift — Web AR Mini Quest</h3>
-        <p class="work-desc">A browser-based AR experience that lets anyone try The Rift on their phone — no app, no download. Extended the in-venue product to a new acquisition channel on the web.</p>
-        <span class="work-arrow">View case study →</span>
-      </a>
-      <a class="work-card" href="case-study-uvu-review.html">
-        <div class="work-thumb">Project image</div>
-        <div class="work-tags"><span class="tag">Media</span><span class="tag">Team Building</span></div>
-        <h3 class="work-title">The UVU Review — 338K-Reader Newsroom</h3>
-        <p class="work-desc">Built and led a 58-person cross-functional team from zero. Grew audience to 338K readers, nearly doubled social following, and rebuilt the publication website using Claude Code.</p>
-        <span class="work-arrow">View case study →</span>
-      </a>
-      <a class="work-card" href="case-study-documentary.html">
-        <div class="work-thumb"><img src="images/Documentary Project/HeroImage-Filming.JPG" alt="Scottish Enlightenment Documentary filming on location"></div>
-        <div class="work-tags"><span class="tag">Documentary</span><span class="tag">Multi-Platform</span><span class="tag">AR</span></div>
-        <h3 class="work-title">The Scottish Enlightenment — Documentary Series</h3>
-        <p class="work-desc">Led a team of 6 designers to produce a 3-episode documentary series in the U.K. on the Scottish Enlightenment's impact on America. Shipped a multi-platform experience: episodes, a 360-photo website, printed AR books, activity books, and business cards for 160 students across 3 classrooms (2023).</p>
-        <span class="work-arrow">View case study →</span>
-      </a>
-    </div>
+<section id="work" class="grid">
+  <div class="slab work-label">Selected work</div>
+  <h2 class="work-head scream">Five things<br>I shipped</h2>
+
+  <div class="cards">
+    <a class="card c1" href="case-study-the-rift.html">
+      <div class="card-n">01 / AR platform</div>
+      <h3 class="card-title">The Rift</h3>
+      <div class="card-tags"><span>AR Platform</span><span>0→1</span><span>Product Lead</span></div>
+      <p class="card-desc">End-to-end product management for an AR platform built in Unity. Multi-source data synthesis moved Google ratings from 4.3 to 4.7 in eight weeks.</p>
+      <div class="card-thumb"><img src="images/The Rift-AR-App/Rift-AR-interaction.jpg" alt="The Rift AR Experience" loading="lazy"></div>
+      <span class="card-go">Case study →</span>
+    </a>
+
+    <a class="card c2" href="case-study-rift-strike.html">
+      <div class="card-n">02 / Experience design</div>
+      <h3 class="card-title">Rift Strike</h3>
+      <div class="card-tags"><span>Systems</span><span>Game Loop</span></div>
+      <p class="card-desc">A teardown of the second experience at The Rift: twelve guest beats, then the three mechanisms underneath.</p>
+      <div class="card-thumb"><img src="images/The Rift-Strike/hero-strike-gearfloor.jpg" alt="Rift Strike" loading="lazy"></div>
+      <span class="card-go">Case study →</span>
+    </a>
+
+    <a class="card c3" href="case-study-uvu-review.html">
+      <div class="card-n">03 / Media</div>
+      <h3 class="card-title">The UVU Review</h3>
+      <div class="card-tags"><span>Media</span><span>Team Building</span></div>
+      <p class="card-desc">Built and led a 58-person cross-functional team from zero. Grew audience to 338K readers and rebuilt the publication website using Claude Code.</p>
+      <div class="card-thumb"><img src="images/Documentary Project/Screenshot-Planning.png" alt="The UVU Review newsroom planning" loading="lazy"></div>
+      <span class="card-go">Case study →</span>
+    </a>
+
+    <a class="card c4" href="case-study-web-ar.html">
+      <div class="card-n">04 / Web AR</div>
+      <h3 class="card-title">Web AR<br>Mini Quest</h3>
+      <div class="card-tags"><span>Web AR</span><span>Mobile</span></div>
+      <p class="card-desc">A browser-based AR experience that lets anyone try The Rift on their phone &mdash; no app, no download. Extended the in-venue product to a new acquisition channel.</p>
+      <span class="card-go">Case study →</span>
+    </a>
+
+    <a class="card c5" href="case-study-documentary.html">
+      <div class="card-n">05 / Documentary</div>
+      <h3 class="card-title">The Scottish<br>Enlightenment</h3>
+      <div class="card-tags"><span>Documentary</span><span>Multi-Platform</span><span>AR</span></div>
+      <p class="card-desc">Led six designers to produce a three-episode series in the U.K. Shipped episodes, a 360-photo site, printed AR books and activity books for 160 students across three classrooms.</p>
+      <div class="card-thumb"><img src="images/Documentary Project/HeroImage-Filming.JPG" alt="Documentary filming on location" loading="lazy"></div>
+      <span class="card-go">Case study →</span>
+    </a>
   </div>
 </section>
 
 <!-- RESUME -->
-<section id="resume">
-  <div class="section-inner">
-    <div class="section-label">Résumé</div>
-    <a class="resume-dl-link" href="Elizabeth-Powell-Resume.pdf" download>Download PDF résumé ↓</a>
-    <div class="resume-cols">
-      <div>
-        <div class="resume-section">
-          <div class="resume-section-title">Experience</div>
-          <div class="resume-item">
-            <div class="resume-item-header">
-              <span class="resume-item-title">Product Lead & Board Director</span>
-              <span class="resume-item-date">Apr 2021 – Present</span>
-            </div>
-            <div class="resume-item-sub">Paladin & Archer Software Systems</div>
-            <div class="resume-item-desc">Own end-to-end product strategy for The Rift (AR platform) and VisiCX (healthcare compliance). Drive execution across engineering, design, and operations.</div>
-          </div>
-          <div class="resume-item">
-            <div class="resume-item-header">
-              <span class="resume-item-title">Executive News Director — Product & Platform Lead</span>
-              <span class="resume-item-date">Apr 2024 – Apr 2026</span>
-            </div>
-            <div class="resume-item-sub">The UVU Review, Utah Valley University</div>
-            <div class="resume-item-desc">Built and led a 58-person cross-functional team from zero. Grew audience to 338K readers across 9 platforms.</div>
-          </div>
-          <div class="resume-item">
-            <div class="resume-item-header">
-              <span class="resume-item-title">Web Designer & Brand Consultant</span>
-              <span class="resume-item-date">Jun 2017 – Apr 2021</span>
-            </div>
-            <div class="resume-item-sub">Self-Employed</div>
-            <div class="resume-item-desc">Designed and launched websites, landing pages, and marketing funnels for small businesses.</div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="resume-section">
-          <div class="resume-section-title">Education</div>
-          <div class="resume-item">
-            <div class="resume-item-header">
-              <span class="resume-item-title">Master of Business Administration (MBA)</span>
-              <span class="resume-item-date">2024 – 2026</span>
-            </div>
-            <div class="resume-item-sub">Utah Valley University · Marketing & Entrepreneurship</div>
-          </div>
-          <div class="resume-item">
-            <div class="resume-item-header">
-              <span class="resume-item-title">B.S. Web & App Development, Interaction Design</span>
-              <span class="resume-item-date">2019 – 2023</span>
-            </div>
-            <div class="resume-item-sub">Utah Valley University · NSLS Honors Program</div>
-          </div>
-        </div>
-        <div class="resume-section">
-          <div class="resume-section-title">Skills & Tools</div>
-          <div class="skill-row">
-            <span class="skill-pill">Product Roadmapping</span>
-            <span class="skill-pill">User Research</span>
-            <span class="skill-pill">A/B Testing</span>
-            <span class="skill-pill">Go-to-Market</span>
-            <span class="skill-pill">Agile/Lean UX</span>
-            <span class="skill-pill">Claude Code</span>
-            <span class="skill-pill">Figma</span>
-            <span class="skill-pill">Google Analytics</span>
-            <span class="skill-pill">Unity</span>
-            <span class="skill-pill">HTML/CSS</span>
-            <span class="skill-pill">Cross-functional Leadership</span>
-          </div>
-        </div>
-      </div>
+<section id="resume" class="grid">
+  <div class="slab res-label">Résumé</div>
+  <h2 class="res-head scream">The receipts</h2>
+  <a class="res-dl" href="Elizabeth-Powell-Resume.pdf" download>Download PDF ↓</a>
+
+  <div class="res-exp">
+    <div class="res-h">Experience</div>
+    <div class="res-item">
+      <span class="res-t">Product Lead &amp; Board Director</span>
+      <span class="res-d">Apr 2021 – Present</span>
+      <span class="res-s">Paladin &amp; Archer Software Systems</span>
+      <p class="res-x">Own end-to-end product strategy for The Rift (AR platform) and VisiCX (healthcare compliance). Drive execution across engineering, design, and operations.</p>
+    </div>
+    <div class="res-item">
+      <span class="res-t">Executive News Director — Product &amp; Platform Lead</span>
+      <span class="res-d">Apr 2024 – Apr 2026</span>
+      <span class="res-s">The UVU Review, Utah Valley University</span>
+      <p class="res-x">Built and led a 58-person cross-functional team from zero. Grew audience to 338K readers across 9 platforms.</p>
+    </div>
+    <div class="res-item">
+      <span class="res-t">Web Designer &amp; Brand Consultant</span>
+      <span class="res-d">Jun 2017 – Apr 2021</span>
+      <span class="res-s">Self-Employed</span>
+      <p class="res-x">Designed and launched websites, landing pages, and marketing funnels for small businesses.</p>
+    </div>
+  </div>
+
+  <div class="res-side">
+    <div class="res-h">Education</div>
+    <div class="res-item">
+      <span class="res-t">Master of Business Administration</span>
+      <span class="res-d">2024 – 2026</span>
+      <span class="res-s">Utah Valley University · Marketing &amp; Entrepreneurship</span>
+    </div>
+    <div class="res-item">
+      <span class="res-t">B.S. Web &amp; App Development, Interaction Design</span>
+      <span class="res-d">2019 – 2023</span>
+      <span class="res-s">Utah Valley University · NSLS Honors Program</span>
+    </div>
+    <div class="res-h" style="margin-top:2.4rem">Skills &amp; tools</div>
+    <div class="pills">
+      <span>Product Roadmapping</span><span>User Research</span><span>A/B Testing</span>
+      <span>Go-to-Market</span><span>Agile/Lean UX</span><span>Claude Code</span>
+      <span>Figma</span><span>Google Analytics</span><span>Unity</span>
+      <span>HTML/CSS</span><span>Cross-functional Leadership</span>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-  <div class="section-inner">
-    <div class="section-label">Contact</div>
-    <div class="contact-grid">
-      <div class="contact-left">
-        <h2 class="contact-headline">Let's make<br><em>something good.</em></h2>
-        <p class="contact-sub">Whether it's a new role, a collaboration, or just a conversation about design — I'd love to hear from you.</p>
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:lizzyapowell@gmail.com">
-            <span class="contact-link-label">Email</span>
-            lizzyapowell@gmail.com
-          </a>
-          <a class="contact-link" href="https://linkedin.com/in/elizabeth-powell2000">
-            <span class="contact-link-label">LinkedIn</span>
-            linkedin.com/in/elizabeth-powell2000
-          </a>
-          <a class="contact-link" href="https://github.com/eapowell">
-            <span class="contact-link-label">GitHub</span>
-            github.com/eapowell
-          </a>
-        </div>
+<section id="contact" class="grid">
+  <div class="slab con-label">Contact</div>
+  <h2 class="con-head scream">Let&rsquo;s make<br>something good</h2>
+  <p class="con-sub lit">Whether it&rsquo;s a new role, a collaboration, or just a conversation about design &mdash; I&rsquo;d love to hear from you.</p>
+
+  <div class="con-links">
+    <a class="con-link" href="mailto:lizzyapowell@gmail.com"><span>Email</span><b>lizzyapowell@gmail.com</b></a>
+    <a class="con-link" href="https://linkedin.com/in/elizabeth-powell2000"><span>LinkedIn</span><b>linkedin.com/in/elizabeth-powell2000</b></a>
+    <a class="con-link" href="https://github.com/eapowell"><span>GitHub</span><b>github.com/eapowell</b></a>
+  </div>
+
+  <div class="con-form">
+    <form id="contactForm" action="https://formsubmit.co/b6cfe488360bf614a32c45d252ab4813" method="POST">
+      <input type="hidden" name="_subject" value="Portfolio message">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none">
+      <div class="fg">
+        <label class="fl" for="fName">Name</label>
+        <input class="fi" id="fName" type="text" name="name" placeholder="Your name" required>
       </div>
-      <div class="contact-right">
-        <form id="contactForm" action="https://formsubmit.co/b6cfe488360bf614a32c45d252ab4813" method="POST">
-          <input type="hidden" name="_subject" value="Portfolio message">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="text" name="_honey" style="display:none">
-          <div class="form-group">
-            <label class="form-label">Name</label>
-            <input class="form-input" type="text" name="name" placeholder="Your name" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Email</label>
-            <input class="form-input" type="email" name="email" placeholder="your@email.com" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Message</label>
-            <textarea class="form-textarea" name="message" placeholder="Tell me what you're working on..." required></textarea>
-          </div>
-          <button class="form-submit" type="submit">Send message</button>
-        </form>
+      <div class="fg">
+        <label class="fl" for="fEmail">Email</label>
+        <input class="fi" id="fEmail" type="email" name="email" placeholder="your@email.com" required>
       </div>
-    </div>
+      <div class="fg">
+        <label class="fl" for="fMsg">Message</label>
+        <textarea class="ft" id="fMsg" name="message" placeholder="Tell me what you're working on..." required></textarea>
+      </div>
+      <button class="fs" type="submit">Send message</button>
+    </form>
   </div>
 </section>
 
-<footer>
-  <p>© 2026 Elizabeth Powell. All rights reserved.</p>
-  <div class="footer-socials">
+<footer class="grid">
+  <div class="foot-a">
+    © 2026 Elizabeth Powell<br>
+    Designed &amp; built by Elizabeth Powell
+  </div>
+  <div class="foot-b">
     <a href="https://linkedin.com/in/elizabeth-powell2000" target="_blank" rel="noopener" aria-label="LinkedIn">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
     </a>
@@ -1006,72 +544,63 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
     </a>
   </div>
-  <p>Designed & built by Elizabeth Powell</p>
 </footer>
 
 <script>
-  const links = document.querySelectorAll('.nav-links a');
-  const sections = document.querySelectorAll('section[id]');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { threshold: 0.4 });
-  sections.forEach(s => obs.observe(s));
+  var links = document.querySelectorAll('.nav-stack a');
+  var sections = document.querySelectorAll('section[id]');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          var a = document.querySelector('.nav-stack a[href="#' + e.target.id + '"]');
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+    sections.forEach(function (s) { obs.observe(s); });
+  }
 
-  const toggle = document.getElementById('modeToggle');
-  const labelPro = document.getElementById('labelPro');
-  const labelFun = document.getElementById('labelFun');
-  let isFun = false;
-
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    navLinks.classList.toggle('open');
-  });
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      navLinks.classList.remove('open');
-    });
-  });
-
-  toggle.addEventListener('click', () => {
+  var toggle = document.getElementById('modeToggle');
+  var labelPro = document.getElementById('labelPro');
+  var labelFun = document.getElementById('labelFun');
+  var isFun = false;
+  function flip() {
     isFun = !isFun;
     document.body.classList.toggle('fun', isFun);
     labelPro.classList.toggle('active-label', !isFun);
     labelFun.classList.toggle('active-label', isFun);
+    toggle.setAttribute('aria-pressed', isFun ? 'true' : 'false');
+  }
+  toggle.addEventListener('click', flip);
+  toggle.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); }
   });
 
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    const form = this;
-    const btn = form.querySelector('.form-submit');
+    var form = this;
+    var btn = form.querySelector('.fs');
     btn.disabled = true;
     btn.textContent = 'Sending...';
     fetch(form.action, {
       method: 'POST',
       body: new FormData(form),
       headers: { 'Accept': 'application/json' }
-    }).then(function(res) {
+    }).then(function (res) {
       if (res.ok) {
-        form.innerHTML = '<div class="form-success"><p>Thanks for reaching out!<br>I\'ll get back to you soon.</p></div>';
+        form.innerHTML = '<div class="form-success"><p>Thanks for reaching out.<br>I\'ll get back to you soon.</p></div>';
       } else {
-        btn.disabled = false;
-        btn.textContent = 'Send message';
+        btn.disabled = false; btn.textContent = 'Send message';
         alert('Something went wrong — please try emailing me directly.');
       }
-    }).catch(function() {
-      btn.disabled = false;
-      btn.textContent = 'Send message';
+    }).catch(function () {
+      btn.disabled = false; btn.textContent = 'Send message';
       alert('Something went wrong — please try emailing me directly.');
     });
   });
 </script>
+
 </body>
 </html>
