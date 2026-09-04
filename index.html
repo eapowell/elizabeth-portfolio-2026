@@ -99,7 +99,9 @@
 
   /* ---------- TICKER ---------- */
   .ticker{
-    grid-column:1/-1;margin-top:20px;margin-right:calc(-1 * var(--padr));background:var(--plate);color:var(--spark);
+    grid-column:1/-1;margin-top:20px;background:var(--plate);color:var(--spark);
+    /* bleeds both edges, matching the hero plate */
+    margin-left:calc(-1 * clamp(14px,3vw,54px));margin-right:calc(-1 * var(--padr));
     border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
     overflow:hidden;white-space:nowrap;
   }
