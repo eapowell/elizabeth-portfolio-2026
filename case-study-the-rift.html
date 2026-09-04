@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Rift — Case Study | Elizabeth Powell</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Anton&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -431,12 +431,18 @@
     .cs-next-right { min-height: 30vh; }
   }
 </style>
+<link rel="stylesheet" href="theme-fun.css">
 </head>
-<body>
+<body class="fun">
 
 <nav>
   <a class="nav-logo" href="index.html">Elizabeth Powell</a>
   <a class="nav-back" href="index.html#work">← Back to all work</a>
+  <div class="cs-mode-toggle" id="modeToggle" role="button" tabindex="0" aria-label="Toggle fun mode">
+    <span class="mode-label" data-label="pro">Pro</span>
+    <div class="toggle-track"><div class="toggle-thumb"></div></div>
+    <span class="mode-label active-label" data-label="fun">Fun</span>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -609,5 +615,6 @@
   <p>Designed & built by Elizabeth Powell</p>
 </footer>
 
+<script src="mode-toggle.js"></script>
 </body>
 </html>
