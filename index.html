@@ -155,6 +155,17 @@
     color:var(--smoke);padding:5px 0 0;
   }
 
+  /* ---------- HERO WORD ROTATOR ---------- */
+  .hero-words-clip{display:block;overflow:hidden;position:relative}
+  .hero-words-track>span{
+    display:block;white-space:nowrap;
+    position:absolute;top:0;left:0;
+    opacity:0;transform:translateY(60%);
+    transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .35s ease;
+  }
+  .hero-words-track>span.hw-active{position:relative;opacity:1;transform:translateY(0)}
+  .hero-words-track>span.hw-exit{opacity:0;transform:translateY(-60%)}
+
   /* ---------- THE VOID ---------- */
   #void{min-height:58vh;position:relative;align-content:end;padding-bottom:clamp(40px,8vw,120px)}
   .void-word{
@@ -619,7 +630,7 @@
 <section id="hero" class="grid">
   <p class="hero-eyebrow">Product management<br>Design · Strategy<br>Utah — remote / hybrid</p>
   <h1 class="hero-line-1 scream">Elizabeth</h1>
-  <div class="plate-wrap"><span class="plate-name scream">Builds&nbsp;on&nbsp;purpose</span></div>
+  <div class="plate-wrap"><span class="plate-name scream"><span class="hero-words-clip" aria-label="Builder"><span class="hero-words-track" id="heroTrack"><span>Designer</span><span>Storyteller</span><span>Investigator</span><span>Strategist</span><span>Builder</span></span></span></span></div>
   <p class="hero-desc">I build products that empower people to do what they care about &mdash; turning complex problems into clear, delightful experiences.</p>
   <a class="hero-cta" href="#work">View selected work →</a>
   <figure class="hero-portrait">
@@ -840,6 +851,33 @@
   toggle.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); }
   });
+
+  (function(){
+    var track=document.getElementById('heroTrack');
+    if(!track)return;
+    var words=track.children;
+    var total=words.length;
+    var cur=0;
+    words[0].classList.add('hw-active');
+    var motionOk=!window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if(!motionOk){
+      words[0].classList.remove('hw-active');
+      cur=total-1;
+      words[cur].classList.add('hw-active');
+      return;
+    }
+    function next(){
+      if(cur>=total-1)return;
+      var prev=cur;
+      cur++;
+      words[prev].classList.remove('hw-active');
+      words[prev].classList.add('hw-exit');
+      words[cur].classList.add('hw-active');
+      setTimeout(function(){words[prev].classList.remove('hw-exit')},600);
+      if(cur<total-1)setTimeout(next,2200);
+    }
+    setTimeout(next,2400);
+  })();
 
   document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
